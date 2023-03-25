@@ -20,7 +20,8 @@ namespace BlogSite.Repository.Configurations.UserBase
 
             builder.HasOne(x => x.User)
                 .WithMany()
-                .HasForeignKey(x => x.User_ID);
+                .HasForeignKey(x => x.User_ID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

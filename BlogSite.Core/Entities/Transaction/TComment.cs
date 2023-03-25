@@ -9,10 +9,8 @@ namespace BlogSite.Core.Entities.Transaction
 {
     public class TComment : BlogSiteMasterBaseEntity<long>
     {
-        public string Comment { get; set; }
-        
+        public string Comment { get; set; }        
         public long Parent_ID { get; set; }
-        public TComment Parrent { get; set; }
 
         public long Blog_ID { get; set; }
         public TBlog Blog { get; set; }

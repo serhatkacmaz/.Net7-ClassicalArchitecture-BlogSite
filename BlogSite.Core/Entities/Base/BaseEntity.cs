@@ -14,7 +14,7 @@ namespace BlogSite.Core.Entities.Base
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
-        public long? User_ID { get; set; }
+        public int? User_ID { get; set; }
         public User User { get; set; }
     }
 }

@@ -20,11 +20,15 @@ namespace BlogSite.Repository.Configurations.Transaction
 
             builder.HasOne(x => x.Category)
                .WithMany(x => x.Blogs)
-               .HasForeignKey(x => x.Category_ID);
+               .HasForeignKey(x => x.Category_ID)
+               .OnDelete(DeleteBehavior.Restrict);
+
 
             builder.HasOne(x => x.User)
                 .WithMany()
-                .HasForeignKey(x => x.User_ID);
+                .HasForeignKey(x => x.User_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\BlogSite.Core\BlogSite.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQL\" />
+  </ItemGroup>
+
 </Project>

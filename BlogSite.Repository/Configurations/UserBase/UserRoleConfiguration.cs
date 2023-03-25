@@ -18,11 +18,13 @@ namespace BlogSite.Repository.Configurations.UserBase
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.UserRoles)
-                .HasForeignKey(x => x.User_ID);
+                .HasForeignKey(x => x.User_ID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Role)
                 .WithMany(x => x.UserRoles)
-                .HasForeignKey(x => x.Role_ID);
+                .HasForeignKey(x => x.Role_ID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -17,7 +17,9 @@ namespace BlogSite.Repository.Seeds
             {
                 Id = 1,
                 Name = "admin",
+                Mail = "admin@gmail.com",
                 UserName = "admin Name",
+                Password = "1234",
                 Title = "Manager",
                 IsActive = true,
                 CreatedDate = DateTime.Now
