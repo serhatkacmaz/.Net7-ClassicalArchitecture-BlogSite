@@ -9,16 +9,16 @@ namespace BlogSite.Core.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<T> GetAsync(int id);
+        Task<T> GetByIdAsync(object id);
         IQueryable<T> GetAll(Expression<Func<T, bool>> expression);
 
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
         
-        void Updates(T entity); 
+        void Update(T entity); 
         
-        void Deletes(T entity);
-        void DeletesRange(IEnumerable<T> entities);
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
 
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);

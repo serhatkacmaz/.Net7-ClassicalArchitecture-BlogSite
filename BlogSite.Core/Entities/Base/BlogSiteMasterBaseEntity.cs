@@ -10,7 +10,5 @@ namespace BlogSite.Core.Entities.Base
     public abstract class BlogSiteMasterBaseEntity<T> : BaseEntity<T>
     {
         public string Name { get; set; }
-        public long? User_ID { get; set; }
-        public User User { get; set; }
     }
 }

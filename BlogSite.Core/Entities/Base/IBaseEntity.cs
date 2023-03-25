@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Base
 {
-    public interface IBaseEntity<T>
+    public interface IBaseEntity
     {
     }
 }

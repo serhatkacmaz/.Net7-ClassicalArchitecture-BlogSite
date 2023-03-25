@@ -9,6 +9,7 @@ namespace BlogSite.Core.Entities.Transaction
 {
     public class TImage : BlogSiteMasterBaseEntity<long>
     {
+        public byte[] Image { get; set; }
         public bool CoverArt { get; set; }
 
         public long Blog_ID { get; set; }
