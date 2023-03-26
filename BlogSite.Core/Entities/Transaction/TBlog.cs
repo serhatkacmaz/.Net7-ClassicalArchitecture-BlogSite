@@ -13,13 +13,12 @@ namespace BlogSite.Core.Entities.Transaction
         public string Content { get; set; }
         public string Description { get; set; }
         public int ViewNumber { get; set; }
-        public int LikesNumber { get; set; }
-        public int DislikesNumber { get; set; }
 
         public int Category_ID { get; set; }
         public MCategory Category { get; set; }
 
         public ICollection<TImage> Images { get; set; }
         public ICollection<TComment> Comments { get; set; }
+        public ICollection<TMovement> Movements { get; set; }
     }
 }
