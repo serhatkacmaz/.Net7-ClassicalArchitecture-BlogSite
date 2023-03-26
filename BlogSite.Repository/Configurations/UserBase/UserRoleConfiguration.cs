@@ -25,6 +25,15 @@ namespace BlogSite.Repository.Configurations.UserBase
                 .WithMany(x => x.UserRoles)
                 .HasForeignKey(x => x.Role_ID)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            int order = -1;
+
+            builder.Property(p => p.Id).HasColumnOrder(++order);
+            builder.Property(p => p.Role_ID).HasColumnOrder(++order);
+            builder.Property(p => p.User_ID).HasColumnOrder(++order);
+            builder.Property(p => p.IsActive).HasColumnOrder(++order);
+            builder.Property(p => p.CreatedDate).HasColumnOrder(++order);
+            builder.Property(p => p.UpdatedDate).HasColumnOrder(++order);
         }
     }
 }

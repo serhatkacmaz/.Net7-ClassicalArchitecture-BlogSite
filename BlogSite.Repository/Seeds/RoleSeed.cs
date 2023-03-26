@@ -17,7 +17,7 @@ namespace BlogSite.Repository.Seeds
             {
                 Id = 1,
                 Name = "admin",
-                Description = "admin rolu tanımlama.",
+                Description = "admin rolu tanımlama",
                 IsActive = true,
                 CreatedDate = DateTime.Now,
             });

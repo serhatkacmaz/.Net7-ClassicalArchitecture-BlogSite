@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Repository.Migrations
 {
     [DbContext(typeof(BlogSiteContext))]
-    [Migration("20230325231651_ver001")]
+    [Migration("20230326000224_ver001")]
     partial class ver001
     {
         /// <inheritdoc />
@@ -29,83 +29,112 @@ namespace BlogSite.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(4);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(2);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
 
                     b.Property<int>("ReferenceId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(3);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(5);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
 
                     b.HasKey("Id");
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("MCategories");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TBlog", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<int>("Category_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnOrder(3);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(9);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(4);
 
                     b.Property<int>("DislikesNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(8);
 
                     b.Property<int>("LikesNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(10);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
 
                     b.Property<int>("ViewNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(7);
 
                     b.HasKey("Id");
 
@@ -113,43 +142,63 @@ namespace BlogSite.Repository.Migrations
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("TBlogs");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("TBlogsHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TComment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(4);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(6);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(5);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(3);
 
                     b.Property<long>("Parent_ID")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(7);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
 
                     b.HasKey("Id");
 
@@ -157,42 +206,51 @@ namespace BlogSite.Repository.Migrations
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("Comments");
+                    b.ToTable("TComments");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TImage", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
 
                     b.Property<bool>("CoverArt")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(4);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(6);
 
                     b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(3);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(5);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(2);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(7);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(8);
 
                     b.HasKey("Id");
 
@@ -200,38 +258,45 @@ namespace BlogSite.Repository.Migrations
 
                     b.HasIndex("User_ID");
 
-                    b.ToTable("Images");
+                    b.ToTable("TImages");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(4);
 
                     b.Property<string>("Description")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(2);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(3);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(5);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
 
                     b.HasKey("Id");
 
@@ -243,8 +308,8 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 2, 16, 51, 352, DateTimeKind.Local).AddTicks(2908),
-                            Description = "admin rolu tanımlama.",
+                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2129),
+                            Description = "admin rolu tanımlama",
                             IsActive = true,
                             Name = "admin"
                         });
@@ -254,50 +319,62 @@ namespace BlogSite.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("About")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(5);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(9);
 
                     b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnOrder(6);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(8);
 
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(3);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(7);
 
                     b.Property<string>("Title")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnOrder(4);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(10);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(2);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(11);
 
                     b.HasKey("Id");
 
@@ -309,7 +386,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 2, 16, 51, 352, DateTimeKind.Local).AddTicks(3280),
+                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2611),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -323,24 +400,30 @@ namespace BlogSite.Repository.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(4);
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnOrder(3);
 
                     b.Property<int>("Role_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(5);
 
                     b.Property<int?>("User_ID")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
 
                     b.HasKey("Id");
 
@@ -354,7 +437,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 2, 16, 51, 352, DateTimeKind.Local).AddTicks(3194),
+                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2507),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
