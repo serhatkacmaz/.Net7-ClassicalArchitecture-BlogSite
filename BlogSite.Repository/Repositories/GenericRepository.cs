@@ -45,7 +45,7 @@ namespace BlogSite.Repository.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             return _dbSet.AsNoTracking().AsQueryable();
         }

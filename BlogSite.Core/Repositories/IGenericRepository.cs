@@ -10,7 +10,7 @@ namespace BlogSite.Core.Repositories
     public interface IGenericRepository<T> where T : class
     {
         Task<T> GetByIdAsync(object id);
-        IQueryable<T> GetAll(Expression<Func<T, bool>> expression);
+        IQueryable<T> GetAll();
 
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
