@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Service.Services
 {
-    public class Service<Entity, Dto> : IService<Entity, Dto> where Entity : BaseEntity<object> where Dto : class
+    public class Service<Entity, Dto, PKType> : IService<Entity, Dto, PKType> where Entity : BaseEntity<PKType> where Dto : class
     {
         #region Old Method
         //private readonly IGenericRepository<T> _repository;

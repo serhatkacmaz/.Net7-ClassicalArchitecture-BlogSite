@@ -11,6 +11,11 @@ namespace BlogSite.Repository.UnitOfWork
     {
         private readonly BlogSiteContext _context;
 
+        public UnitOfWork(BlogSiteContext context)
+        {
+            _context = context;
+        }
+
         public void Commit()
         {
             _context.SaveChanges();
