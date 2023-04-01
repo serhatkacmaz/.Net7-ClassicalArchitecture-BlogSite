@@ -11,7 +11,6 @@ namespace BlogSite.API.Controllers
     [ApiController]
     public class RoleController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IService<Role, RoleDto, int> _service;
 
         public RoleController(IMapper mapper, IService<Role, RoleDto, int> service)
