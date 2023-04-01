@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Base
 {
-    public abstract class BaseEntity<T> : IBaseEntity
+    public abstract class BaseEntity<T>
     {
         public T Id { get; set; }
         public bool IsActive { get; set; }

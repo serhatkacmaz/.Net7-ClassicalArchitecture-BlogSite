@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T>
     {
         Task<T> GetByIdAsync(object id);
         IQueryable<T> GetAll();

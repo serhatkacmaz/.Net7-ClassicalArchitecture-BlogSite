@@ -57,7 +57,7 @@ namespace BlogSite.Repository
 
         }
 
-        private void PrepareAddedEntities(IEnumerable<IBaseEntity> entities)
+        private void PrepareAddedEntities(IEnumerable<BaseEntity<object>> entities)
         {
 
         }
