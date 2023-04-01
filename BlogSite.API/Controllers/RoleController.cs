@@ -13,9 +13,8 @@ namespace BlogSite.API.Controllers
     {
         private readonly IService<Role, RoleDto, int> _service;
 
-        public RoleController(IMapper mapper, IService<Role, RoleDto, int> service)
+        public RoleController(IService<Role, RoleDto, int> service)
         {
-            _mapper = mapper;
             _service = service;
         }
 
