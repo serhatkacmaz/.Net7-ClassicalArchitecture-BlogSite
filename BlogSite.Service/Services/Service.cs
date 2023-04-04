@@ -4,6 +4,7 @@ using BlogSite.Core.Entities.Base;
 using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
+using BlogSite.Service.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -127,6 +128,9 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<Dto>> GetByIdAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
+            if (entity is null)
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+
             var dto = _mapper.Map<Dto>(entity);
             return BlogSiteResponseDto<Dto>.Success(StatusCodes.Status200OK, dto);
         }
@@ -163,7 +167,6 @@ namespace BlogSite.Service.Services
             var entities = await _repository.Where(expression).ToListAsync();
             var dtoList = _mapper.Map<IEnumerable<Dto>>(entities);
             return BlogSiteResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, dtoList);
-
         }
     }
 }

@@ -20,11 +20,12 @@ namespace BlogSite.API.Middlewares
                     var statusCode = excepitonFeature.Error switch
                     {
                         ClientSideException => StatusCodes.Status400BadRequest,
+                        NotFoundException => StatusCodes.Status404NotFound,
                         _ => StatusCodes.Status500InternalServerError
                     };
 
                     context.Response.StatusCode = statusCode;
-                    
+
                     var response = BlogSiteResponseDto<NoContentDto>.Fail(statusCode, excepitonFeature.Error.Message);
                     await context.Response.WriteAsync(JsonSerializer.Serialize(response));
                 });
