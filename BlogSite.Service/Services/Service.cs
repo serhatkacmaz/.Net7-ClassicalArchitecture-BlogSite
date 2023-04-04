@@ -138,6 +138,9 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<NoContentDto>> RemoveAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
+            if (entity is null)
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+
             _repository.Remove(entity);
 
             await _unitOfWork.CommitAsync();
@@ -156,6 +159,9 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<NoContentDto>> UpdateAsync(Dto dto)
         {
             var entity = _mapper.Map<Entity>(dto);
+            if (entity is null)
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+
             _repository.Update(entity);
 
             await _unitOfWork.CommitAsync();
