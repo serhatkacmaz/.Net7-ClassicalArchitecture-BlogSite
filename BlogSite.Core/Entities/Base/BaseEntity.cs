@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Base
 {
-    public abstract class BaseEntity<T>
+    public abstract class BaseEntity<T> : IBaseEntity
     {
         public T Id { get; set; }
         public bool IsActive { get; set; }
+
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 

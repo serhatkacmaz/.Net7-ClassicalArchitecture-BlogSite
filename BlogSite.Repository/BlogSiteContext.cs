@@ -34,32 +34,41 @@ namespace BlogSite.Repository
 
         public override int SaveChanges()
         {
+            OnBeforeSave();
             return base.SaveChanges();
-        }
-
-        public override int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            return base.SaveChanges(acceptAllChangesOnSuccess);
-        }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
-        {
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            OnBeforeSave();
             return base.SaveChangesAsync(cancellationToken);
         }
 
         private void OnBeforeSave()
         {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is IBaseEntity entityReference)
+                {
+                    switch (item.Entity)
+                    {
+                        case EntityState.Added:
+                            {
+                                entityReference.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
 
+
+                    }
+                }
+
+            }
         }
 
-        private void PrepareAddedEntities(IEnumerable<BaseEntity<object>> entities)
-        {
-
-        }
     }
 }
