@@ -1,4 +1,5 @@
 using BlogSite.API.Filters;
+using BlogSite.API.Middlewares;
 using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
@@ -61,6 +62,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseBlogSiteException();
 
 app.UseAuthorization();
 
