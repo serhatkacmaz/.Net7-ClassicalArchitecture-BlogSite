@@ -159,9 +159,6 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<NoContentDto>> UpdateAsync(Dto dto)
         {
             var entity = _mapper.Map<Entity>(dto);
-            if (entity is null)
-                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
-
             _repository.Update(entity);
 
             await _unitOfWork.CommitAsync();
