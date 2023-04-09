@@ -129,8 +129,8 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<Dto>> GetByIdAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            //if (entity is null)
-            //    throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
+            if (entity is null)
+                throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
 
             var dto = _mapper.Map<Dto>(entity);
             return BlogSiteResponseDto<Dto>.Success(StatusCodes.Status200OK, dto);
@@ -139,8 +139,8 @@ namespace BlogSite.Service.Services
         public async Task<BlogSiteResponseDto<NoContentDto>> RemoveAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            //if (entity is null)
-            //    throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
+            if (entity is null)
+                throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
 
             _repository.Remove(entity);
 
