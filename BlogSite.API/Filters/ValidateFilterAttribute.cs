@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BlogSite.API.Filters
 {
+    /// <summary>
+    /// FluentValidation custom bir excepiton fırlattığı zaman yakalayıp, kendi custom response modelimize dönüştürme.
+    /// </summary>
     public class ValidateFilterAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)

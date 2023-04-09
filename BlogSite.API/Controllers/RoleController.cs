@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BlogSite.API.Filters;
 using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Core.Entities.UserBase;
 using BlogSite.Core.Services;
@@ -24,6 +25,13 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(await _roleService.GetAllAsync());
         }
 
+        [HttpGet("{id}")]
+        [ServiceFilter(typeof(NotFoundFilter<Role, RoleDto>))]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return CreateActionResult(await _roleService.GetByIdAsync(id));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Save(RoleDto roleDto)
         {
@@ -37,6 +45,7 @@ namespace BlogSite.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(NotFoundFilter<Role, RoleDto>))]
         public async Task<IActionResult> Remove(int id)
         {
             return CreateActionResult(await _roleService.RemoveAsync(id));
