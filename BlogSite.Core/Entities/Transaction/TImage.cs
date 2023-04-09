@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Transaction
 {
-    public class TImage : BlogSiteMasterBaseEntity<long>
+    public class TImage : BlogSiteMasterBaseEntity
     {
         public byte[] Image { get; set; }
         public bool CoverArt { get; set; }
 
-        public long Blog_ID { get; set; }
+        public int Blog_ID { get; set; }
         public TBlog Blog { get; set; }
     }
 }

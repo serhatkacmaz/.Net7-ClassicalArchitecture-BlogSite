@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.UserBase
 {
-    public class User : BlogSiteMasterBaseEntity<int>
+    public class User : BlogSiteMasterBaseEntity
     {
         public string UserName { get; set; }
         public string Title { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Services
 {
-    public interface IService<Entity, Dto, T> where Entity : BaseEntity<T> where Dto : class
+    public interface IService<Entity, Dto> where Entity : BaseEntity where Dto : class
     {
         Task<BlogSiteResponseDto<Dto>> GetByIdAsync(object id);
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllAsync();

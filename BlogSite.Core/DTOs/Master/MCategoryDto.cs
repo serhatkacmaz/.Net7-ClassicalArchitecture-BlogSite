@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Master
 {
-    public class MCategoryDto : BlogSiteMasterBaseDto<int>
+    public class MCategoryDto : BlogSiteMasterBaseDto
     {
         public int ReferenceId { get; set; }
     }

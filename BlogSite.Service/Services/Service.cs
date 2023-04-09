@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Service.Services
 {
-    public class Service<Entity, Dto, T> : IService<Entity, Dto, T> where Entity : BaseEntity<T> where Dto : class
+    public class Service<Entity, Dto> : IService<Entity, Dto> where Entity : BaseEntity where Dto : class
     {
         #region Old Method
         //private readonly IGenericRepository<T> _repository;
@@ -129,7 +129,7 @@ namespace BlogSite.Service.Services
         {
             var entity = await _repository.GetByIdAsync(id);
             if (entity is null)
-                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+                throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
 
             var dto = _mapper.Map<Dto>(entity);
             return BlogSiteResponseDto<Dto>.Success(StatusCodes.Status200OK, dto);
@@ -139,7 +139,7 @@ namespace BlogSite.Service.Services
         {
             var entity = await _repository.GetByIdAsync(id);
             if (entity is null)
-                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+                throw new NotFoundException($"{typeof(Entity).Name}({id}) not found");
 
             _repository.Remove(entity);
 

@@ -48,7 +48,7 @@ namespace BlogSite.Repository
         {
             foreach (var item in ChangeTracker.Entries())
             {
-                if (item.Entity is IBaseEntity entityReference)
+                if (item.Entity is BaseEntity entityReference)
                 {
                     switch (item.Entity)
                     {
@@ -62,7 +62,6 @@ namespace BlogSite.Repository
                                 entityReference.UpdatedDate = DateTime.Now;
                                 break;
                             }
-
 
                     }
                 }

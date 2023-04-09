@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Transaction
 {
-    public class TBlogDto : BlogSiteMasterBaseDto<long>
+    public class TBlogDto : BlogSiteMasterBaseDto
     {
         public string Content { get; set; }
         public string Description { get; set; }

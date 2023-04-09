@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Services
 {
-    public interface IRoleService : IService<Role, RoleDto, int>
+    public interface IRoleService : IService<Role, RoleDto>
     {
     }
 }

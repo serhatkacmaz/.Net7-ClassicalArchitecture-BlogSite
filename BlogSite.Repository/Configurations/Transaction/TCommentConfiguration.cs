@@ -32,7 +32,7 @@ namespace BlogSite.Repository.Configurations.Transaction
 
             builder.Property(p => p.Id).HasColumnOrder(++order);
             builder.Property(p => p.Blog_ID).HasColumnOrder(++order);
-            builder.Property(p => p.Parent_ID).HasColumnOrder(++order);
+            builder.Property(p => p.ParentID).HasColumnOrder(++order);
             builder.Property(p => p.Name).HasColumnOrder(++order);
             builder.Property(p => p.Comment).HasColumnOrder(++order);
             builder.Property(p => p.IsActive).HasColumnOrder(++order);

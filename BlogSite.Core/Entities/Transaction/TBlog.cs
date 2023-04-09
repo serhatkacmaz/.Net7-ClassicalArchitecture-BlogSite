@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Transaction
 {
-    public class TBlog : BlogSiteMasterBaseEntity<long>
+    public class TBlog : BlogSiteMasterBaseEntity
     {
         public string Content { get; set; }
         public string Description { get; set; }

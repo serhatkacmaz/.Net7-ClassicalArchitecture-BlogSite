@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Transaction
 {
-    public class TMovementDto : BaseDto<long>
+    public class TMovementDto : BaseDto
     {
         public EUserReaction EUserReaction { get; set; }
         public long Blog_ID { get; set; }

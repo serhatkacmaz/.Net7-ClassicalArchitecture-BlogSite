@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Master
 {
-    public class MCategory : BlogSiteMasterBaseEntity<int>
+    public class MCategory : BlogSiteMasterBaseEntity
     {
         public int ReferenceId { get; set; }
         public ICollection<TBlog> Blogs { get; set; }

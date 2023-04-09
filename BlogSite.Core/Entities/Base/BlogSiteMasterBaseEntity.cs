@@ -7,7 +7,7 @@ using BlogSite.Core.Entities.UserBase;
 
 namespace BlogSite.Core.Entities.Base
 {
-    public abstract class BlogSiteMasterBaseEntity<T> : BaseEntity<T>
+    public abstract class BlogSiteMasterBaseEntity : BaseEntity
     {
         public string Name { get; set; }
     }

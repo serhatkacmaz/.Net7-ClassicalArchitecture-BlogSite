@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Service.Services
 {
-    public class RoleService : Service<Role, RoleDto, int>, IRoleService
+    public class RoleService : Service<Role, RoleDto>, IRoleService
     {
         public RoleService(IGenericRepository<Role> repository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository, unitOfWork, mapper)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Transaction
 {
-    public class TImageDto : BlogSiteMasterBaseDto<long>
+    public class TImageDto : BlogSiteMasterBaseDto
     {
         public byte[] Image { get; set; }
         public bool CoverArt { get; set; }

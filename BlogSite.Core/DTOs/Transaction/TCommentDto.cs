@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Transaction
 {
-    public class TCommentDto : BlogSiteMasterBaseDto<long>
+    public class TCommentDto : BlogSiteMasterBaseDto
     {
         public string Comment { get; set; }
         public long Parent_ID { get; set; }

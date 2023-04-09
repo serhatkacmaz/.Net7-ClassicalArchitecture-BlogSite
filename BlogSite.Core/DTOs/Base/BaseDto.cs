@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.Base
 {
-    public abstract class BaseDto<T>
+    public abstract class BaseDto
     {
-        public T Id { get; set; }
+        public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

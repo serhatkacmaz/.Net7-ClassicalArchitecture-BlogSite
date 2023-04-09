@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Transaction
 {
-    public class TComment : BlogSiteMasterBaseEntity<long>
+    public class TComment : BlogSiteMasterBaseEntity
     {
         public string Comment { get; set; }        
-        public long Parent_ID { get; set; }
+        public int ParentID { get; set; }
 
-        public long Blog_ID { get; set; }
+        public int Blog_ID { get; set; }
         public TBlog Blog { get; set; }
     }
 }

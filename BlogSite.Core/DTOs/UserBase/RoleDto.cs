@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.DTOs.UserBase
 {
-    public class RoleDto : BlogSiteMasterBaseDto<int>
+    public class RoleDto : BlogSiteMasterBaseDto
     {
         public string Description { get; set; }
     }

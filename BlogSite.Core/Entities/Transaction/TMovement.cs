@@ -15,11 +15,11 @@ namespace BlogSite.Core.Entities.Transaction
         Favorite = 3
     }
 
-    public class TMovement : BaseEntity<long>
+    public class TMovement : BaseEntity
     {
         public EUserReaction EUserReaction { get; set; }
 
-        public long Blog_ID { get; set; }
+        public int Blog_ID { get; set; }
         public TBlog Blog { get; set; }
     }
 }

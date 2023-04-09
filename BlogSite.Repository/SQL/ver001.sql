@@ -57,13 +57,11 @@ GO
 
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'CREATE TABLE [TBlogs] (
-    [Id] bigint NOT NULL IDENTITY,
+    [Id] int NOT NULL IDENTITY,
     [Category_ID] int NOT NULL,
     [Name] nvarchar(50) NOT NULL,
     [Content] nvarchar(150) NOT NULL,
     [Description] nvarchar(max) NULL,
-    [LikesNumber] int NOT NULL,
-    [DislikesNumber] int NOT NULL,
     [ViewNumber] int NOT NULL,
     [IsActive] bit NOT NULL,
     [CreatedDate] datetime2 NOT NULL,
@@ -92,9 +90,9 @@ CREATE TABLE [UserRoles] (
 GO
 
 CREATE TABLE [TComments] (
-    [Id] bigint NOT NULL IDENTITY,
-    [Blog_ID] bigint NOT NULL,
-    [Parent_ID] bigint NOT NULL,
+    [Id] int NOT NULL IDENTITY,
+    [Blog_ID] int NOT NULL,
+    [ParentID] int NOT NULL,
     [Name] nvarchar(50) NOT NULL,
     [Comment] nvarchar(max) NOT NULL,
     [IsActive] bit NOT NULL,
@@ -108,8 +106,8 @@ CREATE TABLE [TComments] (
 GO
 
 CREATE TABLE [TImages] (
-    [Id] bigint NOT NULL IDENTITY,
-    [Blog_ID] bigint NOT NULL,
+    [Id] int NOT NULL IDENTITY,
+    [Blog_ID] int NOT NULL,
     [Name] nvarchar(50) NOT NULL,
     [Image] varbinary(max) NULL,
     [CoverArt] bit NOT NULL,
@@ -123,10 +121,24 @@ CREATE TABLE [TImages] (
 );
 GO
 
+CREATE TABLE [TMovement] (
+    [Id] int NOT NULL IDENTITY,
+    [Blog_ID] int NOT NULL,
+    [IsActive] bit NOT NULL,
+    [CreatedDate] datetime2 NOT NULL,
+    [UpdatedDate] datetime2 NULL,
+    [User_ID] int NULL,
+    [EUserReaction] tinyint NOT NULL,
+    CONSTRAINT [PK_TMovement] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_TMovement_TBlogs_Blog_ID] FOREIGN KEY ([Blog_ID]) REFERENCES [TBlogs] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_TMovement_Users_User_ID] FOREIGN KEY ([User_ID]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+GO
+
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedDate', N'Description', N'IsActive', N'Name', N'UpdatedDate', N'User_ID') AND [object_id] = OBJECT_ID(N'[Roles]'))
     SET IDENTITY_INSERT [Roles] ON;
 INSERT INTO [Roles] ([Id], [CreatedDate], [Description], [IsActive], [Name], [UpdatedDate], [User_ID])
-VALUES (1, '2023-03-26T03:02:24.1432129+03:00', N'admin rolu tanımlama', CAST(1 AS bit), N'admin', NULL, NULL);
+VALUES (1, '2023-04-09T16:41:08.1636800+03:00', N'admin rolu tanımlama', CAST(1 AS bit), N'admin', NULL, NULL);
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedDate', N'Description', N'IsActive', N'Name', N'UpdatedDate', N'User_ID') AND [object_id] = OBJECT_ID(N'[Roles]'))
     SET IDENTITY_INSERT [Roles] OFF;
 GO
@@ -134,7 +146,7 @@ GO
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'About', N'CreatedDate', N'Image', N'IsActive', N'Mail', N'Name', N'Password', N'Title', N'UpdatedDate', N'UserName', N'User_ID') AND [object_id] = OBJECT_ID(N'[Users]'))
     SET IDENTITY_INSERT [Users] ON;
 INSERT INTO [Users] ([Id], [About], [CreatedDate], [Image], [IsActive], [Mail], [Name], [Password], [Title], [UpdatedDate], [UserName], [User_ID])
-VALUES (1, NULL, '2023-03-26T03:02:24.1432611+03:00', NULL, CAST(1 AS bit), N'admin@gmail.com', N'admin', N'1234', N'Manager', NULL, N'admin Name', NULL);
+VALUES (1, NULL, '2023-04-09T16:41:08.1637192+03:00', NULL, CAST(1 AS bit), N'admin@gmail.com', N'admin', N'1234', N'Manager', NULL, N'admin Name', NULL);
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'About', N'CreatedDate', N'Image', N'IsActive', N'Mail', N'Name', N'Password', N'Title', N'UpdatedDate', N'UserName', N'User_ID') AND [object_id] = OBJECT_ID(N'[Users]'))
     SET IDENTITY_INSERT [Users] OFF;
 GO
@@ -142,7 +154,7 @@ GO
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedDate', N'IsActive', N'Role_ID', N'UpdatedDate', N'User_ID') AND [object_id] = OBJECT_ID(N'[UserRoles]'))
     SET IDENTITY_INSERT [UserRoles] ON;
 INSERT INTO [UserRoles] ([Id], [CreatedDate], [IsActive], [Role_ID], [UpdatedDate], [User_ID])
-VALUES (1, '2023-03-26T03:02:24.1432507+03:00', CAST(1 AS bit), 1, NULL, 1);
+VALUES (1, '2023-04-09T16:41:08.1637094+03:00', CAST(1 AS bit), 1, NULL, 1);
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CreatedDate', N'IsActive', N'Role_ID', N'UpdatedDate', N'User_ID') AND [object_id] = OBJECT_ID(N'[UserRoles]'))
     SET IDENTITY_INSERT [UserRoles] OFF;
 GO
@@ -171,6 +183,12 @@ GO
 CREATE INDEX [IX_TImages_User_ID] ON [TImages] ([User_ID]);
 GO
 
+CREATE INDEX [IX_TMovement_Blog_ID] ON [TMovement] ([Blog_ID]);
+GO
+
+CREATE INDEX [IX_TMovement_User_ID] ON [TMovement] ([User_ID]);
+GO
+
 CREATE INDEX [IX_UserRoles_Role_ID] ON [UserRoles] ([Role_ID]);
 GO
 
@@ -181,7 +199,7 @@ CREATE INDEX [IX_Users_User_ID] ON [Users] ([User_ID]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20230326000224_ver001', N'7.0.4');
+VALUES (N'20230409134108_ver001', N'7.0.4');
 GO
 
 COMMIT;

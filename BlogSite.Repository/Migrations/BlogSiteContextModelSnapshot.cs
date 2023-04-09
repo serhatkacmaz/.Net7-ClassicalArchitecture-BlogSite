@@ -67,12 +67,12 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TBlog", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Category_ID")
                         .HasColumnType("int")
@@ -147,15 +147,15 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TComment", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<string>("Comment")
@@ -177,8 +177,8 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnOrder(3);
 
-                    b.Property<long>("Parent_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("ParentID")
+                        .HasColumnType("int")
                         .HasColumnOrder(2);
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -200,15 +200,15 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TImage", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<bool>("CoverArt")
@@ -252,15 +252,15 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<DateTime>("CreatedDate")
@@ -338,7 +338,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 40, 3, 758, DateTimeKind.Local).AddTicks(9287),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(6800),
                             Description = "admin rolu tanımlama",
                             IsActive = true,
                             Name = "admin"
@@ -416,7 +416,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 40, 3, 758, DateTimeKind.Local).AddTicks(9724),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7192),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -467,7 +467,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 40, 3, 758, DateTimeKind.Local).AddTicks(9626),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7094),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1

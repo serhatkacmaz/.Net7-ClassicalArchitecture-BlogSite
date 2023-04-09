@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Repository.Migrations
 {
     [DbContext(typeof(BlogSiteContext))]
-    [Migration("20230326000224_ver001")]
+    [Migration("20230409134108_ver001")]
     partial class ver001
     {
         /// <inheritdoc />
@@ -70,12 +70,12 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TBlog", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Category_ID")
                         .HasColumnType("int")
@@ -89,23 +89,15 @@ namespace BlogSite.Repository.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnOrder(9);
+                        .HasColumnOrder(7);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(4);
 
-                    b.Property<int>("DislikesNumber")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
-                        .HasColumnOrder(8);
-
-                    b.Property<int>("LikesNumber")
-                        .HasColumnType("int")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(6);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -126,15 +118,15 @@ namespace BlogSite.Repository.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnOrder(10);
+                        .HasColumnOrder(8);
 
                     b.Property<int?>("User_ID")
                         .HasColumnType("int")
-                        .HasColumnOrder(11);
+                        .HasColumnOrder(9);
 
                     b.Property<int>("ViewNumber")
                         .HasColumnType("int")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(5);
 
                     b.HasKey("Id");
 
@@ -158,15 +150,15 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TComment", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<string>("Comment")
@@ -188,8 +180,8 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnOrder(3);
 
-                    b.Property<long>("Parent_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("ParentID")
+                        .HasColumnType("int")
                         .HasColumnOrder(2);
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -211,15 +203,15 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TImage", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Blog_ID")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
                         .HasColumnOrder(1);
 
                     b.Property<bool>("CoverArt")
@@ -259,6 +251,47 @@ namespace BlogSite.Repository.Migrations
                     b.HasIndex("User_ID");
 
                     b.ToTable("TImages");
+                });
+
+            modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Blog_ID")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(3);
+
+                    b.Property<byte>("EUserReaction")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(4);
+
+                    b.Property<int?>("User_ID")
+                        .HasColumnType("int")
+                        .HasColumnOrder(5);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Blog_ID");
+
+                    b.HasIndex("User_ID");
+
+                    b.ToTable("TMovement");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>
@@ -308,7 +341,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2129),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(6800),
                             Description = "admin rolu tanımlama",
                             IsActive = true,
                             Name = "admin"
@@ -386,7 +419,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2611),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7192),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -437,7 +470,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 26, 3, 2, 24, 143, DateTimeKind.Local).AddTicks(2507),
+                            CreatedDate = new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7094),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
@@ -508,6 +541,24 @@ namespace BlogSite.Repository.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
+                {
+                    b.HasOne("BlogSite.Core.Entities.Transaction.TBlog", "Blog")
+                        .WithMany("Movements")
+                        .HasForeignKey("Blog_ID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
+                        .WithMany()
+                        .HasForeignKey("User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>
                 {
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
@@ -556,6 +607,8 @@ namespace BlogSite.Repository.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
+
+                    b.Navigation("Movements");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlogSite.Core.Entities.Base
 {
-    public abstract class BaseEntity<T> : IBaseEntity
+    public abstract class BaseEntity
     {
-        public T Id { get; set; }
+        public int Id { get; set; }
         public bool IsActive { get; set; }
 
         public DateTime CreatedDate { get; set; }
