@@ -2,8 +2,6 @@
 using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Core.Entities.UserBase;
 using BlogSite.Core.Services;
-using BlogSite.Service.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

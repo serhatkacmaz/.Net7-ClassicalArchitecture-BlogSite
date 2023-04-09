@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace BlogSite.Core.Repositories
 {
@@ -14,9 +9,9 @@ namespace BlogSite.Core.Repositories
 
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
-        
-        void Update(T entity); 
-        
+
+        void Update(T entity);
+
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
 

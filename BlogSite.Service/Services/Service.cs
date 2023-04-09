@@ -6,14 +6,8 @@ using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
 using BlogSite.Service.Exceptions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogSite.Service.Services
 {

@@ -3,12 +3,7 @@ using BlogSite.Core.Entities.Master;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Entities.UserBase;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogSite.Repository
 {

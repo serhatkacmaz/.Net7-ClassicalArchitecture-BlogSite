@@ -1,10 +1,5 @@
 ﻿using BlogSite.Core.DTOs.UserBase;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogSite.Service.Validations
 {
@@ -21,6 +16,6 @@ namespace BlogSite.Service.Validations
             RuleFor(x => x.Description)
                 .NotNull().WithMessage("{PropertyName} is required")
                 .NotEmpty().WithMessage("{PropertyName} is not empty");
-        } 
+        }
     }
 }

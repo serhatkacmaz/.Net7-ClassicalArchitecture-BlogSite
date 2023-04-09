@@ -1,11 +1,7 @@
 ﻿using BlogSite.API.Filters;
 using BlogSite.Core.DTOs.Transaction;
-using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Core.Entities.Transaction;
-using BlogSite.Core.Entities.UserBase;
-using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

@@ -1,5 +1,4 @@
 ﻿using BlogSite.Core.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

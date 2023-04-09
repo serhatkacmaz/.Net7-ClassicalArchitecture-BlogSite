@@ -2,7 +2,6 @@
 using BlogSite.Service.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace BlogSite.API.Middlewares
 {
