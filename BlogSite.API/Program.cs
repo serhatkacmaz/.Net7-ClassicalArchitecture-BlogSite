@@ -1,5 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using BlogSite.API.Filters;
 using BlogSite.API.Middlewares;
+using BlogSite.API.Modules;
 using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
@@ -17,6 +20,10 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 //FluentValidation - Fiter
 builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RoleDtoValidator>());
@@ -26,26 +33,13 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
 //Filter
 builder.Services.AddScoped(typeof(NotFoundFilter<,>));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<,>), typeof(Service<,>));
-
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-
-
+//AutoMapper
 builder.Services.AddAutoMapper(typeof(MasterProfile), typeof(TransactionProfile), typeof(UserBaseProfile));
 
-
+//SqlConnection
 builder.Services.AddDbContext<BlogSiteContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
@@ -54,6 +48,12 @@ builder.Services.AddDbContext<BlogSiteContext>(x =>
     });
 });
 
+//AutoFac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+{
+    containerBuilder.RegisterModule(new RepositoryServiceModule());
+});
 
 var app = builder.Build();
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BlogSite.API.Filters
 {
-    public class NotFoundFilter<Entity, Dto> : IAsyncActionFilter where Entity : BaseEntity where Dto : class
+    public class NotFoundFilter<Entity, Dto> : IBlogSiteFilter, IAsyncActionFilter where Entity : BaseEntity where Dto : class
     {
         private readonly IService<Entity, Dto> _service;
 
