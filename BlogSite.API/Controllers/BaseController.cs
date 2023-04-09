@@ -7,7 +7,7 @@ namespace BlogSite.API.Controllers
     public class BaseController : ControllerBase
     {
         [NonAction]
-        public IActionResult CreateActionResult<T>(BlogSiteResponseDto<T> response)
+        protected IActionResult CreateActionResult<T>(BlogSiteResponseDto<T> response)
         {
             if (response.StatusCode == 204)
                 return new ObjectResult(null) { StatusCode = response.StatusCode };
