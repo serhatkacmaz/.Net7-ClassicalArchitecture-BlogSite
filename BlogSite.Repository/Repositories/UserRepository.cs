@@ -8,5 +8,10 @@ namespace BlogSite.Repository.Repositories
         public UserRepository(BlogSiteContext context) : base(context)
         {
         }
+
+        public int ActiveUserCount()
+        {
+            return _context.Users.Where(u => u.IsActive).Count();
+        }
     }
 }

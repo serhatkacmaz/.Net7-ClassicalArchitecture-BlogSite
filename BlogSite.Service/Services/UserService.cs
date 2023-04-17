@@ -1,16 +1,26 @@
 ﻿using AutoMapper;
+using BlogSite.Core.DTOs;
 using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Core.Entities.UserBase;
 using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogSite.Service.Services
 {
     public class UserService : Service<User, UserDto>, IUserService
     {
-        public UserService(IGenericRepository<User> repository, IUnitOfWork unitOfWork, IMapper mapper) : base(repository, unitOfWork, mapper)
+        private readonly IUserRepository _userRepository;
+        public UserService(IGenericRepository<User> repository, IUnitOfWork unitOfWork, IMapper mapper, IUserRepository userRepository) : base(repository, unitOfWork, mapper)
         {
+            _userRepository = userRepository;
+        }
+
+        public BlogSiteResponseDto<int> ActiveUserCount()
+        {
+            var count = _userRepository.ActiveUserCount();
+            return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
         }
     }
 }

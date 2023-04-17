@@ -17,7 +17,7 @@ namespace BlogSite.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             return CreateActionResult(await _userService.GetAllAsync());
@@ -47,6 +47,12 @@ namespace BlogSite.API.Controllers
         public async Task<IActionResult> Remove(int id)
         {
             return CreateActionResult(await _userService.RemoveAsync(id));
+        }
+
+        [HttpGet("GetUserCount")]
+        public IActionResult GetUserCount()
+        {
+            return CreateActionResult(_userService.ActiveUserCount());
         }
 
     }
