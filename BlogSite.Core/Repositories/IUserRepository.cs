@@ -4,6 +4,5 @@ namespace BlogSite.Core.Repositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-        int ActiveUserCount();
     }
 }

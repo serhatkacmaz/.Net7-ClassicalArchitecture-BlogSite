@@ -52,7 +52,7 @@ namespace BlogSite.API.Controllers
         [HttpGet("GetUserCount")]
         public IActionResult GetUserCount()
         {
-            return CreateActionResult(_userService.ActiveUserCount());
+            return CreateActionResult(_userService.Count(x => x.IsActive));
         }
 
     }

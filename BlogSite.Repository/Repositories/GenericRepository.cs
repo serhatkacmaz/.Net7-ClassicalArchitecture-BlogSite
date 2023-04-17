@@ -1,10 +1,11 @@
-﻿using BlogSite.Core.Repositories;
+﻿using BlogSite.Core.Entities.Base;
+using BlogSite.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace BlogSite.Repository.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         protected readonly BlogSiteContext _context;
         private readonly DbSet<T> _dbSet;
@@ -58,6 +59,11 @@ namespace BlogSite.Repository.Repositories
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Where(expression);
+        }
+
+        public int Count(Expression<Func<T, bool>> expression)
+        {
+            return _dbSet.Count(expression);
         }
     }
 }

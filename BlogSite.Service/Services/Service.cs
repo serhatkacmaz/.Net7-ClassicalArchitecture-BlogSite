@@ -166,5 +166,11 @@ namespace BlogSite.Service.Services
             var dtoList = _mapper.Map<IEnumerable<Dto>>(entities);
             return BlogSiteResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, dtoList);
         }
+
+        public BlogSiteResponseDto<int> Count(Expression<Func<Entity, bool>> expression)
+        {
+            var count = _repository.Count(expression);
+            return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
+        }
     }
 }

@@ -12,7 +12,7 @@ builder.Services.AddHttpClient<UserApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
-builder.Services.AddHttpClient<BlogDashboardApiService>(opt =>
+builder.Services.AddHttpClient<BlogApiService>(opt =>
 {
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });

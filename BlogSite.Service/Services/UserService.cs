@@ -16,11 +16,5 @@ namespace BlogSite.Service.Services
         {
             _userRepository = userRepository;
         }
-
-        public BlogSiteResponseDto<int> ActiveUserCount()
-        {
-            var count = _userRepository.ActiveUserCount();
-            return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
-        }
     }
 }

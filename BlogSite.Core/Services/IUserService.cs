@@ -6,6 +6,5 @@ namespace BlogSite.Core.Services
 {
     public interface IUserService : IService<User, UserDto>
     {
-        BlogSiteResponseDto<int> ActiveUserCount();
     }
 }

@@ -2,6 +2,7 @@
 using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
+using BlogSite.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
@@ -48,5 +49,14 @@ namespace BlogSite.API.Controllers
         {
             return CreateActionResult(await _blogService.RemoveAsync(id));
         }
+
+
+        //->
+        [HttpGet("GetTotalCount")]
+        public IActionResult GetTotalCount()
+        {
+            return CreateActionResult(_blogService.Count(x => x.IsActive));
+        }
+
     }
 }

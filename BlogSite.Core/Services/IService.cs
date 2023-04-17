@@ -19,5 +19,7 @@ namespace BlogSite.Core.Services
 
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> Where(Expression<Func<Entity, bool>> expression);
         Task<BlogSiteResponseDto<bool>> AnyAsync(Expression<Func<Entity, bool>> expression);
+
+        BlogSiteResponseDto<int> Count(Expression<Func<Entity, bool>> expression);
     }
 }
