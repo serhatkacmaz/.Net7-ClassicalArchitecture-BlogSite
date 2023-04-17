@@ -17,6 +17,10 @@ builder.Services.AddHttpClient<BlogApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
+builder.Services.AddHttpClient<MovementApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
 
 
 var app = builder.Build();

@@ -8,5 +8,10 @@ namespace BlogSite.Repository.Repositories
         public BlogRepository(BlogSiteContext context) : base(context)
         {
         }
+
+        public int GetTotalViewCount()
+        {
+            return _context.TBlogs.Where(x => x.IsActive).Sum(x => x.ViewNumber);
+        }
     }
 }

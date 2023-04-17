@@ -12,9 +12,15 @@ namespace BlogSite.Web.ApiServices
             _httpClient = httpClient;
         }
 
-        public async Task<int> GetTotalCount()
+        public async Task<int> GetTotalCountAsync()
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>("blog/GetTotalCount");
+            return response.Data;
+        }
+
+        public async Task<int> GetTotalViewCountAsync()
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>("blog/GetTotalViewCount");
             return response.Data;
         }
     }

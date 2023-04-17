@@ -3,10 +3,10 @@
     public class AdminDashboardVievModel
     {
         public int TotalCount { get; set; }
-        public int TotalViewCount { get; set; }
-        public int ActiveUserCount { get; set; }
-        public int TotalFavorite { get; set; }
-        public int TotalLike { get; set; }
-        public int TotalDislike { get; set; }
+        public int ViewCount { get; set; }
+        public int UserCount { get; set; }
+        public int FavoriteCount { get; set; }
+        public int LikeCount { get; set; }
+        public int DislikeCount { get; set; }
     }
 }

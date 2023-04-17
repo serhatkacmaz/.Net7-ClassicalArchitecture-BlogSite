@@ -58,5 +58,10 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(_blogService.Count(x => x.IsActive));
         }
 
+        [HttpGet("GetTotalViewCount")]
+        public IActionResult GetTotalViewCount()
+        {
+            return CreateActionResult(_blogService.GetTotalViewCount());
+        }
     }
 }

@@ -8,21 +8,37 @@ namespace BlogSite.Web.Controllers
     {
         private readonly UserApiService _adminDashboardApiService;
         private readonly BlogApiService _blogApiService;
+        private readonly MovementApiService _movementApiService;
 
-        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService)
+        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService, MovementApiService movementApiService)
         {
             _adminDashboardApiService = adminDashboardApiService;
             _blogApiService = blogApiService;
+            _movementApiService = movementApiService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var model = new AdminDashboardVievModel();
+            var userCountTask = _adminDashboardApiService.GetUserCountAsync();
+            var viewCountTask = _blogApiService.GetTotalViewCountAsync();
+            var totalCountTask = _blogApiService.GetTotalCountAsync();
+            var likeCountTask = _movementApiService.GetTotalBlogLikeCountAsync();
+            var dislikeCountTask = _movementApiService.GetTotalBlogDisLikeCountAsync();
+            var favoriteCountTask = _movementApiService.GetTotalFavoriteCountAsync();
 
-            model.ActiveUserCount = await _adminDashboardApiService.GetUserCountAsync();
-            model.TotalCount = await _blogApiService.GetTotalCount();
+            await Task.WhenAll(userCountTask, viewCountTask, totalCountTask, likeCountTask, favoriteCountTask);
 
-            return View(model);
+            var model = new AdminDashboardVievModel()
+            {
+                UserCount = userCountTask.Result,
+                ViewCount = viewCountTask.Result,
+                TotalCount = totalCountTask.Result,
+                LikeCount = likeCountTask.Result,
+                DislikeCount = dislikeCountTask.Result,
+                FavoriteCount = favoriteCountTask.Result,
+            };
+
+            return View( model);
         }
     }
 }
