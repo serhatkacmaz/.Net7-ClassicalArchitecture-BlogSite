@@ -2,6 +2,10 @@
 
 }
 
+@section Styles{
+    <link href="~/css/loginRegister.css" rel="stylesheet" />
+}
+
 <!-- Home Section -->
 
 <section id="home" class="main-home parallax-section">
@@ -15,12 +19,57 @@
                 <h4>Yazılarını paylaşabilir veya diğer yazarları takip edebilirsin</h4>
                 @if (false)
                 {
-                    <a href="#blog" class="smoothScroll btn btn-default">skacmaz</a>
+                    <a href="#" class="smoothScroll btn btn-default">skacmaz</a>
                 }
                 else
                 {
-                    <a href="#blog" class="smoothScroll btn btn-default">Kayıt Ol / Giriş Yap</a>
+                    <!--Trigger-->
+                    <a class="smoothScroll btn btn-default" id="loginRegisterBtn" href="#" data-target="#login" data-toggle="modal">Giriş/Kayıt</a>                
                 }
+
+                <!--Login Modal-->
+
+                <div id="login" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="container" id="container">
+                                    <div class="form-container sign-up-container">
+                                        <form action="#">
+                                            <input id="r_Name" name="Name" type="text" class="form-control" placeholder="Name" />
+                                            <input id="r_Email" name="Email" type="email" class="form-control" placeholder="Email" />
+                                            <input id="r_Password" name="Password" type="password" class="form-control" placeholder="Password" />
+                                            <button>Kayıt Ol</button>
+                                        </form>
+                                    </div>
+                                    <div class="form-container sign-in-container">
+                                        <form action="#">
+                                            <input id="l_Email" name="Email" type="email" class="form-control" placeholder="Email" />
+                                            <input id="l_Password" name="Password" type="password" class="form-control" placeholder="Password" />
+                                            <a href="#">Şifrenizi mi unuttunuz?</a>
+                                            <button>Giriş Yap</button>
+                                        </form>
+                                    </div>
+                                    <div class="overlay-container">
+                                        <div class="overlay">
+                                            <div class="overlay-panel overlay-left">
+                                                <h1>Hoş Geldiniz!</h1>
+                                                <p>Bizimle bağlantıda kalmak için lütfen kişisel bilgilerinizle giriş yapın</p>
+                                                <button class="ghost" id="signIn">Giriş Yap</button>
+                                            </div>
+                                            <div class="overlay-panel overlay-right">
+                                                <h1>Selam, Blogger!</h1>
+                                                <p>Kişisel bilgilerinizi girin ve bizimle yolculuğa başlayın</p>
+                                                <button class="ghost" id="signUp">Kayıt Ol</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -58,3 +107,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script src="~/js/loginRegister.js"></script>
+}
