@@ -2,6 +2,7 @@
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.UserDashboard;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
@@ -18,12 +19,12 @@ namespace BlogSite.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var modelList = new List<BlogDashboardViewModel>();
+            var modelList = new List<BlogListViewModel>();
             var blogList = await _blogApiService.GetByUserIdAsync(1); //TODO: userID
 
             foreach (var item in blogList)
             {
-                modelList.Add(new BlogDashboardViewModel()
+                modelList.Add(new BlogListViewModel()
                 {
                     Name = item.Name,
                     IsActive = item.IsActive,

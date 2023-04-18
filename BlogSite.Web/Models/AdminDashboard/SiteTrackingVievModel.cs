@@ -1,6 +1,6 @@
-﻿namespace BlogSite.Web.Models
+﻿namespace BlogSite.Web.Models.AdminDashboard
 {
-    public class AdminDashboardVievModel
+    public class SiteTrackingVievModel
     {
         public int TotalCount { get; set; }
         public int ViewCount { get; set; }

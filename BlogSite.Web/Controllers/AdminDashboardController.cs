@@ -1,5 +1,6 @@
 ﻿using BlogSite.Web.ApiServices;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.AdminDashboard;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
@@ -28,7 +29,7 @@ namespace BlogSite.Web.Controllers
 
             await Task.WhenAll(userCountTask, viewCountTask, totalCountTask, likeCountTask, favoriteCountTask);
 
-            var model = new AdminDashboardVievModel()
+            var model = new SiteTrackingVievModel()
             {
                 UserCount = userCountTask.Result,
                 ViewCount = viewCountTask.Result,

@@ -1,4 +1,6 @@
-﻿@model List<BlogDashboardViewModel>
+﻿@using BlogSite.Web.Models.UserDashboard;
+@model List<BlogListViewModel>
+
 @{
     Layout = "_UserDashboardLayout";
 }
@@ -7,7 +9,7 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
-            <input type="submit" value="Yeni Blog Ekle" class="btn btn-success float-right" onclick="window.location.href='/BlogDashboard/CreateNewBlog'">
+            <input type="submit" value="Yeni Blog Ekle" class="btn btn-success float-right" onclick="window.location.href='/UserDashboard/CreateNewBlog'">
         </div>
     </div>
     <br />
@@ -91,6 +93,7 @@
     }
 </section>
 <!-- /.content -->
+
 @section Scripts{
    @* <script>
         $(document).ready(function () {

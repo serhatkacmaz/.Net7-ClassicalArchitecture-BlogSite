@@ -1,6 +1,6 @@
-﻿namespace BlogSite.Web.Models
+﻿namespace BlogSite.Web.Models.UserDashboard
 {
-    public class BlogDashboardViewModel
+    public class BlogListViewModel
     {
         public string Name { get; set; }
         public bool IsActive { get; set; }
