@@ -2,7 +2,6 @@
 using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
-using BlogSite.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
@@ -61,8 +60,8 @@ namespace BlogSite.API.Controllers
         public IActionResult GetTotalBlogDisLikeCount()
         {
             return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.DisLike && x.IsActive));
-        }  
-        
+        }
+
         [HttpGet("GetTotalFavoriteCount")]
         public IActionResult GetTotalFavoriteCount()
         {

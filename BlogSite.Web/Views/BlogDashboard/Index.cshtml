@@ -7,7 +7,7 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
-            <input type="submit" value="Yeni Blog Ekle" class="btn btn-success float-right">
+            <input type="submit" value="Yeni Blog Ekle" class="btn btn-success float-right" onclick="window.location.href='/BlogDashboard/CreateNewBlog'">
         </div>
     </div>
     <br />
@@ -65,18 +65,18 @@
                                 </td>
                             }
                             <td class="project-state">
-                                <span class="badge badge-info">@item.CreatedDate.ToShortDateString()</span>
+                                <span class="badge badge-info">@item.CreatedDate.ToShortDateString()  @item.CreatedDate.ToShortTimeString()</span>
                             </td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-primary btn-sm" href="#">
                                     <i class="fas fa-folder"></i>
-                                    Görüntüle
+                                    Aç
                                 </a>
                                 <a class="btn btn-info btn-sm" href="#">
                                     <i class="fas fa-pencil-alt"></i>
                                     Düzenle
                                 </a>
-                                <a class="btn btn-warning btn-sm" href="#">
+                                <a class="btn btn-danger btn-sm" href="#">
                                     <i class="fas fa-trash"></i>
                                     Pasif
                                 </a>
@@ -95,3 +95,12 @@
     }
 </section>
 <!-- /.content -->
+@section Scripts{
+   @* <script>
+        $(document).ready(function () {
+            $("#btnYeniBlogEkle").click(function () {
+                window.location.href = "/Blog/YeniEkle";
+            });
+        });
+    </script>*@
+}

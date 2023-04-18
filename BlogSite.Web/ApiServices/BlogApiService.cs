@@ -1,6 +1,5 @@
 ﻿using BlogSite.Core.DTOs;
 using BlogSite.Core.DTOs.Transaction;
-using BlogSite.Core.DTOs.UserBase;
 
 namespace BlogSite.Web.ApiServices
 {
@@ -29,6 +28,16 @@ namespace BlogSite.Web.ApiServices
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TBlogDto>>>($"blog/GetByUserId/{userId}");
             return response.Data;
+        }
+
+        public async Task<BlogSiteResponseDto<TBlogDto>> Save(TBlogDto blogDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("blog", blogDto);
+            var responseBody = await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TBlogDto>>();
+            return responseBody;
+
+            //if (!response.IsSuccessStatusCode) return responseBody.Errors;
+            //return new List<string>();
         }
     }
 }

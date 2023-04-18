@@ -38,7 +38,7 @@ namespace BlogSite.Web.Controllers
                 FavoriteCount = favoriteCountTask.Result,
             };
 
-            return View( model);
+            return View(model);
         }
     }
 }

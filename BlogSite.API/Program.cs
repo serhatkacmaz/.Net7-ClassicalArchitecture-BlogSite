@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //FluentValidation - Fiter
-builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RoleDtoValidator>());
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<TBlogDtoValidator>());
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -49,6 +49,15 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new RepositoryServiceModule());
 });
 
+//CORS
+//builder.Services.AddCors(opts =>
+//{
+//    opts.AddDefaultPolicy(build =>
+//    {
+//        build.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+//    });
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,6 +68,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//app.UseCors();
 
 app.UseBlogSiteException();
 

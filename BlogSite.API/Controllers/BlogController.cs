@@ -2,7 +2,6 @@
 using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
-using BlogSite.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

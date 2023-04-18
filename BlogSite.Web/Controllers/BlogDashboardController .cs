@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Web.ApiServices;
+using BlogSite.Web.Helpers;
 using BlogSite.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace BlogSite.Web.Controllers
             _blogApiService = blogApiService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var modelList = new List<BlogDashboardViewModel>();
@@ -25,7 +27,7 @@ namespace BlogSite.Web.Controllers
                 {
                     Name = item.Name,
                     IsActive = item.IsActive,
-                    CreatedDate = item.CreatedDate
+                    CreatedDate = DateTime.Now
                 });
             }
 
@@ -39,9 +41,23 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewBlog(TBlogDto blogDto)
+        public async Task<IActionResult> CreateNewBlog(TBlogDto blogDto)
         {
-            return View();
+            try
+            {
+                //TODO:
+                blogDto.Category_ID = 1;
+                blogDto.User_ID = 1;
+
+                var responseDto = await _blogApiService.Save(blogDto);
+                ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

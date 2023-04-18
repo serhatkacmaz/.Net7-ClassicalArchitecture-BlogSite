@@ -1,6 +1,5 @@
 ﻿using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlogSite.Repository.Repositories
 {
