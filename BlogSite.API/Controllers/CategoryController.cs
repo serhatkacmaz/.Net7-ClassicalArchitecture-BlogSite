@@ -11,43 +11,44 @@ namespace BlogSite.API.Controllers
     [ApiController]
     public class CategoryController : BaseController
     {
-        private readonly ICategoryService _CategoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryService CategoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _CategoryService = CategoryService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return CreateActionResult(await _CategoryService.GetAllAsync());
+            return CreateActionResult(await _categoryService.GetAllAsync());
         }
 
         [HttpGet("{id}")]
         [ServiceFilter(typeof(NotFoundFilter<MCategory, MCategoryDto>))]
         public async Task<IActionResult> GetById(int id)
         {
-            return CreateActionResult(await _CategoryService.GetByIdAsync(id));
+            return CreateActionResult(await _categoryService.GetByIdAsync(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(MCategoryDto CategoryDto)
+        public async Task<IActionResult> Save(MCategoryDto categoryDto)
         {
-            return CreateActionResult(await _CategoryService.AddAsync(CategoryDto));
+            categoryDto.ReferenceId = await _categoryService.LastCategoryPKAsync();
+            return CreateActionResult(await _categoryService.AddAsync(categoryDto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(MCategoryDto CategoryDto)
+        public async Task<IActionResult> Update(MCategoryDto categoryDto)
         {
-            return CreateActionResult(await _CategoryService.UpdateAsync(CategoryDto));
+            return CreateActionResult(await _categoryService.UpdateAsync(categoryDto));
         }
 
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(NotFoundFilter<MCategory, MCategoryDto>))]
         public async Task<IActionResult> Remove(int id)
         {
-            return CreateActionResult(await _CategoryService.RemoveAsync(id));
+            return CreateActionResult(await _categoryService.RemoveAsync(id));
         }
     }
 }

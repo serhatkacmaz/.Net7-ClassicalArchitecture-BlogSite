@@ -4,5 +4,6 @@ namespace BlogSite.Core.Repositories
 {
     public interface ICategoryRepository : IGenericRepository<MCategory>
     {
+        Task<MCategory> LastCategoryPKAsync();
     }
 }

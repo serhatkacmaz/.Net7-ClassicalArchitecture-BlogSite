@@ -65,10 +65,11 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
+                categoryDto.User_ID = 1; //TODO:
                 var responseDto = await _categoryApiService.SaveAsync(categoryDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CategoryGrid));
             }
             catch
             {

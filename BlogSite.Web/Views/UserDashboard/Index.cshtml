@@ -24,29 +24,30 @@
                 </button>
             </div>
         </div>
-        @foreach (var item in Model)
-        {
-            <div class="card-body p-0">
-                <table class="table table-striped projects">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">
-                                #
-                            </th>
-                            <th style="width: 35%">
-                                Blog İsmi
-                            </th>
-                            <th style="width: 20%" class="text-center">
-                                Durum
-                            </th>
-                            <th style="width: 20%" class="text-center">
-                                Tarih
-                            </th>
-                            <th style="width: 20%">
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">
+                            #
+                        </th>
+                        <th style="width: 35%">
+                            İsim
+                        </th>
+                        <th style="width: 20%" class="text-center">
+                            Durum
+                        </th>
+                        <th style="width: 20%" class="text-center">
+                            Tarih
+                        </th>
+                        <th style="width: 20%">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <td>
                                 #
@@ -77,14 +78,14 @@
                                 <a class="btn btn-info btn-sm" href="#">
                                     <i class="fas fa-pencil-alt"></i>
                                     Düzenle
-                                </a>                                
+                                </a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
     <!-- /.card -->
     @if (Model.Count == 0)
@@ -93,9 +94,8 @@
     }
 </section>
 <!-- /.content -->
-
 @section Scripts{
-   @* <script>
+    @* <script>
         $(document).ready(function () {
             $("#btnYeniBlogEkle").click(function () {
                 window.location.href = "/Blog/YeniEkle";

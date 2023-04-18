@@ -8,6 +8,5 @@ namespace BlogSite.Core.DTOs.Transaction
         public string Description { get; set; }
         public int ViewNumber { get; set; }
         public int Category_ID { get; set; }
-        public int User_ID { get; set; }
     }
 }

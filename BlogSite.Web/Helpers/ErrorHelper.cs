@@ -8,7 +8,7 @@ namespace BlogSite.Web.Helpers
     {
         public static void ResponseHandler<T>(BlogSiteResponseDto<T> responseDto, ControllerContext controllerContext) where T : class
         {
-            if (responseDto.Errors.Count > 0)
+            if (responseDto.Errors != null && responseDto.Errors.Count > 0)
             {
                 foreach (var item in responseDto.Errors)
                 {
