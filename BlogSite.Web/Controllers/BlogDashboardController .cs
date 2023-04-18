@@ -27,7 +27,7 @@ namespace BlogSite.Web.Controllers
                 {
                     Name = item.Name,
                     IsActive = item.IsActive,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = item.CreatedDate
                 });
             }
 
