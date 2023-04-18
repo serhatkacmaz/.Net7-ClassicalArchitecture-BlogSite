@@ -8,17 +8,17 @@ namespace BlogSite.Service.Validations
         public TBlogDtoValidator()
         {
             RuleFor(x => x.Name)
-                   .NotNull().WithMessage("{PropertyName} is required")
-                   .NotEmpty().WithMessage("{PropertyName} is not empty");
+                   .NotNull().WithMessage("{PropertyName} *")
+                   .NotEmpty().WithMessage("{PropertyName} *");
 
             RuleFor(x => x.Content)
-               .NotNull().WithMessage("{PropertyName} is required")
-               .NotEmpty().WithMessage("{PropertyName} is not empty");
+               .NotNull().WithMessage("{PropertyName} *")
+               .NotEmpty().WithMessage("{PropertyName} *");
 
 
             RuleFor(x => x.Description)
-               .NotNull().WithMessage("{PropertyName} is required")
-               .NotEmpty().WithMessage("{PropertyName} is not empty");
+               .NotNull().WithMessage("{PropertyName} *")
+               .NotEmpty().WithMessage("{PropertyName} *");
         }
     }
 }

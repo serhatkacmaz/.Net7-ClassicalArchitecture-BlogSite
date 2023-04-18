@@ -10,12 +10,12 @@ namespace BlogSite.Service.Validations
             RuleFor(x => x.Id).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
 
             RuleFor(x => x.Name)
-                .NotNull().WithMessage("{PropertyName} is required")
-                .NotEmpty().WithMessage("{PropertyName} is not empty");
+                .NotNull().WithMessage("{PropertyName} *")
+                .NotEmpty().WithMessage("{PropertyName} *");
 
             RuleFor(x => x.Description)
-                .NotNull().WithMessage("{PropertyName} is required")
-                .NotEmpty().WithMessage("{PropertyName} is not empty");
+                .NotNull().WithMessage("{PropertyName} *")
+                .NotEmpty().WithMessage("{PropertyName} *");
         }
     }
 }
