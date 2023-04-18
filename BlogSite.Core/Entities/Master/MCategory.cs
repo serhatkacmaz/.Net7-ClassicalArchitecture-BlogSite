@@ -6,6 +6,8 @@ namespace BlogSite.Core.Entities.Master
     public class MCategory : BlogSiteMasterBaseEntity
     {
         public int ReferenceId { get; set; }
+        public string Description { get; set; }
+
         public ICollection<TBlog> Blogs { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace BlogSite.Web.Controllers
                 blogDto.Category_ID = 1;
                 blogDto.User_ID = 1;
 
-                var responseDto = await _blogApiService.Save(blogDto);
+                var responseDto = await _blogApiService.SaveAsync(blogDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
 
                 return RedirectToAction(nameof(Index));

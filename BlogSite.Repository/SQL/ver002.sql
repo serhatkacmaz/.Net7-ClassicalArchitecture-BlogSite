@@ -1,0 +1,30 @@
+﻿BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [MCategories] ADD [Description] nvarchar(max) NULL;
+GO
+
+UPDATE [Roles] SET [CreatedDate] = '2023-04-18T22:04:12.0030316+03:00'
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+UPDATE [UserRoles] SET [CreatedDate] = '2023-04-18T22:04:12.0030609+03:00'
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+UPDATE [Users] SET [CreatedDate] = '2023-04-18T22:04:12.0030716+03:00'
+WHERE [Id] = 1;
+SELECT @@ROWCOUNT;
+
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230418190412_ver002', N'7.0.4');
+GO
+
+COMMIT;
+GO

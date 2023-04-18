@@ -1,4 +1,7 @@
-﻿using BlogSite.Web.ApiServices;
+﻿using BlogSite.Core.DTOs.Master;
+using BlogSite.Core.DTOs.Transaction;
+using BlogSite.Web.ApiServices;
+using BlogSite.Web.Helpers;
 using BlogSite.Web.Models;
 using BlogSite.Web.Models.AdminDashboard;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +13,17 @@ namespace BlogSite.Web.Controllers
         private readonly UserApiService _adminDashboardApiService;
         private readonly BlogApiService _blogApiService;
         private readonly MovementApiService _movementApiService;
+        private readonly CategoryApiService _categoryApiService;
 
-        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService, MovementApiService movementApiService)
+        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService, MovementApiService movementApiService, CategoryApiService categoryApiService)
         {
             _adminDashboardApiService = adminDashboardApiService;
             _blogApiService = blogApiService;
             _movementApiService = movementApiService;
+            _categoryApiService = categoryApiService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var userCountTask = _adminDashboardApiService.GetUserCountAsync();
@@ -41,5 +47,34 @@ namespace BlogSite.Web.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CategoryGrid()
+        {
+            return View(await _categoryApiService.GetAllAsync());
+        }
+
+        [HttpGet]
+        public IActionResult CreateNewCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewCategory(MCategoryDto categoryDto)
+        {
+            try
+            {
+                var responseDto = await _categoryApiService.SaveAsync(categoryDto);
+                ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

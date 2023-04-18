@@ -30,14 +30,10 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
-        public async Task<BlogSiteResponseDto<TBlogDto>> Save(TBlogDto blogDto)
+        public async Task<BlogSiteResponseDto<TBlogDto>> SaveAsync(TBlogDto blogDto)
         {
             var response = await _httpClient.PostAsJsonAsync("blog", blogDto);
-            var responseBody = await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TBlogDto>>();
-            return responseBody;
-
-            //if (!response.IsSuccessStatusCode) return responseBody.Errors;
-            //return new List<string>();
+            return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TBlogDto>>();
         }
     }
 }
