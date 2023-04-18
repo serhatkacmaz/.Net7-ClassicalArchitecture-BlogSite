@@ -5,6 +5,7 @@
     Layout = "_AdminDashboardLayout";
 }
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -12,7 +13,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Genel</h3>
@@ -47,25 +48,11 @@
                 </div>
                 <!-- /.card -->
             </div>
-            <div class="col-md-6">
-                <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title">Ek</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
+         
         </div>
         <div class="row">
             <div class="col-12">
-                <input type="submit" value="Kategori Ekle" class="btn btn-success float-right">
+                <input type="submit" value="Kaydet" class="btn btn-success float-right">
             </div>
         </div>
     </section>

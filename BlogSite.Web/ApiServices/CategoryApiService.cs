@@ -19,10 +19,22 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<MCategoryDto> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<MCategoryDto>>($"category/{id}");
+            return response.Data;
+        }
+
         public async Task<BlogSiteResponseDto<MCategoryDto>> SaveAsync(MCategoryDto categoryDto)
         {
             var response = await _httpClient.PostAsJsonAsync("category", categoryDto);
             return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<MCategoryDto>>();
+        }
+
+        public async Task<bool> UpdateAsync(MCategoryDto categoryDto)
+        {
+            var response = await _httpClient.PutAsJsonAsync("category", categoryDto);
+            return response.IsSuccessStatusCode;
         }
     }
 }

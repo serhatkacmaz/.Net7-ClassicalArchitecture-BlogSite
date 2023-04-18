@@ -68,13 +68,9 @@
                                 </td>
                             }
                             <td class="project-state">
-                                <span class="badge badge-info">@item.CreatedDate.ToShortDateString()  @item.CreatedDate.ToShortTimeString()</span>
+                                <span class="badge badge-warning">@item.CreatedDate.ToShortDateString()  @item.CreatedDate.ToShortTimeString()</span>
                             </td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" href="#">
-                                    <i class="fas fa-folder"></i>
-                                    Detay
-                                </a>
                                 <a class="btn btn-info btn-sm" href="#">
                                     <i class="fas fa-pencil-alt"></i>
                                     Düzenle
@@ -94,12 +90,3 @@
     }
 </section>
 <!-- /.content -->
-@section Scripts{
-    @* <script>
-        $(document).ready(function () {
-            $("#btnYeniBlogEkle").click(function () {
-                window.location.href = "/Blog/YeniEkle";
-            });
-        });
-    </script>*@
-}

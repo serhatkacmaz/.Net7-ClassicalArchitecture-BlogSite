@@ -48,6 +48,7 @@ namespace BlogSite.Web.Controllers
             return View(model);
         }
 
+        #region Category
         [HttpGet]
         public async Task<IActionResult> CategoryGrid()
         {
@@ -76,6 +77,32 @@ namespace BlogSite.Web.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CategoryEdit(int id)
+        {
+            return View(await _categoryApiService.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CategoryEdit(MCategoryDto categoryDto)
+        {
+            try
+            {
+                categoryDto.User_ID = 1; //TODO:
+                var result = await _categoryApiService.UpdateAsync(categoryDto);
+
+                if (!result)
+                    return View();
+                else
+                    return RedirectToAction(nameof(CategoryGrid));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
 
     }
 }
