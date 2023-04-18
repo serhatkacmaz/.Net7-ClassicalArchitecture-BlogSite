@@ -7,5 +7,7 @@ namespace BlogSite.Core.Services
     public interface IBlogService : IService<TBlog, TBlogDto>
     {
         BlogSiteResponseDto<int> GetTotalViewCount();
+
+        Task<BlogSiteResponseDto<List<TBlogDto>>> GetByUserIdAsync(int userId);
     }
 }

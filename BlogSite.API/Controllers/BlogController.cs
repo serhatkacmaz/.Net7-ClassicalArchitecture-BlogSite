@@ -52,16 +52,22 @@ namespace BlogSite.API.Controllers
 
 
         //->
-        [HttpGet("GetTotalCount")]
+        [HttpGet("[action]")]
         public IActionResult GetTotalCount()
         {
             return CreateActionResult(_blogService.Count(x => x.IsActive));
         }
 
-        [HttpGet("GetTotalViewCount")]
+        [HttpGet("[action]")]
         public IActionResult GetTotalViewCount()
         {
             return CreateActionResult(_blogService.GetTotalViewCount());
+        }
+
+        [HttpGet("[action]/{userId}")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            return CreateActionResult(await _blogService.GetByUserIdAsync(userId));
         }
     }
 }

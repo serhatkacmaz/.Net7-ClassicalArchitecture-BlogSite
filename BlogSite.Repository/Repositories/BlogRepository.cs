@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogSite.Repository.Repositories
 {
@@ -7,6 +8,11 @@ namespace BlogSite.Repository.Repositories
     {
         public BlogRepository(BlogSiteContext context) : base(context)
         {
+        }
+
+        public IQueryable<TBlog> GetByUserIdAsync(int userId)
+        {
+            return _context.TBlogs.Where(x => x.User_ID == userId);
         }
 
         public int GetTotalViewCount()
