@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {
-    public class BlogDashboardController : Controller
+    public class UserDashboardController  : Controller
     {
         private readonly BlogApiService _blogApiService;
 
-        public BlogDashboardController(BlogApiService blogApiService)
+        public UserDashboardController (BlogApiService blogApiService)
         {
             _blogApiService = blogApiService;
         }
