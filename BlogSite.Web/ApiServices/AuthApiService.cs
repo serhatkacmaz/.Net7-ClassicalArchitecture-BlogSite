@@ -13,9 +13,15 @@ namespace BlogSite.Web.ApiServices
             _httpClient = httpClient;
         }
 
-        public async Task<BlogSiteResponseDto<TokenDto>> Login(LoginDto loginDto)
+        public async Task<BlogSiteResponseDto<TokenDto>> CreateToken(LoginDto loginDto)
         {
             var response = await _httpClient.PostAsJsonAsync("auth/CreateToken", loginDto);
+            return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TokenDto>>();
+        }
+
+        public async Task<BlogSiteResponseDto<TokenDto>> CreateTokenByRefreshToken(RefreshTokenDto refreshTokenDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("auth/CreateTokenByRefreshToken", refreshTokenDto);
             return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TokenDto>>();
         }
     }

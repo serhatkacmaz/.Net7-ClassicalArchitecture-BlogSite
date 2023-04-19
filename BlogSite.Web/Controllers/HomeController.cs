@@ -35,7 +35,7 @@ namespace BlogSite.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginClick(LoginDto loginDto)
         {      
-            var result = await _authApiService.Login(loginDto);
+            var result = await _authApiService.CreateToken(loginDto);
 
             if (result.Errors == null)
             {

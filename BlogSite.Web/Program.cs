@@ -40,7 +40,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.Cookie.Name = "YourCookieName";
         options.LoginPath = "/Home/LoginClick";
-        options.ExpireTimeSpan = TimeSpan.FromDays(30);
     });
 
 var app = builder.Build();

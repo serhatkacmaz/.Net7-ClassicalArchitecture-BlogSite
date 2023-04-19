@@ -54,8 +54,8 @@ namespace BlogSite.Service.Services
 
         public TokenDto CreateToken(User user)
         {
-            var accessTokenExpiration = DateTime.Now.AddMonths(_tokenOption.AccessTokenExpiration);
-            var refreshTokenExpiration = DateTime.Now.AddMonths(_tokenOption.RefreshTokenExpiration);
+            var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpiration);
+            var refreshTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.RefreshTokenExpiration);
 
             var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
@@ -83,7 +83,7 @@ namespace BlogSite.Service.Services
 
         public ClientTokenDto CreateTokenByClient(Client client)
         {
-            var accessTokenExpiration = DateTime.Now.AddMonths(_tokenOption.AccessTokenExpiration);
+            var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpiration);
 
             var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
