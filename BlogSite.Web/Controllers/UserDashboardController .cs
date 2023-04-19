@@ -3,6 +3,7 @@ using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.UserDashboard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
@@ -27,6 +28,7 @@ namespace BlogSite.Web.Controllers
         #endregion
 
         #region Blog
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> BlogGrid()
         {

@@ -1,4 +1,7 @@
 using BlogSite.Web.ApiServices;
+using BlogSite.Web.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,18 @@ builder.Services.AddHttpClient<CategoryApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
+builder.Services.AddHttpClient<AuthApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.Cookie.Name = "YourCookieName";
+        options.LoginPath = "/Home/LoginClick";
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    });
 
 var app = builder.Build();
 
@@ -41,7 +56,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseMiddleware<JwtTokenMiddleware>();
+
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
