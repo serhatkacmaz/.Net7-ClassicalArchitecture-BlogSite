@@ -33,14 +33,14 @@ namespace BlogSite.Service.Services
             if (loginDto is null)
                 throw new ArgumentNullException(nameof(loginDto));
 
-            var user = await _userRepository.FindByMailAsync(loginDto.Email);
+            var user = await _userRepository.FindByMailAsync(loginDto.Mail);
 
             if (user is null)
-                return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status400BadRequest, "Email or Password is wrong");
+                return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status400BadRequest, "Mail or Password is wrong");
 
 
             if (user.Password != loginDto.Password)
-                return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status400BadRequest, "Email or Password is wrong");
+                return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status400BadRequest, "Mail or Password is wrong");
 
             var tokenDto = _tokenService.CreateToken(user);
             var userRefreshToken = await _userRefreshTokenRepository.Where(x => x.UserId == user.Id).SingleOrDefaultAsync();

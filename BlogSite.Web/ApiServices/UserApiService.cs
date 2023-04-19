@@ -1,4 +1,5 @@
 ﻿using BlogSite.Core.DTOs;
+using BlogSite.Core.DTOs.Master;
 using BlogSite.Core.DTOs.UserBase;
 
 namespace BlogSite.Web.ApiServices
@@ -28,6 +29,12 @@ namespace BlogSite.Web.ApiServices
         {
             var response = await _httpClient.PutAsJsonAsync("user", userDto);
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<BlogSiteResponseDto<UserDto>> SaveAsync(UserDto userDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("user", userDto);
+            return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<UserDto>>();
         }
 
         public async Task<int> GetUserCountAsync()

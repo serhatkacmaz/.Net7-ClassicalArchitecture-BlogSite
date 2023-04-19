@@ -20,7 +20,7 @@ namespace BlogSite.Web.Middleware
             var accessToken = context.Request.Cookies["X-Access-Token"];
             var refreshToken = context.Request.Cookies["Refresh-Token"];
 
-            if (context.Request.Path.Value.Contains("Home/Index"))
+            if (context.Request.Path.Value.Contains("Login/") || context.Request.Path.Value.Contains("Home/Index"))
             {
                 await _next(context);
                 return;
@@ -56,8 +56,8 @@ namespace BlogSite.Web.Middleware
                 else
                 {
                     context.User = null;
-                    context.Response.Redirect("Home/Index");
-                    await _next(context);
+                    context.Response.Redirect("/Home/Index");
+                    return; //INFO returnURl cancel
                 }
             }
 

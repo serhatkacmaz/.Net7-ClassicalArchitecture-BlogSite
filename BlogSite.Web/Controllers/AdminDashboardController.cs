@@ -2,10 +2,12 @@
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.AdminDashboard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {
+    [Authorize]
     public class AdminDashboardController : Controller
     {
         private readonly UserApiService _adminDashboardApiService;

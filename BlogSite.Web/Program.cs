@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
     {
         options.Cookie.Name = "YourCookieName";
-        options.LoginPath = "/Home/LoginClick";
+        options.LoginPath = "/Login/Index";
     });
 
 var app = builder.Build();

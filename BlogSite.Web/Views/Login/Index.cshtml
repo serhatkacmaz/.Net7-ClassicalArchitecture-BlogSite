@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="~/css/loginRegister.css" rel="stylesheet" />
+
+<center>
+    <!--Login Modal-->
+
+    <div id="login" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container" id="container">
+                        <div class="form-container sign-up-container">
+                            <form asp-action="Register" asp-controller="Login">
+                                <input id="r_Name" name="Name" type="text" class="form-control" placeholder="Name" />
+                                <input id="r_Mmail" name="Mail" type="email" class="form-control" placeholder="Email" />
+                                <input id="r_Password" name="Password" type="password" class="form-control" placeholder="Password" />
+                                <button>Kayıt Ol</button>
+                            </form>
+                        </div>
+                        <div class="form-container sign-in-container">
+                            <form asp-action="LoginClick" asp-controller="Login">
+                                <input id="l_Mail" name="Mail" type="email" class="form-control" placeholder="Email" />
+                                <input id="l_Password" name="Password" type="password" class="form-control" placeholder="Password" />
+                                <a href="#">Şifrenizi mi unuttunuz?</a>
+                                <button>Giriş Yap</button>
+                            </form>
+                        </div>
+                        <div class="overlay-container">
+                            <div class="overlay">
+                                <div class="overlay-panel overlay-left">
+                                    <h1>Hoş Geldiniz!</h1>
+                                    <p>Bizimle bağlantıda kalmak için lütfen kişisel bilgilerinizle giriş yapın</p>
+                                    <button class="ghost" id="signIn">Giriş Yap</button>
+                                </div>
+                                <div class="overlay-panel overlay-right">
+                                    <h1>Selam, Blogger!</h1>
+                                    <p>Kişisel bilgilerinizi girin ve bizimle yolculuğa başlayın</p>
+                                    <button class="ghost" id="signUp">Kayıt Ol</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subTitle">
+        BLOG SITE
+    </div>
+</center>
+
+<script src="~/js/loginRegister.js"></script>

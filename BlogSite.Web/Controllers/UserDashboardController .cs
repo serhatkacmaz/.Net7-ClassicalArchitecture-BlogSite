@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {
+    [Authorize]
     public class UserDashboardController : Controller
     {
         private readonly BlogApiService _blogApiService;
@@ -28,8 +29,6 @@ namespace BlogSite.Web.Controllers
         #endregion
 
         #region Blog
-        [Authorize]
-        [HttpGet]
         public async Task<IActionResult> BlogGrid()
         {
             var modelList = new List<BlogListViewModel>();
