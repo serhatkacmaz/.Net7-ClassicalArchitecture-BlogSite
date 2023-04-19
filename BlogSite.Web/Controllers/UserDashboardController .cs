@@ -1,9 +1,7 @@
-﻿using BlogSite.Core.DTOs.Master;
-using BlogSite.Core.DTOs.Transaction;
+﻿using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
-using BlogSite.Web.Models;
 using BlogSite.Web.Models.UserDashboard;
 using Microsoft.AspNetCore.Mvc;
 

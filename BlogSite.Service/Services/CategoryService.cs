@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using BlogSite.Core.DTOs;
 using BlogSite.Core.DTOs.Master;
 using BlogSite.Core.Entities.Master;
 using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using BlogSite.Core.UnitOfWorks;
-using Microsoft.AspNetCore.Http;
 
 namespace BlogSite.Service.Services
 {

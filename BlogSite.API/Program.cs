@@ -4,7 +4,6 @@ using BlogSite.API.Filters;
 using BlogSite.API.Middlewares;
 using BlogSite.API.Modules;
 using BlogSite.Core.Configurations;
-using BlogSite.Core.Services;
 using BlogSite.Repository;
 using BlogSite.Service.Mapping;
 using BlogSite.Service.Services;

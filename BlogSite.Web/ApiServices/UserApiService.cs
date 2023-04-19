@@ -1,5 +1,4 @@
 ﻿using BlogSite.Core.DTOs;
-using BlogSite.Core.DTOs.Master;
 using BlogSite.Core.DTOs.UserBase;
 
 namespace BlogSite.Web.ApiServices

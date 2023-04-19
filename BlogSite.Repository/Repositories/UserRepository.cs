@@ -12,7 +12,7 @@ namespace BlogSite.Repository.Repositories
 
         public Task<User> FindByMailAsync(string mail)
         {
-            return _context.Users.AsNoTracking().Where(x=>x.Mail == mail).SingleOrDefaultAsync(); 
+            return _context.Users.AsNoTracking().Where(x => x.Mail == mail).SingleOrDefaultAsync();
         }
     }
 }

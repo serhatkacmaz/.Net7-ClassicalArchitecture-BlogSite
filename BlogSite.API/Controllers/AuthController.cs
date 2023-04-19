@@ -1,6 +1,5 @@
 ﻿using BlogSite.Core.DTOs.JWT;
 using BlogSite.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

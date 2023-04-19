@@ -1,5 +1,4 @@
-﻿using BlogSite.Core.Entities.Base;
-using BlogSite.Core.Repositories;
+﻿using BlogSite.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
