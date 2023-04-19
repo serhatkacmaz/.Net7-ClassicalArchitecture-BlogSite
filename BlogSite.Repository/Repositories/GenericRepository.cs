@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace BlogSite.Repository.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly BlogSiteContext _context;
         private readonly DbSet<T> _dbSet;

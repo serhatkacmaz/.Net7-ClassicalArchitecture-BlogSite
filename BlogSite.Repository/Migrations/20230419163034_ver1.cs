@@ -1,15 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace BlogSite.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class ver001 : Migration
+    public partial class ver1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "UserRefreshTokens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRefreshTokens", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -50,7 +66,8 @@ namespace BlogSite.Repository.Migrations
                     ReferenceId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -313,17 +330,17 @@ namespace BlogSite.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "CreatedDate", "Description", "IsActive", "Name", "UpdatedDate", "User_ID" },
-                values: new object[] { 1, new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(6800), "admin rolu tanımlama", true, "admin", null, null });
+                values: new object[] { 1, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(3393), "admin rolu tanımlama", true, "admin", null, null });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "About", "CreatedDate", "Image", "IsActive", "Mail", "Name", "Password", "Title", "UpdatedDate", "UserName", "User_ID" },
-                values: new object[] { 1, null, new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7192), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "admin Name", null });
+                values: new object[] { 1, null, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4908), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "admin Name", null });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "CreatedDate", "IsActive", "Role_ID", "UpdatedDate", "User_ID" },
-                values: new object[] { 1, new DateTime(2023, 4, 9, 16, 41, 8, 163, DateTimeKind.Local).AddTicks(7094), true, 1, null, 1 });
+                values: new object[] { 1, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4338), true, 1, null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MCategories_User_ID",
@@ -402,6 +419,9 @@ namespace BlogSite.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "TMovement");
+
+            migrationBuilder.DropTable(
+                name: "UserRefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");

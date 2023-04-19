@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.Entities.UserBase;
 using BlogSite.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogSite.Repository.Repositories
 {
@@ -7,6 +8,11 @@ namespace BlogSite.Repository.Repositories
     {
         public UserRepository(BlogSiteContext context) : base(context)
         {
+        }
+
+        public Task<User> FindByMailAsync(string mail)
+        {
+            return _context.Users.AsNoTracking().Where(x=>x.Mail == mail).SingleOrDefaultAsync(); 
         }
     }
 }

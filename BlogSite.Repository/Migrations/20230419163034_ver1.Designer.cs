@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Repository.Migrations
 {
     [DbContext(typeof(BlogSiteContext))]
-    [Migration("20230418190412_ver002")]
-    partial class ver002
+    [Migration("20230419163034_ver1")]
+    partial class ver1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -344,7 +344,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 18, 22, 4, 12, 3, DateTimeKind.Local).AddTicks(316),
+                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(3393),
                             Description = "admin rolu tanımlama",
                             IsActive = true,
                             Name = "admin"
@@ -422,7 +422,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 18, 22, 4, 12, 3, DateTimeKind.Local).AddTicks(716),
+                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4908),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -430,6 +430,34 @@ namespace BlogSite.Repository.Migrations
                             Title = "Manager",
                             UserName = "admin Name"
                         });
+                });
+
+            modelBuilder.Entity("BlogSite.Core.Entities.UserBase.UserRefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime>("Expiration")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(3);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRefreshTokens");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.UserRole", b =>
@@ -473,7 +501,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 18, 22, 4, 12, 3, DateTimeKind.Local).AddTicks(609),
+                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4338),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1

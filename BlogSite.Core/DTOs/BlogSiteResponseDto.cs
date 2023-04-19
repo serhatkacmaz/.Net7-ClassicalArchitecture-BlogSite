@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using BlogSite.Core.DTOs.UserBase;
+using System.Text.Json.Serialization;
 
 namespace BlogSite.Core.DTOs
 {
@@ -33,6 +34,11 @@ namespace BlogSite.Core.DTOs
         public static BlogSiteResponseDto<T> Fail(int statusCode, string error)
         {
             return new BlogSiteResponseDto<T> { StatusCode = statusCode, Errors = new List<string> { error } };
+        }
+
+        public static BlogSiteResponseDto<UserDto> Fail(object satusCodes)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

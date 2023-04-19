@@ -6,6 +6,7 @@ using BlogSite.Repository;
 using BlogSite.Repository.Repositories;
 using BlogSite.Repository.UnitOfWork;
 using BlogSite.Service.Mapping;
+using BlogSite.Service.Services;
 using System.Reflection;
 using Module = Autofac.Module;
 
@@ -24,6 +25,8 @@ namespace BlogSite.API.Modules
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<TokenService>().As<ITokenService>();
 
             var apiAssembly = Assembly.GetExecutingAssembly();
             var repositoryAssembly = Assembly.GetAssembly(typeof(BlogSiteContext));

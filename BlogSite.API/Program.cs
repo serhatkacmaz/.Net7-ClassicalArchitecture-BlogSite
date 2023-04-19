@@ -1,12 +1,16 @@
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BlogSite.API.Filters;
 using BlogSite.API.Middlewares;
 using BlogSite.API.Modules;
+using BlogSite.Core.Configurations;
+using BlogSite.Core.Services;
 using BlogSite.Repository;
 using BlogSite.Service.Mapping;
+using BlogSite.Service.Services;
 using BlogSite.Service.Validations;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -27,11 +31,14 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
+
 //Filter
 builder.Services.AddScoped(typeof(NotFoundFilter<,>));
 
+
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MasterProfile), typeof(TransactionProfile), typeof(UserBaseProfile));
+
 
 //SqlConnection
 builder.Services.AddDbContext<BlogSiteContext>(x =>
@@ -42,12 +49,43 @@ builder.Services.AddDbContext<BlogSiteContext>(x =>
     });
 });
 
+
 //AutoFac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new RepositoryServiceModule());
 });
+
+//Options Pattern
+builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
+builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));
+
+
+//Token Doğrulama
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
+{
+    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+    opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidIssuer = tokenOptions.Issuer,
+        ValidAudience = tokenOptions.Audience[0],
+        IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
+
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidateLifetime = true,
+
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
 
 //CORS
 //builder.Services.AddCors(opts =>
@@ -57,6 +95,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 //        build.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 //    });
 //});
+
 
 var app = builder.Build();
 
@@ -72,6 +111,8 @@ app.UseHttpsRedirection();
 //app.UseCors();
 
 app.UseBlogSiteException();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

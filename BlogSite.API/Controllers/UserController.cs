@@ -2,6 +2,7 @@
 using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Core.Entities.UserBase;
 using BlogSite.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
@@ -53,6 +54,13 @@ namespace BlogSite.API.Controllers
         public IActionResult GetUserCount()
         {
             return CreateActionResult(_userService.Count(x => x.IsActive));
+        }
+
+        [Authorize]
+        [HttpGet("GetUserByName")]
+        public async Task<IActionResult> GetUserByName()
+        {
+            return CreateActionResult(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
         }
 
     }
