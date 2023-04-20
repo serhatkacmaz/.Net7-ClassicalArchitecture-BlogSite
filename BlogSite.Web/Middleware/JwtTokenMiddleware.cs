@@ -16,14 +16,14 @@ namespace BlogSite.Web.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var accessToken = context.Request.Cookies["X-Access-Token"];
-            var refreshToken = context.Request.Cookies["Refresh-Token"];
-
             if (context.Request.Path.Value.Contains("Login/") || context.Request.Path.Value.Contains("Home/Index"))
             {
                 await _next(context);
                 return;
             }
+
+            var accessToken = context.Request.Cookies["X-Access-Token"];
+            var refreshToken = context.Request.Cookies["Refresh-Token"];
 
             if (!string.IsNullOrEmpty(accessToken))
             {
@@ -50,6 +50,8 @@ namespace BlogSite.Web.Middleware
                             SameSite = SameSiteMode.Strict,
                             Expires = refreshResult.Data.RefreshTokenExpiration
                         });
+
+                        context.Request.Headers.Add("Authorization", $"Bearer {refreshResult.Data.AccessToken}");
                     }
                 }
                 else
