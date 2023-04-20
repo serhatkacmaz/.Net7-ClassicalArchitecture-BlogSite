@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class AdminDashboardController : Controller
     {
         private readonly UserApiService _adminDashboardApiService;

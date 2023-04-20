@@ -42,6 +42,9 @@ namespace BlogSite.Service.Services
             if (user.Password != loginDto.Password)
                 return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status400BadRequest, "Mail or Password is wrong");
 
+            if (!user.IsActive)
+                return BlogSiteResponseDto<TokenDto>.Fail(StatusCodes.Status401Unauthorized, "User is not active");
+
             var tokenDto = _tokenService.CreateToken(user);
             var userRefreshToken = await _userRefreshTokenRepository.Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
 

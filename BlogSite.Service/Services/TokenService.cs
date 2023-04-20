@@ -1,6 +1,7 @@
 ﻿using BlogSite.Core.Configurations;
 using BlogSite.Core.DTOs.JWT;
 using BlogSite.Core.Entities.UserBase;
+using BlogSite.Core.Repositories;
 using BlogSite.Core.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -13,10 +14,12 @@ namespace BlogSite.Service.Services
     public class TokenService : ITokenService
     {
         private readonly CustomTokenOption _tokenOption;
+        private readonly IUserRoleRepository _userRoleRepository;
 
-        public TokenService(IOptions<CustomTokenOption> tokenOption)
+        public TokenService(IOptions<CustomTokenOption> tokenOption, IUserRoleRepository userRoleRepository)
         {
             _tokenOption = tokenOption.Value;
+            _userRoleRepository = userRoleRepository;
         }
 
         private string CreateRefreshToken()
@@ -28,8 +31,10 @@ namespace BlogSite.Service.Services
             return Convert.ToBase64String(numberByte);
         }
 
-        private IEnumerable<Claim> GetClaims(User user, List<string> Audiences)
+        private async Task<IEnumerable<Claim>> GetClaims(User user, List<string> Audiences)
         {
+            var userRoles = await _userRoleRepository.GetRolesByUserIdAsync(user.Id);
+
             var userList = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -39,6 +44,8 @@ namespace BlogSite.Service.Services
             };
 
             userList.AddRange(Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
+            userList.AddRange(userRoles.Select(x => new Claim(ClaimTypes.Role, x)));
+
             return userList;
         }
 
@@ -64,7 +71,7 @@ namespace BlogSite.Service.Services
                 issuer: _tokenOption.Issuer,
                 expires: accessTokenExpiration,
                 notBefore: DateTime.Now,
-                claims: GetClaims(user, _tokenOption.Audience),
+                claims: GetClaims(user, _tokenOption.Audience).Result,
                 signingCredentials: signingCredentials);
 
             var handler = new JwtSecurityTokenHandler();
