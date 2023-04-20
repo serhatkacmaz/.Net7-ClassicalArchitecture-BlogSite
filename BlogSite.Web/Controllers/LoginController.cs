@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using BlogSite.Core.DTOs.UserBase;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BlogSite.Web.Controllers
 {
@@ -35,17 +36,6 @@ namespace BlogSite.Web.Controllers
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var token = tokenHandler.ReadJwtToken(result.Data.AccessToken);
-                var claimsIdentity = new ClaimsIdentity(token.Claims, JwtBearerDefaults.AuthenticationScheme);
-
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = result.Data.RefreshTokenExpiration.AddSeconds(10)
-                };
-
-                await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, claimsPrincipal, authProperties);
 
                 Response.Cookies.Append("X-Access-Token", result.Data.AccessToken, new CookieOptions
                 {

@@ -1,5 +1,8 @@
+using BlogSite.Core.Configurations;
+using BlogSite.Service.Services;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Middleware;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -35,12 +38,31 @@ builder.Services.AddHttpClient<AuthApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
+builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
+{
+    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+    opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
     {
-        options.Cookie.Name = "YourCookieName";
-        options.LoginPath = "/Login/Index";
-    });
+        ValidIssuer = tokenOptions.Issuer,
+        ValidAudience = tokenOptions.Audience[0],
+        IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
+
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidateLifetime = true,
+
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 var app = builder.Build();
 

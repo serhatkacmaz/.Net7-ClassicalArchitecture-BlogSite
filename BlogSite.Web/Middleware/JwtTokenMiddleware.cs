@@ -26,39 +26,40 @@ namespace BlogSite.Web.Middleware
                 return;
             }
 
-            //if (!string.IsNullOrEmpty(accessToken))
-            //{
-            //    context.Request.Headers.Add("Authorization", $"Bearer {accessToken}");
-            //}
-
-            if (string.IsNullOrEmpty(accessToken) && !string.IsNullOrEmpty(refreshToken))
+            if (!string.IsNullOrEmpty(accessToken))
             {
-                var refreshResult = await _authApiService.CreateTokenByRefreshToken(new RefreshTokenDto() { Token = refreshToken });
-
-                if (refreshResult.Errors is null)
-                {
-                    context.Response.Cookies.Append("X-Access-Token", refreshResult.Data.AccessToken, new CookieOptions
-                    {
-                        HttpOnly = true,
-                        SameSite = SameSiteMode.Strict,
-                        Expires = refreshResult.Data.AccessTokenExpiration
-                    });
-
-                    context.Response.Cookies.Append("Refresh-Token", refreshResult.Data.RefreshToken, new CookieOptions
-                    {
-                        HttpOnly = true,
-                        SameSite = SameSiteMode.Strict,
-                        Expires = refreshResult.Data.RefreshTokenExpiration
-                    });
-                }
+                context.Request.Headers.Add("Authorization", $"Bearer {accessToken}");
             }
             else
             {
-                context.User = null;
-                context.Response.Redirect("/Home/Index");
-                return; //INFO returnURl cancel
-            }
+                if (!string.IsNullOrEmpty(refreshToken))
+                {
+                    var refreshResult = await _authApiService.CreateTokenByRefreshToken(new RefreshTokenDto() { Token = refreshToken });
 
+                    if (refreshResult.Errors is null)
+                    {
+                        context.Response.Cookies.Append("X-Access-Token", refreshResult.Data.AccessToken, new CookieOptions
+                        {
+                            HttpOnly = true,
+                            SameSite = SameSiteMode.Strict,
+                            Expires = refreshResult.Data.AccessTokenExpiration
+                        });
+
+                        context.Response.Cookies.Append("Refresh-Token", refreshResult.Data.RefreshToken, new CookieOptions
+                        {
+                            HttpOnly = true,
+                            SameSite = SameSiteMode.Strict,
+                            Expires = refreshResult.Data.RefreshTokenExpiration
+                        });
+                    }
+                }
+                else
+                {
+                    context.User = null;
+                    context.Response.Redirect("/Home/Index");
+                    return; //INFO returnURl cancel
+                }
+            }   
 
             await _next(context);
         }

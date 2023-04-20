@@ -12,6 +12,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,6 +84,8 @@ builder.Services.AddAuthentication(options =>
 
         ClockSkew = TimeSpan.Zero
     };
+    opts.RequireHttpsMetadata = false;
+    opts.SaveToken = true;
 });
 
 
