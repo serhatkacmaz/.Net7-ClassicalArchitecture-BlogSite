@@ -57,13 +57,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(5);
 
-                    b.Property<int?>("User_ID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
                     b.HasKey("Id");
-
-                    b.HasIndex("User_ID");
 
                     b.ToTable("MCategories");
                 });
@@ -120,7 +114,10 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(8);
 
-                    b.Property<int?>("User_ID")
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_ID")
                         .HasColumnType("int")
                         .HasColumnOrder(9);
 
@@ -131,6 +128,8 @@ namespace BlogSite.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Category_ID");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("User_ID");
 
@@ -180,7 +179,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnOrder(3);
 
-                    b.Property<int>("ParentID")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
@@ -188,7 +187,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(7);
 
-                    b.Property<int?>("User_ID")
+                    b.Property<int>("User_ID")
                         .HasColumnType("int")
                         .HasColumnOrder(8);
 
@@ -240,15 +239,9 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(7);
 
-                    b.Property<int?>("User_ID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(8);
-
                     b.HasKey("Id");
 
                     b.HasIndex("Blog_ID");
-
-                    b.HasIndex("User_ID");
 
                     b.ToTable("TImages");
                 });
@@ -281,13 +274,18 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(4);
 
-                    b.Property<int?>("User_ID")
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_ID")
                         .HasColumnType("int")
                         .HasColumnOrder(5);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Blog_ID");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("User_ID");
 
@@ -327,13 +325,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(5);
 
-                    b.Property<int?>("User_ID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
                     b.HasKey("Id");
-
-                    b.HasIndex("User_ID");
 
                     b.ToTable("Roles");
 
@@ -341,10 +333,18 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(3393),
-                            Description = "admin rolu tanımlama",
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8483),
+                            Description = "Admin kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
-                            Name = "admin"
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8495),
+                            Description = "Blog Site kullanıcıları için tanımlanmıştır.",
+                            IsActive = true,
+                            Name = "BlogSiteUser"
                         });
                 });
 
@@ -405,13 +405,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(2);
 
-                    b.Property<int?>("User_ID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(11);
-
                     b.HasKey("Id");
-
-                    b.HasIndex("User_ID");
 
                     b.ToTable("Users");
 
@@ -419,13 +413,24 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4908),
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8835),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
                             Password = "1234",
                             Title = "Manager",
-                            UserName = "admin Name"
+                            UserName = "Admin User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8837),
+                            IsActive = true,
+                            Mail = "skacmaz@gmail.com",
+                            Name = "skacmaz",
+                            Password = "1234",
+                            Title = "Software Developer",
+                            UserName = "Serhat Kaçmaz"
                         });
                 });
 
@@ -482,7 +487,7 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(5);
 
-                    b.Property<int?>("User_ID")
+                    b.Property<int>("User_ID")
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
@@ -498,21 +503,19 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4338),
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8729),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8731),
+                            IsActive = true,
+                            Role_ID = 2,
+                            User_ID = 2
                         });
-                });
-
-            modelBuilder.Entity("BlogSite.Core.Entities.Master.MCategory", b =>
-                {
-                    b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
-                        .WithMany()
-                        .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TBlog", b =>
@@ -523,10 +526,15 @@ namespace BlogSite.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("BlogSite.Core.Entities.UserBase.User", null)
+                        .WithMany("TBlogs")
+                        .HasForeignKey("UserId");
+
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
                         .WithMany()
                         .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
@@ -544,7 +552,8 @@ namespace BlogSite.Repository.Migrations
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
                         .WithMany()
                         .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Blog");
 
@@ -559,14 +568,7 @@ namespace BlogSite.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
-                        .WithMany()
-                        .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Blog");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
@@ -577,32 +579,17 @@ namespace BlogSite.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("BlogSite.Core.Entities.UserBase.User", null)
+                        .WithMany("TMovements")
+                        .HasForeignKey("UserId");
+
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
                         .WithMany()
                         .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Blog");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>
-                {
-                    b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
-                        .WithMany()
-                        .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BlogSite.Core.Entities.UserBase.User", b =>
-                {
-                    b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
-                        .WithMany()
-                        .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
@@ -618,7 +605,8 @@ namespace BlogSite.Repository.Migrations
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
@@ -646,6 +634,10 @@ namespace BlogSite.Repository.Migrations
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.User", b =>
                 {
+                    b.Navigation("TBlogs");
+
+                    b.Navigation("TMovements");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

@@ -1,6 +1,4 @@
-﻿using BlogSite.Core.Entities.UserBase;
-
-namespace BlogSite.Core.Entities.Base
+﻿namespace BlogSite.Core.Entities.Base
 {
     public abstract class BaseEntity
     {
@@ -9,8 +7,5 @@ namespace BlogSite.Core.Entities.Base
 
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-
-        public int? User_ID { get; set; }
-        public User User { get; set; }
     }
 }

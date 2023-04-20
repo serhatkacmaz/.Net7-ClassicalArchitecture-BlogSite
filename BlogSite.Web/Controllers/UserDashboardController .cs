@@ -86,7 +86,6 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
-                userDto.User_ID = 1; //TODO:
                 var result = await _userApiService.UpdateAsync(userDto);
 
                 if (!result)

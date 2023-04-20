@@ -6,5 +6,8 @@ namespace BlogSite.Core.Entities.UserBase
     {
         public int Role_ID { get; set; }
         public Role Role { get; set; }
+
+        public int User_ID { get; set; }
+        public User User { get; set; }
     }
 }

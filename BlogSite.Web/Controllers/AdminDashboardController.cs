@@ -66,7 +66,6 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
-                categoryDto.User_ID = 1; //TODO:
                 var responseDto = await _categoryApiService.SaveAsync(categoryDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
 
@@ -89,7 +88,6 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
-                categoryDto.User_ID = 1; //TODO:
                 var result = await _categoryApiService.UpdateAsync(categoryDto);
 
                 if (!result)

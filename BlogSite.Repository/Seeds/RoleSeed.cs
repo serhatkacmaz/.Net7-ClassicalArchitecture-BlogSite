@@ -11,8 +11,15 @@ namespace BlogSite.Repository.Seeds
             builder.HasData(new Role
             {
                 Id = 1,
-                Name = "admin",
-                Description = "admin rolu tanımlama",
+                Name = "Admin",
+                Description = "Admin kullanıcıları için tanımlanmıştır.",
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+            }, new Role
+            {
+                Id = 2,
+                Name = "BlogSiteUser",
+                Description = "Blog Site kullanıcıları için tanımlanmıştır.",
                 IsActive = true,
                 CreatedDate = DateTime.Now,
             });

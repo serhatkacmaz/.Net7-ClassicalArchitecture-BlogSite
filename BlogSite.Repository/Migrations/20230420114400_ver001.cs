@@ -1,15 +1,53 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace BlogSite.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class ver1 : Migration
+    public partial class ver001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "MCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    ReferenceId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "UserRefreshTokens",
                 columns: table => new
@@ -40,67 +78,11 @@ namespace BlogSite.Repository.Migrations
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Users_User_ID",
-                        column: x => x.User_ID,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MCategories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ReferenceId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MCategories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MCategories_Users_User_ID",
-                        column: x => x.User_ID,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Roles_Users_User_ID",
-                        column: x => x.User_ID,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,7 +144,7 @@ namespace BlogSite.Repository.Migrations
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)
                         .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
                         .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:IsTemporal", true)
                         .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)
@@ -179,6 +161,12 @@ namespace BlogSite.Repository.Migrations
                         .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)
                         .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
                         .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart")
                 },
                 constraints: table =>
@@ -190,6 +178,11 @@ namespace BlogSite.Repository.Migrations
                         principalTable: "MCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TBlogs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TBlogs_Users_User_ID",
                         column: x => x.User_ID,
@@ -210,7 +203,7 @@ namespace BlogSite.Repository.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Role_ID = table.Column<int>(type: "int", nullable: false),
-                    User_ID = table.Column<int>(type: "int", nullable: true),
+                    User_ID = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -239,13 +232,13 @@ namespace BlogSite.Repository.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Blog_ID = table.Column<int>(type: "int", nullable: false),
-                    ParentID = table.Column<int>(type: "int", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
+                    User_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -276,8 +269,7 @@ namespace BlogSite.Repository.Migrations
                     CoverArt = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -286,12 +278,6 @@ namespace BlogSite.Repository.Migrations
                         name: "FK_TImages_TBlogs_Blog_ID",
                         column: x => x.Blog_ID,
                         principalTable: "TBlogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TImages_Users_User_ID",
-                        column: x => x.User_ID,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -306,8 +292,9 @@ namespace BlogSite.Repository.Migrations
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    User_ID = table.Column<int>(type: "int", nullable: true),
-                    EUserReaction = table.Column<byte>(type: "tinyint", nullable: false)
+                    User_ID = table.Column<int>(type: "int", nullable: false),
+                    EUserReaction = table.Column<byte>(type: "tinyint", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -319,6 +306,11 @@ namespace BlogSite.Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_TMovement_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_TMovement_Users_User_ID",
                         column: x => x.User_ID,
                         principalTable: "Users",
@@ -328,28 +320,30 @@ namespace BlogSite.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Roles",
-                columns: new[] { "Id", "CreatedDate", "Description", "IsActive", "Name", "UpdatedDate", "User_ID" },
-                values: new object[] { 1, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(3393), "admin rolu tanımlama", true, "admin", null, null });
+                columns: new[] { "Id", "CreatedDate", "Description", "IsActive", "Name", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8483), "Admin kullanıcıları için tanımlanmıştır.", true, "Admin", null },
+                    { 2, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8495), "Blog Site kullanıcıları için tanımlanmıştır.", true, "BlogSiteUser", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "About", "CreatedDate", "Image", "IsActive", "Mail", "Name", "Password", "Title", "UpdatedDate", "UserName", "User_ID" },
-                values: new object[] { 1, null, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4908), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "admin Name", null });
+                columns: new[] { "Id", "About", "CreatedDate", "Image", "IsActive", "Mail", "Name", "Password", "Title", "UpdatedDate", "UserName" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8835), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "Admin User" },
+                    { 2, null, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8837), null, true, "skacmaz@gmail.com", "skacmaz", "1234", "Software Developer", null, "Serhat Kaçmaz" }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "CreatedDate", "IsActive", "Role_ID", "UpdatedDate", "User_ID" },
-                values: new object[] { 1, new DateTime(2023, 4, 19, 19, 30, 33, 978, DateTimeKind.Local).AddTicks(4338), true, 1, null, 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MCategories_User_ID",
-                table: "MCategories",
-                column: "User_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Roles_User_ID",
-                table: "Roles",
-                column: "User_ID");
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8729), true, 1, null, 1 },
+                    { 2, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8731), true, 2, null, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBlogs_Category_ID",
@@ -360,6 +354,11 @@ namespace BlogSite.Repository.Migrations
                 name: "IX_TBlogs_User_ID",
                 table: "TBlogs",
                 column: "User_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TBlogs_UserId",
+                table: "TBlogs",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TComments_Blog_ID",
@@ -377,11 +376,6 @@ namespace BlogSite.Repository.Migrations
                 column: "Blog_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TImages_User_ID",
-                table: "TImages",
-                column: "User_ID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TMovement_Blog_ID",
                 table: "TMovement",
                 column: "Blog_ID");
@@ -392,6 +386,11 @@ namespace BlogSite.Repository.Migrations
                 column: "User_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TMovement_UserId",
+                table: "TMovement",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_Role_ID",
                 table: "UserRoles",
                 column: "Role_ID");
@@ -399,11 +398,6 @@ namespace BlogSite.Repository.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_User_ID",
                 table: "UserRoles",
-                column: "User_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_User_ID",
-                table: "Users",
                 column: "User_ID");
         }
 

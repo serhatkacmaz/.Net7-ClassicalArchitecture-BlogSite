@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.Entities.Base;
 using BlogSite.Core.Entities.Master;
+using BlogSite.Core.Entities.UserBase;
 
 namespace BlogSite.Core.Entities.Transaction
 {
@@ -11,6 +12,9 @@ namespace BlogSite.Core.Entities.Transaction
 
         public int Category_ID { get; set; }
         public MCategory Category { get; set; }
+
+        public int User_ID { get; set; }
+        public User User { get; set; }
 
         public ICollection<TImage> Images { get; set; }
         public ICollection<TComment> Comments { get; set; }

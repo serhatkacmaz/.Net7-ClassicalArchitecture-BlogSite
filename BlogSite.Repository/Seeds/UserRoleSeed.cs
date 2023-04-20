@@ -15,6 +15,13 @@ namespace BlogSite.Repository.Seeds
                 Role_ID = 1,
                 IsActive = true,
                 CreatedDate = DateTime.Now,
+            }, new UserRole
+            {
+                Id = 2,
+                User_ID = 2,
+                Role_ID = 2,
+                IsActive = true,
+                CreatedDate = DateTime.Now,
             });
         }
     }

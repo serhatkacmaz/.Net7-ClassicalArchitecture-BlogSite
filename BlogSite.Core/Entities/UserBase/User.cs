@@ -1,4 +1,5 @@
 ﻿using BlogSite.Core.Entities.Base;
+using BlogSite.Core.Entities.Transaction;
 
 namespace BlogSite.Core.Entities.UserBase
 {
@@ -12,5 +13,7 @@ namespace BlogSite.Core.Entities.UserBase
         public byte[] Image { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<TMovement> TMovements { get; set; }
+        public ICollection<TBlog> TBlogs { get; set; }
     }
 }

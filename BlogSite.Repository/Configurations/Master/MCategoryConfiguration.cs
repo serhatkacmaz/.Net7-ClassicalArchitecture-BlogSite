@@ -12,11 +12,6 @@ namespace BlogSite.Repository.Configurations.Master
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Name).IsUnicode().IsRequired().HasMaxLength(50);
 
-            builder.HasOne(x => x.User)
-                .WithMany()
-                .HasForeignKey(x => x.User_ID)
-                .OnDelete(DeleteBehavior.Restrict);
-
             int order = -1;
 
             builder.Property(p => p.Id).HasColumnOrder(++order);
@@ -25,7 +20,6 @@ namespace BlogSite.Repository.Configurations.Master
             builder.Property(p => p.ReferenceId).HasColumnOrder(++order);
             builder.Property(p => p.CreatedDate).HasColumnOrder(++order);
             builder.Property(p => p.UpdatedDate).HasColumnOrder(++order);
-            builder.Property(p => p.User_ID).HasColumnOrder(++order);
         }
     }
 }
