@@ -1,6 +1,5 @@
 ﻿using BlogSite.Core.DTOs.JWT;
 using BlogSite.Web.ApiServices;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace BlogSite.Web.Middleware
 {
@@ -59,7 +58,7 @@ namespace BlogSite.Web.Middleware
                     context.Response.Redirect("/Home/Index");
                     return; //INFO returnURl cancel
                 }
-            }   
+            }
 
             await _next(context);
         }

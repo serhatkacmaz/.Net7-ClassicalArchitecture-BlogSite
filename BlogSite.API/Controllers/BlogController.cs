@@ -2,7 +2,6 @@
 using BlogSite.Core.DTOs.Transaction;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
@@ -64,7 +63,6 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(_blogService.GetTotalViewCount());
         }
 
-        [Authorize]
         [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> GetByUserId(int userId)
         {

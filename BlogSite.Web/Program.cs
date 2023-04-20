@@ -2,9 +2,7 @@ using BlogSite.Core.Configurations;
 using BlogSite.Service.Services;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Middleware;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 

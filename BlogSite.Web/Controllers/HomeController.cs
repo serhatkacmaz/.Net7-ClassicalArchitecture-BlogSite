@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
 using System.Security.Claims;
 
 namespace BlogSite.Web.Controllers
@@ -34,7 +33,7 @@ namespace BlogSite.Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> LoginClick(LoginDto loginDto)
-        {      
+        {
             var result = await _authApiService.CreateToken(loginDto);
 
             if (result.Errors == null)

@@ -1,12 +1,8 @@
 ﻿using BlogSite.Core.DTOs.JWT;
+using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using BlogSite.Core.DTOs.UserBase;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BlogSite.Web.Controllers
 {
@@ -49,7 +45,6 @@ namespace BlogSite.Web.Controllers
                     SameSite = SameSiteMode.Strict,
                     Expires = result.Data.RefreshTokenExpiration
                 });
-
             }
 
             return RedirectToAction("Index", "Home");
