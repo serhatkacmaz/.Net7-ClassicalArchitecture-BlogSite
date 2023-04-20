@@ -29,46 +29,7 @@ namespace BlogSite.Web.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginClick(LoginDto loginDto)
-        {
-            var result = await _authApiService.CreateToken(loginDto);
-
-            if (result.Errors == null)
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.ReadJwtToken(result.Data.AccessToken);
-                var claimsIdentity = new ClaimsIdentity(token.Claims, JwtBearerDefaults.AuthenticationScheme);
-
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = result.Data.RefreshTokenExpiration.AddSeconds(10)
-                };
-
-                await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, claimsPrincipal, authProperties);
-
-                Response.Cookies.Append("X-Access-Token", result.Data.AccessToken, new CookieOptions
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = result.Data.AccessTokenExpiration
-                });
-                Response.Cookies.Append("Refresh-Token", result.Data.RefreshToken, new CookieOptions
-                {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = result.Data.RefreshTokenExpiration
-                });
-
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
+        }      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
