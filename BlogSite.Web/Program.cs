@@ -38,7 +38,7 @@ builder.Services.AddHttpClient<AuthApiService>(opt =>
 
 builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
 
-
+//Token Dogrulama
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
