@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace BlogSite.Repository.Repositories
@@ -63,6 +64,22 @@ namespace BlogSite.Repository.Repositories
         public int Count(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Count(expression);
+        }
+
+        public IQueryable<T> GetAllWithIncludeAll()
+        {
+            var queryable = _dbSet.AsNoTracking().AsQueryable();
+
+            var entityType = typeof(T);
+            var properties = entityType.GetProperties()
+                                       .Where(p => p.PropertyType.IsClass && p.PropertyType != typeof(string));
+
+            foreach (var property in properties)
+            {
+                queryable = queryable.Include(property.Name);
+            }
+
+            return queryable;
         }
     }
 }

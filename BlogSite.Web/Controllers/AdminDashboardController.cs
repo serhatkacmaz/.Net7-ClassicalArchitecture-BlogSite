@@ -17,14 +17,16 @@ namespace BlogSite.Web.Controllers
         private readonly MovementApiService _movementApiService;
         private readonly CategoryApiService _categoryApiService;
         private readonly RoleApiService _roleApiService;
+        private readonly UserRoleApiService _userRoleApiService;
 
-        public AdminDashboardController(UserApiService userApiService, BlogApiService blogApiService, MovementApiService movementApiService, CategoryApiService categoryApiService, RoleApiService roleApiService)
+        public AdminDashboardController(UserApiService userApiService, BlogApiService blogApiService, MovementApiService movementApiService, CategoryApiService categoryApiService, RoleApiService roleApiService, UserRoleApiService userRoleApiService = null)
         {
             _userApiService = userApiService;
             _blogApiService = blogApiService;
             _movementApiService = movementApiService;
             _categoryApiService = categoryApiService;
             _roleApiService = roleApiService;
+            _userRoleApiService = userRoleApiService;
         }
 
         [HttpGet]
@@ -168,28 +170,6 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateNewUser()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateNewUser(UserDto userDto)
-        {
-            try
-            {
-                var responseDto = await _userApiService.SaveAsync(userDto);
-                ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
-
-                return RedirectToAction(nameof(UserGrid));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        [HttpGet]
         public async Task<IActionResult> UserEdit(int id)
         {
             return View(await _userApiService.GetByIdAsync(id));
@@ -211,6 +191,14 @@ namespace BlogSite.Web.Controllers
             {
                 return View();
             }
+        }
+        #endregion
+
+        #region UserRole
+        [HttpGet]
+        public async Task<IActionResult> UserRoleGrid()
+        {
+            return View(await _userRoleApiService.GetAllAsync());
         }
         #endregion
     }

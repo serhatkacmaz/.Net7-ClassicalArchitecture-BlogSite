@@ -36,8 +36,12 @@ builder.Services.AddHttpClient<AuthApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
-
 builder.Services.AddHttpClient<RoleApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
+builder.Services.AddHttpClient<UserRoleApiService>(opt =>
 {
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });

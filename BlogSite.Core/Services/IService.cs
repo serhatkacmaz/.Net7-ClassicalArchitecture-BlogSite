@@ -8,6 +8,7 @@ namespace BlogSite.Core.Services
     {
         Task<BlogSiteResponseDto<Dto>> GetByIdAsync(object id);
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllAsync();
+        Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllWithIncludeAllAsync();
 
         Task<BlogSiteResponseDto<Dto>> AddAsync(Dto dtoList);
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> AddRangeAsync(IEnumerable<Dto> entities);

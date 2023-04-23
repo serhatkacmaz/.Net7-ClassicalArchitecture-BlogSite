@@ -172,5 +172,12 @@ namespace BlogSite.Service.Services
             var count = _repository.Count(expression);
             return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
         }
+
+        public async Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllWithIncludeAllAsync()
+        {
+            var entities = await _repository.GetAllWithIncludeAll().ToListAsync();
+            var dtoList = _mapper.Map<IEnumerable<Dto>>(entities);
+            return BlogSiteResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, dtoList);
+        }
     }
 }

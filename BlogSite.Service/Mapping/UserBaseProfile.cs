@@ -10,7 +10,11 @@ namespace BlogSite.Service.Mapping
         {
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<UserRole, UserRoleDto>().ReverseMap();
+            CreateMap<UserRole, UserRoleDto>()
+                     .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+                     .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name));
+
+            CreateMap<UserRoleDto, UserRole>();
         }
     }
 }

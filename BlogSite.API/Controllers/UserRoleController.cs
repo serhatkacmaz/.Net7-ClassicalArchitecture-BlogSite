@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
 {
+    [Route("api/[controller]/[action]")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserRoleController : BaseController
@@ -20,7 +21,7 @@ namespace BlogSite.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return CreateActionResult(await _userRoleService.GetAllAsync());
+            return CreateActionResult(await _userRoleService.GetAllWithIncludeAllAsync());
         }
 
         [HttpGet("{id}")]
