@@ -27,10 +27,12 @@
                         <div class="form-group">
                             @Html.Label(null,"Kullanıcı", htmlAttributes: new { @class = "control-label col-md-2" })
                             @Html.DropDownListFor(x => x.User_ID, (ViewBag.UserDropDownList) as List<SelectListItem>, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.User_ID, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             @Html.Label(null,"Rol", htmlAttributes: new { @class = "control-label col-md-2" })
                             @Html.DropDownListFor(x => x.Role_ID, (ViewBag.RoleDropDownList) as List<SelectListItem>, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Role_ID, "", new { @class = "text-danger" })
                         </div>
                      @*   <div class="form-group">
                             @Html.Label(null,"Durum", htmlAttributes: new { @class = "control-label col-md-2" })

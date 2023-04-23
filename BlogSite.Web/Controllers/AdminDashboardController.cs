@@ -1,5 +1,6 @@
 ﻿using BlogSite.Core.DTOs.Master;
 using BlogSite.Core.DTOs.UserBase;
+using BlogSite.Core.Entities.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.AdminDashboard;
@@ -207,10 +208,12 @@ namespace BlogSite.Web.Controllers
             var itemList = new List<SelectListItem>();
             var roleList = await _roleApiService.GetAllAsync();
 
+            itemList.Add(new SelectListItem { Text = "Seçiniz", Value = "0" });
             itemList.AddRange(roleList.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }));
             ViewBag.RoleDropDownList = itemList;
 
             itemList = new List<SelectListItem>();
+            itemList.Add(new SelectListItem { Text = "Seçiniz", Value = "0" });
             var userList = await _userApiService.GetAllAsync();
 
             itemList.AddRange(userList.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }));
@@ -224,15 +227,15 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
-                userRoleDto.IsActive = true;
+                userRoleDto.IsActive = true; //TODO:
                 var responseDto = await _userRoleApiService.SaveAsync(userRoleDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
 
                 return RedirectToAction(nameof(UserRoleGrid));
             }
-            catch
-            {
-                return View();
+            catch (Exception)
+            {       
+                return RedirectToAction(nameof(CreateNewUserRole));
             }
         }
 
@@ -242,7 +245,6 @@ namespace BlogSite.Web.Controllers
             var responseDto = await _userRoleApiService.Remove(id);
             return RedirectToAction(nameof(UserRoleGrid));
         }
-
         #endregion
     }
 }
