@@ -81,5 +81,17 @@ namespace BlogSite.Repository.Repositories
 
             return queryable;
         }
+
+        public IQueryable<T> GetAllWithInclude(List<Expression<Func<T, object>>> includeProperties)
+        {
+            var queryable = _dbSet.AsNoTracking().AsQueryable();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                queryable = queryable.Include(includeProperty);
+            }
+
+            return queryable;
+        }
     }
 }

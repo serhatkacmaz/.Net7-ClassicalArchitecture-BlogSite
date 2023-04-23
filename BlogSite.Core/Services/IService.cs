@@ -7,8 +7,10 @@ namespace BlogSite.Core.Services
     public interface IService<Entity, Dto> where Entity : BaseEntity where Dto : class
     {
         Task<BlogSiteResponseDto<Dto>> GetByIdAsync(object id);
+
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllAsync();
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllWithIncludeAllAsync();
+        Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllWithIncludeAsync(List<Expression<Func<Entity, object>>> includeProperties);
 
         Task<BlogSiteResponseDto<Dto>> AddAsync(Dto dtoList);
         Task<BlogSiteResponseDto<IEnumerable<Dto>>> AddRangeAsync(IEnumerable<Dto> entities);

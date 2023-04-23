@@ -177,6 +177,15 @@ namespace BlogSite.Service.Services
         {
             var entities = await _repository.GetAllWithIncludeAll().ToListAsync();
             var dtoList = _mapper.Map<IEnumerable<Dto>>(entities);
+
+            return BlogSiteResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, dtoList);
+        }
+
+        public async Task<BlogSiteResponseDto<IEnumerable<Dto>>> GetAllWithIncludeAsync(List<Expression<Func<Entity, object>>> includeProperties)
+        {
+            var entities = await _repository.GetAllWithInclude(includeProperties).ToListAsync();
+            var dtoList = _mapper.Map<IEnumerable<Dto>>(entities);
+
             return BlogSiteResponseDto<IEnumerable<Dto>>.Success(StatusCodes.Status200OK, dtoList);
         }
     }

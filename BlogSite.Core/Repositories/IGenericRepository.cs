@@ -8,6 +8,7 @@ namespace BlogSite.Core.Repositories
 
         IQueryable<T> GetAll();
         IQueryable<T> GetAllWithIncludeAll();
+        IQueryable<T> GetAllWithInclude(List<Expression<Func<T,object>>> includeProperties);
 
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
