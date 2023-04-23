@@ -36,6 +36,12 @@ builder.Services.AddHttpClient<AuthApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
+
+builder.Services.AddHttpClient<RoleApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
 builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
 
 //Token Dogrulama

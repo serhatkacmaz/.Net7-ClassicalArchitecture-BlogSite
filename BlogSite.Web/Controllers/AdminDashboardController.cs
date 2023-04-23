@@ -1,4 +1,5 @@
 ﻿using BlogSite.Core.DTOs.Master;
+using BlogSite.Core.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.AdminDashboard;
@@ -7,20 +8,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminDashboardController : Controller
     {
         private readonly UserApiService _adminDashboardApiService;
         private readonly BlogApiService _blogApiService;
         private readonly MovementApiService _movementApiService;
         private readonly CategoryApiService _categoryApiService;
+        private readonly RoleApiService _roleApiService;
 
-        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService, MovementApiService movementApiService, CategoryApiService categoryApiService)
+        public AdminDashboardController(UserApiService adminDashboardApiService, BlogApiService blogApiService, MovementApiService movementApiService, CategoryApiService categoryApiService, RoleApiService roleApiService)
         {
             _adminDashboardApiService = adminDashboardApiService;
             _blogApiService = blogApiService;
             _movementApiService = movementApiService;
             _categoryApiService = categoryApiService;
+            _roleApiService = roleApiService;
         }
 
         [HttpGet]
@@ -94,6 +97,60 @@ namespace BlogSite.Web.Controllers
                     return View();
                 else
                     return RedirectToAction(nameof(CategoryGrid));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
+
+        #region Role
+        [HttpGet]
+        public async Task<IActionResult> RoleGrid()
+        {
+            return View(await _roleApiService.GetAllAsync());
+        }
+
+        [HttpGet]
+        public IActionResult CreateNewRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewRole(RoleDto roleDto)
+        {
+            try
+            {
+                var responseDto = await _roleApiService.SaveAsync(roleDto);
+                ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
+
+                return RedirectToAction(nameof(RoleGrid));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RoleEdit(int id)
+        {
+            return View(await _roleApiService.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RoleEdit(RoleDto roleDto)
+        {
+            try
+            {
+                var result = await _roleApiService.UpdateAsync(roleDto);
+
+                if (!result)
+                    return View();
+                else
+                    return RedirectToAction(nameof(RoleGrid));
             }
             catch
             {

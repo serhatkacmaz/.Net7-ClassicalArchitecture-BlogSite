@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
 {
+    [Route("api/[controller]/[action]")]
     [Route("api/[controller]")]
     [ApiController]
     public class RoleController : BaseController

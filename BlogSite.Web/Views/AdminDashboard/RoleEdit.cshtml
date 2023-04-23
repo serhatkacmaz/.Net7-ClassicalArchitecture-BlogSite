@@ -1,9 +1,10 @@
-﻿@using BlogSite.Core.DTOs.Master;
-@model MCategoryDto
+﻿@using BlogSite.Core.DTOs.UserBase;
+@model RoleDto
 
 @{
     Layout = "_AdminDashboardLayout";
 }
+
 
 @using (Html.BeginForm())
 {
@@ -46,11 +47,12 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-            </div>        
+            </div>
+
         </div>
         <div class="row">
             <div class="col-12">
-                <input type="submit" value="Kategori Ekle" class="btn btn-success float-right">
+                <input type="submit" value="Kaydet" class="btn btn-success float-right">
             </div>
         </div>
     </section>

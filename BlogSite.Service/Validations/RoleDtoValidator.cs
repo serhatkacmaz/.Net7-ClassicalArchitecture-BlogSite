@@ -7,7 +7,7 @@ namespace BlogSite.Service.Validations
     {
         public RoleDtoValidator()
         {
-            RuleFor(x => x.Id).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
+            //RuleFor(x => x.Id).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
 
             RuleFor(x => x.Name)
                 .NotNull().WithMessage("{PropertyName} *")

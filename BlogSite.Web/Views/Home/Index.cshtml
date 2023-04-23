@@ -1,7 +1,6 @@
 ﻿@using System.Security.Claims;
 @{
     var userRole = User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).ToList();
-    var x21 = 10;
 }
 
 <!-- Home Section -->
@@ -17,7 +16,7 @@
                 <h4>Yazılarını paylaşabilir veya diğer yazarları takip edebilirsin</h4>
                 @if (Context.User.Identity.IsAuthenticated)
                 {
-                    @if (userRole.Contains("admin"))
+                    @if (userRole.Contains("Admin"))
                     {
                         <a href="/AdminDashboard/Index" class="smoothScroll btn btn-default">@Context.User.Identity.Name</a>
                     }else
