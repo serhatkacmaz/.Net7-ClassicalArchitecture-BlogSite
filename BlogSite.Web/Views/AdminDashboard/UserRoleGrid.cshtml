@@ -16,7 +16,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Kullanıcı Rolleri</h3>
+            <h3 class="card-title">Yetkiler</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -31,14 +31,11 @@
                         <th style="width: 5%">
                             #
                         </th>
-                        <th style="width: 25%">
+                        <th style="width: 30%">
                             Kullanıcı
                         </th>
-                        <th style="width: 25%">
+                        <th style="width: 30%">
                             Rol
-                        </th>
-                        <th style="width: 10%" class="text-center">
-                            Durum
                         </th>
                         <th style="width: 15%" class="text-center">
                             Tarih
@@ -59,26 +56,14 @@
                             </td>
                             <td>
                                 <a>@item.RoleName</a>
-                            </td>
-                            @if (item.IsActive)
-                            {
-                                <td class="project-state">
-                                    <span class="badge badge-success">Aktif</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state">
-                                    <span class="badge badge-danger">Pasif</span>
-                                </td>
-                            }
+                            </td>                            
                             <td class="project-state">
                                 <span class="badge badge-warning">@item.CreatedDate.ToShortDateString()  @item.CreatedDate.ToShortTimeString()</span>
                             </td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-info btn-sm" href="/AdminDashboard/UserRoleEdit?id=@item.Id">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Düzenle
+                                <a class="btn btn-danger btn-sm" href="/AdminDashboard/UserRoleDelete?id=@item.Id">
+                                    <i class="fas fa-trash"></i>
+                                    Sil
                                 </a>
                             </td>
                         </tr>

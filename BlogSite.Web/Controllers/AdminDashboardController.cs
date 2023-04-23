@@ -200,6 +200,49 @@ namespace BlogSite.Web.Controllers
         {
             return View(await _userRoleApiService.GetAllAsync());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateNewUserRole()
+        {
+            var itemList = new List<SelectListItem>();
+            var roleList = await _roleApiService.GetAllAsync();
+
+            itemList.AddRange(roleList.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }));
+            ViewBag.RoleDropDownList = itemList;
+
+            itemList = new List<SelectListItem>();
+            var userList = await _userApiService.GetAllAsync();
+
+            itemList.AddRange(userList.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }));
+            ViewBag.UserDropDownList = itemList;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewUserRole(UserRoleDto userRoleDto)
+        {
+            try
+            {
+                userRoleDto.IsActive = true;
+                var responseDto = await _userRoleApiService.SaveAsync(userRoleDto);
+                ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
+
+                return RedirectToAction(nameof(UserRoleGrid));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserRoleDelete(int id)
+        {
+            var responseDto = await _userRoleApiService.Remove(id);
+            return RedirectToAction(nameof(UserRoleGrid));
+        }
+
         #endregion
     }
 }

@@ -44,7 +44,6 @@ namespace BlogSite.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ServiceFilter(typeof(NotFoundFilter<UserRole, UserRoleDto>))]
         public async Task<IActionResult> Remove(int id)
         {
             return CreateActionResult(await _userRoleService.RemoveAsync(id));

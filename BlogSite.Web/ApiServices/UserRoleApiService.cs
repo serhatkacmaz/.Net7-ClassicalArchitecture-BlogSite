@@ -35,5 +35,11 @@ namespace BlogSite.Web.ApiServices
             var response = await _httpClient.PutAsJsonAsync("UserRole", userRoleDto);
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> Remove(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"UserRole/{id}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }
