@@ -46,7 +46,7 @@ builder.Services.AddHttpClient<UserRoleApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
-builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
+builder.Services.Configure<JwtTokenOption>(builder.Configuration.GetSection("TokenOption"));
 
 //Token Dogrulama
 builder.Services.AddAuthentication(options =>
@@ -56,7 +56,7 @@ builder.Services.AddAuthentication(options =>
 
 }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
 {
-    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<JwtTokenOption>();
     opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
     {
         ValidIssuer = tokenOptions.Issuer,

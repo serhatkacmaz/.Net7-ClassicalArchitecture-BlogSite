@@ -13,13 +13,13 @@ namespace BlogSite.Service.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly List<Client> _clients;
+        private readonly List<ClientOption> _clients;
         private readonly ITokenService _tokenService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
         private readonly IUserRepository _userRepository;
 
-        public AuthenticationService(IOptions<List<Client>> optionsClient, ITokenService tokenService, IUserRepository userRepository, IUserRefreshTokenRepository userRefreshTokenRepository, IUnitOfWork unitOfWork)
+        public AuthenticationService(IOptions<List<ClientOption>> optionsClient, ITokenService tokenService, IUserRepository userRepository, IUserRefreshTokenRepository userRefreshTokenRepository, IUnitOfWork unitOfWork)
         {
             _clients = optionsClient.Value;
             _tokenService = tokenService;

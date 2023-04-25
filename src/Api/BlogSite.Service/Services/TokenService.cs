@@ -14,10 +14,10 @@ namespace BlogSite.Service.Services
 {
     public class TokenService : ITokenService
     {
-        private readonly CustomTokenOption _tokenOption;
+        private readonly JwtTokenOption _tokenOption;
         private readonly IUserRoleRepository _userRoleRepository;
 
-        public TokenService(IOptions<CustomTokenOption> tokenOption, IUserRoleRepository userRoleRepository)
+        public TokenService(IOptions<JwtTokenOption> tokenOption, IUserRoleRepository userRoleRepository)
         {
             _tokenOption = tokenOption.Value;
             _userRoleRepository = userRoleRepository;
@@ -50,7 +50,7 @@ namespace BlogSite.Service.Services
             return userList;
         }
 
-        private IEnumerable<Claim> GetClaimsByClient(Client client)
+        private IEnumerable<Claim> GetClaimsByClient(ClientOption client)
         {
             var claims = new List<Claim>();
             claims.AddRange(client.Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
@@ -89,7 +89,7 @@ namespace BlogSite.Service.Services
             return tokenDto;
         }
 
-        public ClientTokenDto CreateTokenByClient(Client client)
+        public ClientTokenDto CreateTokenByClient(ClientOption client)
         {
             var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpiration);
 

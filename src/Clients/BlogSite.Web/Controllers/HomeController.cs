@@ -1,7 +1,4 @@
-﻿using BlogSite.Web.ApiServices;
-using BlogSite.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Controllers
 {

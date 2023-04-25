@@ -1,6 +1,6 @@
 ﻿namespace BlogSite.Common.Configurations
 {
-    public class CustomTokenOption
+    public class JwtTokenOption
     {
         public List<string> Audience { get; set; }
         public string Issuer { get; set; }

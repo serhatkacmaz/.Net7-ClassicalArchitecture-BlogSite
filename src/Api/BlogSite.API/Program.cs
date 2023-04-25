@@ -7,7 +7,6 @@ using BlogSite.Common.Configurations;
 using BlogSite.Common.Helpers;
 using BlogSite.Repository;
 using BlogSite.Service.Mapping;
-using BlogSite.Service.Services;
 using BlogSite.Service.Validations;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -58,8 +57,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 });
 
 //Options Pattern
-builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
-builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));
+builder.Services.Configure<JwtTokenOption>(builder.Configuration.GetSection("TokenOption"));
+builder.Services.Configure<List<ClientOption>>(builder.Configuration.GetSection("Clients"));
 
 
 //Token Doğrulama
@@ -70,7 +69,7 @@ builder.Services.AddAuthentication(options =>
 
 }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
 {
-    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+    var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<JwtTokenOption>();
     opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
     {
         ValidIssuer = tokenOptions.Issuer,

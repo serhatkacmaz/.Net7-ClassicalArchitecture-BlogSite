@@ -1,6 +1,6 @@
 ﻿namespace BlogSite.Common.Configurations
 {
-    public class Client
+    public class ClientOption
     {
         public string Id { get; set; }
         public string Secret { get; set; }

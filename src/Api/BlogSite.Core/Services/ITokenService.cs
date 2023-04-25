@@ -7,6 +7,6 @@ namespace BlogSite.Core.Services
     public interface ITokenService
     {
         TokenDto CreateToken(User user);
-        ClientTokenDto CreateTokenByClient(Client client);
+        ClientTokenDto CreateTokenByClient(ClientOption client);
     }
 }
