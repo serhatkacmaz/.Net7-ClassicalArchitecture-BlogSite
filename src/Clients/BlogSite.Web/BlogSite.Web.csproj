@@ -15,4 +15,8 @@
     <Folder Include="Models\Home\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\BlogSite.Common\BlogSite.Common.csproj" />
+  </ItemGroup>
+
 </Project>
