@@ -35,6 +35,10 @@
                             @Html.ValidationMessageFor(x => x.Content, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
+                            @Html.Label(null,"Kategori", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @*@Html.DropDownListFor(x => x.Category_ID, ViewBag.CategoriesDropDownList as SelectList, null, new { @class = "form-control" })*@
+                        </div>
+                        <div class="form-group">
                             @Html.Label(null,"Durum", htmlAttributes: new { @class = "control-label col-md-2" })
                             @Html.DropDownListFor(x => x.IsActive, new List<SelectListItem>
                         {

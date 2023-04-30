@@ -5,6 +5,8 @@ using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.UserDashboard;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace BlogSite.Web.Controllers
 {
@@ -13,18 +15,21 @@ namespace BlogSite.Web.Controllers
     {
         private readonly BlogApiService _blogApiService;
         private readonly UserApiService _userApiService;
+        private readonly CategoryApiService _categoryApiService;
+        public int _userId { get => int.Parse(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault()); }
 
-        public UserDashboardController(BlogApiService blogApiService, UserApiService userApiService)
+        public UserDashboardController(BlogApiService blogApiService, UserApiService userApiService, CategoryApiService categoryApiService)
         {
             _blogApiService = blogApiService;
             _userApiService = userApiService;
+            _categoryApiService = categoryApiService;
         }
 
         #region Index
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _userApiService.GetByIdAsync(1));
+            return View(await _userApiService.GetByIdAsync(_userId));
         }
         #endregion
 
@@ -32,7 +37,15 @@ namespace BlogSite.Web.Controllers
         public async Task<IActionResult> BlogGrid()
         {
             var modelList = new List<BlogListViewModel>();
-            var blogList = await _blogApiService.GetByUserIdAsync(1); //TODO: userID
+            var blogList = await _blogApiService.GetByUserIdAsync(_userId);
+
+            var categoryList = await _categoryApiService.GetAllAsync();
+            var list = new List<SelectListItem>();
+
+            list.AddRange(categoryList.Select(s => new SelectListItem { Text = s.Name, Value = s.Id.ToString() }));
+            ViewBag.CategoriesDropDownList = list;
+
+            ViewData["CategoriesDropDownList"] = new SelectList(categoryList, "Id", "Name");
 
             foreach (var item in blogList)
             {
@@ -60,7 +73,7 @@ namespace BlogSite.Web.Controllers
             {
                 //TODO:
                 blogDto.Category_ID = 1;
-                blogDto.User_ID = 1;
+                blogDto.User_ID = _userId;
 
                 var responseDto = await _blogApiService.SaveAsync(blogDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
@@ -78,14 +91,23 @@ namespace BlogSite.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            return View(await _userApiService.GetByIdAsync(1));
+            return View(await _userApiService.GetByIdAsync(_userId));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Profile(UserDto userDto)
+        public async Task<IActionResult> Profile(UserDto userDto, IFormFile avatarImage)
         {
             try
             {
+                if (avatarImage != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await avatarImage.CopyToAsync(stream);
+                        userDto.Image = stream.ToArray();
+                    }
+                }
+
                 var result = await _userApiService.UpdateAsync(userDto);
 
                 if (!result)

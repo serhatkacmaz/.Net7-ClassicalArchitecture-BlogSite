@@ -5,7 +5,7 @@
     Layout = "_UserDashboardLayout";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Profile", "UserDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.IsActive)
@@ -15,7 +15,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">             
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
@@ -53,6 +53,22 @@
                                 @Html.ValidationMessageFor(x => x.About, "", new { @class = "text-danger" })
                             </div>
                             <div class="row">
+                                <div class="form-group">
+                                    @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="avatarImage" name="avatarImage" onchange="previewImage(event)">
+                                            <label class="custom-file-label" for="exampleInputFile">Avatar</label>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div>
+                                    <img id="preview" src="#" alt="Resim önizleme" style="display:none; height:50px; width:50px; margin:25px; margin-left:30px;" />
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12">
                                     <input type="submit" value="Kaydet" class="btn btn-danger float-right">
                                 </div>
@@ -69,3 +85,17 @@
     </section>
     <!-- /.content -->
 }
+
+@section Scripts{
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var preview = document.getElementById('preview');
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+ } 

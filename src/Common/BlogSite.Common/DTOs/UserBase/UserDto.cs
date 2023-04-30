@@ -9,5 +9,6 @@ namespace BlogSite.Common.DTOs.UserBase
         public string Mail { get; set; }
         public string Password { get; set; }
         public string About { get; set; }
+        public byte[] Image { get; set; }
     }
 }
