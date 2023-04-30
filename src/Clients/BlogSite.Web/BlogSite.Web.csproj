@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BlogSite.Common\BlogSite.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Models\Home\" />
   </ItemGroup>
 
