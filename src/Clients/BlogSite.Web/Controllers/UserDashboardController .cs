@@ -38,15 +38,7 @@ namespace BlogSite.Web.Controllers
         {
             var modelList = new List<BlogListViewModel>();
             var blogList = await _blogApiService.GetByUserIdAsync(_userId);
-
-            var categoryList = await _categoryApiService.GetAllAsync();
-            var list = new List<SelectListItem>();
-
-            list.AddRange(categoryList.Select(s => new SelectListItem { Text = s.Name, Value = s.Id.ToString() }));
-            ViewBag.CategoriesDropDownList = list;
-
-            ViewData["CategoriesDropDownList"] = new SelectList(categoryList, "Id", "Name");
-
+        
             foreach (var item in blogList)
             {
                 modelList.Add(new BlogListViewModel()
@@ -61,8 +53,12 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateNewBlog()
+        public async Task<IActionResult> CreateNewBlog()
         {
+            var categoryList = await _categoryApiService.GetAllAsync();
+            var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
+            ViewBag.CategoriesSelectList = categoriesSelectList;
+
             return View();
         }
 
@@ -71,17 +67,20 @@ namespace BlogSite.Web.Controllers
         {
             try
             {
-                //TODO:
-                blogDto.Category_ID = 1;
                 blogDto.User_ID = _userId;
 
                 var responseDto = await _blogApiService.SaveAsync(blogDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(BlogGrid));
             }
             catch
             {
+                //TODO:
+                var categoryList = await _categoryApiService.GetAllAsync();
+                var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
+                ViewBag.CategoriesSelectList = categoriesSelectList;
+
                 return View();
             }
         }

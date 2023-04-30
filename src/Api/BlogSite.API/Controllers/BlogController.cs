@@ -30,7 +30,7 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(await _blogService.GetByIdAsync(id));
         }
 
-        [HttpPost]
+        [HttpPost("Save")]
         public async Task<IActionResult> Save(TBlogDto blogDto)
         {
             return CreateActionResult(await _blogService.AddAsync(blogDto));

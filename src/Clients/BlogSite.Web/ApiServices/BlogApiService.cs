@@ -32,7 +32,7 @@ namespace BlogSite.Web.ApiServices
 
         public async Task<BlogSiteResponseDto<TBlogDto>> SaveAsync(TBlogDto blogDto)
         {
-            var response = await _httpClient.PostAsJsonAsync("blog", blogDto);
+            var response = await _httpClient.PostAsJsonAsync("blog/save", blogDto);
             return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TBlogDto>>();
         }
     }
