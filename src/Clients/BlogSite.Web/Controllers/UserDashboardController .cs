@@ -1,5 +1,4 @@
-﻿using BlogSite.Common.DTOs.Master;
-using BlogSite.Common.DTOs.Transaction;
+﻿using BlogSite.Common.DTOs.Transaction;
 using BlogSite.Common.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
