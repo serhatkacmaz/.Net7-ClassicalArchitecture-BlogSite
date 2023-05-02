@@ -17,20 +17,41 @@ namespace BlogSite.Web.Controllers
         private readonly BlogApiService _blogApiService;
         private readonly UserApiService _userApiService;
         private readonly CategoryApiService _categoryApiService;
+        private readonly MovementApiService _movementApiService;
         public int _userId { get => int.Parse(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault()); }
 
-        public UserDashboardController(BlogApiService blogApiService, UserApiService userApiService, CategoryApiService categoryApiService)
+        public UserDashboardController(BlogApiService blogApiService, UserApiService userApiService, CategoryApiService categoryApiService, MovementApiService movementApiService)
         {
             _blogApiService = blogApiService;
             _userApiService = userApiService;
             _categoryApiService = categoryApiService;
+            _movementApiService = movementApiService;
         }
 
         #region Index
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _userApiService.GetByIdAsync(_userId));
+            var blogCountTask = _blogApiService.GetTotalBlogCountByUserId(_userId);
+            var likeCountTask = _movementApiService.GetTotalBlogLikeCountByUserIdAsync(_userId);
+            var dislikeCountTask = _movementApiService.GetTotalBlogDisLikeCountByUserIdAsync(_userId);
+            var userTask = _userApiService.GetByIdAsync(_userId);
+
+            await Task.WhenAll(blogCountTask, likeCountTask, dislikeCountTask, userTask);
+
+            var model = new UserTrackingViewModel()
+            {
+                FullName = userTask.Result.UserName,
+                Title = userTask.Result.Title,
+                About = userTask.Result.About,
+                Image = userTask.Result.Image,
+                CreatedDate = userTask.Result.CreatedDate,
+                BlogCount = blogCountTask.Result,
+                TotalLikeCount = likeCountTask.Result,
+                TotalDislikeCount = dislikeCountTask.Result,
+            };
+
+            return View(model);
         }
         #endregion
 

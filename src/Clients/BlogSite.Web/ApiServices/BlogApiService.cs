@@ -37,6 +37,12 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<int> GetTotalBlogCountByUserId(int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>($"blog/GetTotalBlogCountByUserId/{userId}");
+            return response.Data;
+        }
+
         public async Task<bool> UpdateAsync(TBlogDto blogDto)
         {
             var response = await _httpClient.PutAsJsonAsync("blog", blogDto);

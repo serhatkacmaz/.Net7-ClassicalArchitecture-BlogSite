@@ -17,11 +17,24 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<int> GetTotalBlogLikeCountByUserIdAsync(int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>($"movement/GetTotalBlogLikeCountByUserId/{userId}");
+            return response.Data;
+        }
+
         public async Task<int> GetTotalBlogDisLikeCountAsync()
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>("movement/GetTotalBlogDisLikeCount");
             return response.Data;
         }
+
+        public async Task<int> GetTotalBlogDisLikeCountByUserIdAsync(int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>($"movement/GetTotalBlogDisLikeCountByUserId/{userId}");
+            return response.Data;
+        }
+
 
         public async Task<int> GetTotalFavoriteCountAsync()
         {

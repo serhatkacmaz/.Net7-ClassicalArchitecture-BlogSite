@@ -1,14 +1,22 @@
-﻿@using BlogSite.Common.DTOs.UserBase;
-@model UserDto
+﻿@using BlogSite.Web.Models.UserDashboard;
+@model UserTrackingViewModel
 
 @{
     Layout = "_UserDashboardLayout";
 }
 
+@section Styles{
+    <style>
+        .monitoring{
+            text-align: center;
+            justify-content: center;
+            margin:1.5%;
+        }
+    </style>
+}
+
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(x => x.IsActive)
-
     @Html.AntiForgeryToken()
 
     <!-- Main content -->
@@ -17,7 +25,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
+                    <div class="card card-orange card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 @if (Model.Image != null && Model.Image.Length > 0)
@@ -30,21 +38,14 @@
                                 }
                             </div>
 
-                            <h3 class="profile-username text-center">@Model.UserName</h3>
-
+                            <h3 class="profile-username text-center">@Model.FullName</h3>
                             <p class="text-muted text-center">@Model.Title</p>
-
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Blog</b> <a class="float-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Like</b> <a class="float-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Dislike</b> <a class="float-right">13,287</a>
-                                </li>
-                            </ul>
+                            <hr>
+                            <strong>Hakkımda</strong>
+                            <p class="text-muted">@Model.About</p>
+                            <hr>
+                            <strong>Hesap Oluşturulma Tarihi</strong>
+                            <p class="text-muted">@Model.CreatedDate.ToShortDateString()</p>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -52,19 +53,49 @@
                 </div>
                 <div class="col-md-9">
                     <!-- About Me Box -->
-                    <div class="card card-primary">
+                    <div class="card card-gray card-outline">
                         <div class="card-header">
-                            <h3 class="card-title">About Me</h3>
+                            <h3 class="card-title">Bloger izlence</h3>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                            <p class="text-muted">@Model.About</p>
-                            <hr>
+                        <div class="small-box bg-info monitoring">
+                            <div class="inner">
+                                <h3>@Model.BlogCount</h3>
 
-                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Hesap Oluşturulma Tarihi</strong>
-                            <p class="text-muted">@Model.CreatedDate</p>
-                            <hr>
+                                <p>Blog</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                        </div>
+                        <div class="small-box bg-purple monitoring">
+                            <div class="inner">
+                                <h3>@Model.BlogCount</h3>
+
+                                <p>Toplam Favorilere Eklenme Sayısı</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                        </div>
+                        <div class="small-box bg-success monitoring">
+                            <div class="inner">
+                                <h3>@Model.TotalLikeCount</h3>
+
+                                <p>Beğeni</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                        </div>
+                        <div class="small-box bg-danger monitoring">
+                            <div class="inner">
+                                <h3>@Model.TotalDislikeCount</h3>
+
+                                <p>Beğenilmeme</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-thumbs-down"></i>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>

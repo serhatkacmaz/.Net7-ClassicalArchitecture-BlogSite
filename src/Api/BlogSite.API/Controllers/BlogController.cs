@@ -49,7 +49,6 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(await _blogService.RemoveAsync(id));
         }
 
-
         //->
         [HttpGet("[action]")]
         public IActionResult GetTotalCount()
@@ -67,6 +66,12 @@ namespace BlogSite.API.Controllers
         public async Task<IActionResult> GetByUserId(int userId)
         {
             return CreateActionResult(await _blogService.GetByUserIdAsync(userId));
+        }
+
+        [HttpGet("[action]/{userId}")]
+        public IActionResult GetTotalBlogCountByUserId(int userId)
+        {
+            return CreateActionResult(_blogService.Count(x => x.User_ID == userId));
         }
     }
 }

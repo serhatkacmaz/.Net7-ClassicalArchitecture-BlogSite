@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
 {
+    [Route("api/[controller][action]")]
     [Route("api/[controller]")]
     [ApiController]
     public class MovementController : BaseController
@@ -57,10 +58,22 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.Like && x.IsActive));
         }
 
+        [HttpGet("GetTotalBlogLikeCountByUserId/{userId}")]
+        public IActionResult GetTotalBlogLikeCountByUserId(int userId)
+        {
+            return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.Like && x.User_ID == userId));
+        }
+
         [HttpGet("GetTotalBlogDisLikeCount")]
         public IActionResult GetTotalBlogDisLikeCount()
         {
             return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.DisLike && x.IsActive));
+        }
+
+        [HttpGet("GetTotalBlogDisLikeCountByUserId/{userId}")]
+        public IActionResult GetTotalBlogDisLikeCountByUserId(int userId)
+        {
+            return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.DisLike && x.User_ID == userId));
         }
 
         [HttpGet("GetTotalFavoriteCount")]
