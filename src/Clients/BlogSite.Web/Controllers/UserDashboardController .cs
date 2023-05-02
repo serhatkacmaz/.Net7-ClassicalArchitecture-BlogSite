@@ -1,4 +1,5 @@
-﻿using BlogSite.Common.DTOs.Transaction;
+﻿using BlogSite.Common.DTOs.Master;
+using BlogSite.Common.DTOs.Transaction;
 using BlogSite.Common.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
@@ -63,7 +64,7 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewBlog(TBlogDto blogDto)
+        public async Task<IActionResult> CreateNewBlog(TBlogDto blogDto, List<IFormFile> files)
         {
             try
             {
@@ -71,6 +72,20 @@ namespace BlogSite.Web.Controllers
 
                 var responseDto = await _blogApiService.SaveAsync(blogDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
+
+                //foreach (var item in files)
+                //{
+                //    using (var stream = new MemoryStream())
+                //    {
+                //        await item.CopyToAsync(stream);
+                //        userDto.Image = stream.ToArray();
+                //    }
+                //}
+                //using (var stream = new MemoryStream())
+                //{
+                //    await avatarImage.CopyToAsync(stream);
+                //    userDto.Image = stream.ToArray();
+                //}
 
                 return RedirectToAction(nameof(BlogGrid));
             }
@@ -81,6 +96,29 @@ namespace BlogSite.Web.Controllers
                 var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
                 ViewBag.CategoriesSelectList = categoriesSelectList;
 
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> BlogEdit(int id)
+        {
+            return View(await _blogApiService.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BlogEdit(TBlogDto blogDto)
+        {
+            try
+            {
+                var result = await _blogApiService.UpdateAsync(blogDto);
+
+                if (!result)
+                    return View();
+                else
+                    return RedirectToAction(nameof(blogDto));
+            }
+            catch
+            {
                 return View();
             }
         }

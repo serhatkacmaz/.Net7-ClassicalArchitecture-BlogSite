@@ -1,4 +1,5 @@
 ﻿using BlogSite.Common.DTOs;
+using BlogSite.Common.DTOs.Master;
 using BlogSite.Common.DTOs.Transaction;
 
 namespace BlogSite.Web.ApiServices
@@ -24,10 +25,22 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<TBlogDto> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<TBlogDto>>($"blog/{id}");
+            return response.Data;
+        }
+
         public async Task<List<TBlogDto>> GetByUserIdAsync(int userId)
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TBlogDto>>>($"blog/GetByUserId/{userId}");
             return response.Data;
+        }
+
+        public async Task<bool> UpdateAsync(TBlogDto blogDto)
+        {
+            var response = await _httpClient.PutAsJsonAsync("blog", blogDto);
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<BlogSiteResponseDto<TBlogDto>> SaveAsync(TBlogDto blogDto)

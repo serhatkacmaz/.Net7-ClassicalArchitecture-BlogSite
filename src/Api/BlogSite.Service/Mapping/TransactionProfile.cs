@@ -10,7 +10,6 @@ namespace BlogSite.Service.Mapping
         {
             CreateMap<TBlog, TBlogDto>().ReverseMap();
             CreateMap<TComment, TCommentDto>().ReverseMap();
-            CreateMap<TImage, TImageDto>().ReverseMap();
             CreateMap<TMovement, TMovementDto>().ReverseMap();
         }
     }

@@ -16,7 +16,6 @@ namespace BlogSite.Core.Entities.Transaction
         public int User_ID { get; set; }
         public User User { get; set; }
 
-        public ICollection<TImage> Images { get; set; }
         public ICollection<TComment> Comments { get; set; }
         public ICollection<TMovement> Movements { get; set; }
     }

@@ -5,7 +5,20 @@
     Layout = "_UserDashboardLayout";
 }
 
-@using (Html.BeginForm())
+@section Styles{
+    <style>
+        .preview-img {
+            display: none;
+            height: 100px;
+            width: 150px;
+            margin: 25px;
+            margin-left: 30px;
+            flex: 1;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("CreateNewBlog", "UserDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -61,12 +74,52 @@
             <div class="col-md-6">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Ek</h3>
+                        <h3 class="card-title">Resimler</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="file1" name="files" onchange="previewImage(event,'preview1')">
+                                    <label class="custom-file-label" for="exampleInputFile">1. Resim</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="file2" name="files" onchange="previewImage(event,'preview2')">
+                                    <label class="custom-file-label" for="exampleInputFile">2. Resim</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="file3" name="files" onchange="previewImage(event,'preview3')">
+                                    <label class="custom-file-label" for="exampleInputFile">3. Resim</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><img id="preview1" class="preview-img"></div>
+                            <div class="col-sm-4"><img id="preview2" class="preview-img"></div>
+                            <div class="col-sm-4"><img id="preview3" class="preview-img"></div>
                         </div>
                     </div>
                     <!-- /.card-body -->

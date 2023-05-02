@@ -58,10 +58,10 @@
 
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="avatarImage" name="avatarImage" onchange="previewImage(event)">
+                                            <input type="file" class="custom-file-input" id="avatarImage" name="avatarImage" onchange="previewImage(event,'preview')">
                                             <label class="custom-file-label" for="exampleInputFile">Avatar</label>
                                         </div>
-                                    
+
                                     </div>
                                 </div>
                                 <div>
@@ -85,17 +85,3 @@
     </section>
     <!-- /.content -->
 }
-
-@section Scripts{
-    <script>
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                var preview = document.getElementById('preview');
-                preview.src = reader.result;
-                preview.style.display = 'block';
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
- } 

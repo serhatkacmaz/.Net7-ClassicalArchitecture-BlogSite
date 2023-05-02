@@ -16,7 +16,6 @@ namespace BlogSite.Repository
         public DbSet<MCategory> MCategories { get; set; }
         public DbSet<TBlog> TBlogs { get; set; }
         public DbSet<TComment> TComments { get; set; }
-        public DbSet<TImage> TImages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
         public DbSet<Role> Roles { get; set; }
