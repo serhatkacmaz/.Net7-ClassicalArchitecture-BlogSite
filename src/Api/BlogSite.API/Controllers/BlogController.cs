@@ -63,6 +63,12 @@ namespace BlogSite.API.Controllers
         }
 
         [HttpGet("[action]/{userId}")]
+        public IActionResult GetTotalViewCountByUserId(int userId)
+        {
+            return CreateActionResult(_blogService.GetTotalViewCountByUserId(userId));
+        }
+
+        [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> GetByUserId(int userId)
         {
             return CreateActionResult(await _blogService.GetByUserIdAsync(userId));

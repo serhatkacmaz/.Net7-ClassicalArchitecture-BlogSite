@@ -3,6 +3,7 @@
     public class UserTrackingViewModel
     {
         public int BlogCount { get; set; }
+        public int ViewCount { get; set; }
         public int TotalLikeCount { get; set; }
         public int TotalDislikeCount { get; set; }
         public string FullName { get; set; }

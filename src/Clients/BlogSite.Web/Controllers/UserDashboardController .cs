@@ -33,11 +33,12 @@ namespace BlogSite.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var blogCountTask = _blogApiService.GetTotalBlogCountByUserId(_userId);
+            var viewCountTask = _blogApiService.GetTotalViewCountByUserId(_userId);
             var likeCountTask = _movementApiService.GetTotalBlogLikeCountByUserIdAsync(_userId);
             var dislikeCountTask = _movementApiService.GetTotalBlogDisLikeCountByUserIdAsync(_userId);
             var userTask = _userApiService.GetByIdAsync(_userId);
 
-            await Task.WhenAll(blogCountTask, likeCountTask, dislikeCountTask, userTask);
+            await Task.WhenAll(blogCountTask, viewCountTask, likeCountTask, dislikeCountTask, userTask);
 
             var model = new UserTrackingViewModel()
             {
@@ -47,6 +48,7 @@ namespace BlogSite.Web.Controllers
                 Image = userTask.Result.Image,
                 CreatedDate = userTask.Result.CreatedDate,
                 BlogCount = blogCountTask.Result,
+                ViewCount = viewCountTask.Result,
                 TotalLikeCount = likeCountTask.Result,
                 TotalDislikeCount = dislikeCountTask.Result,
             };

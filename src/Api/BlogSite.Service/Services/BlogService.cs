@@ -26,6 +26,12 @@ namespace BlogSite.Service.Services
             return BlogSiteResponseDto<List<TBlogDto>>.Success(StatusCodes.Status200OK, dtoList);
         }
 
+        public BlogSiteResponseDto<int> GetTotalViewCountByUserId(int userId)
+        {
+            var count = _blogRepository.GetTotalViewCountByUserId(userId);
+            return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
+        }
+
         public BlogSiteResponseDto<int> GetTotalViewCount()
         {
             var count = _blogRepository.GetTotalViewCount();
