@@ -4,3 +4,147 @@
 @{
     Layout = "_UserDashboardLayout";
 }
+
+
+@section Styles{
+    <style>
+        .preview-img {
+            height: 100px;
+            width: 150px;
+            margin: 25px;
+            margin-left: 30px;
+            flex: 1;
+            border-radius:10px;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("BlogEdit", "UserDashboard", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.User_ID)
+    @Html.HiddenFor(x => x.CoverImg)
+    @Html.HiddenFor(x => x.HeaderImg)
+    @Html.HiddenFor(x => x.ContentImg)
+    @Html.AntiForgeryToken()
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Genel</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.Label(null,"Başlık", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"İçerik", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(x => x.Content, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null, "Kategori", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownListFor(x => x.Category_ID, ViewBag.CategoriesSelectList as SelectList, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Category_ID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Durum", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownListFor(x => x.IsActive, new List<SelectListItem>
+                        {
+                        new SelectListItem { Text = "Aktif", Value = "true" },
+                        new SelectListItem { Text = "Pasif", Value = "false" }
+                        }, null, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Detay", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control", rows = "4", cols = "40" })
+                            @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Resimler</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="coverImg" name="coverImg" onchange="previewImage(event,'preview1')">
+                                    <label class="custom-file-label" for="exampleInputFile">Kapak Resmi</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="headerImg" name="headerImg" onchange="previewImage(event,'preview2')">
+                                    <label class="custom-file-label" for="exampleInputFile">Baş Resmi</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(null,"Profil Resmi", htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="contentImg" name="contentImg" onchange="previewImage(event,'preview3')">
+                                    <label class="custom-file-label" for="exampleInputFile">İçerik Resmi</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img id="preview1" class="preview-img" src="@($"data:image/png;base64,{Convert.ToBase64String(Model.CoverImg)}")" alt="kapak resmi">
+                            </div>
+                            <div class="col-sm-4">
+                                <img id="preview2" class="preview-img" src="@($"data:image/png;base64,{Convert.ToBase64String(Model.HeaderImg)}")" alt="baş resmi">
+                            </div>
+                            <div class="col-sm-4">
+                                <img id="preview3" class="preview-img" src="@($"data:image/png;base64,{Convert.ToBase64String(Model.ContentImg)}")" alt="içerik resmi">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="submit" value="Kaydet" class="btn btn-success float-right">
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+}

@@ -39,11 +39,12 @@ namespace BlogSite.Web.Controllers
         {
             var modelList = new List<BlogListViewModel>();
             var blogList = await _blogApiService.GetByUserIdAsync(_userId);
-        
+
             foreach (var item in blogList)
             {
                 modelList.Add(new BlogListViewModel()
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     IsActive = item.IsActive,
                     CreatedDate = item.CreatedDate
@@ -64,34 +65,46 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewBlog(TBlogDto blogDto, List<IFormFile> files)
+        public async Task<IActionResult> CreateNewBlog(TBlogDto blogDto, IFormFile coverImg, IFormFile headerImg, IFormFile contentImg)
         {
             try
             {
                 blogDto.User_ID = _userId;
 
+                if (coverImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await coverImg.CopyToAsync(stream);
+                        blogDto.CoverImg = stream.ToArray();
+                    }
+                }
+
+                if (headerImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await headerImg.CopyToAsync(stream);
+                        blogDto.HeaderImg = stream.ToArray();
+                    }
+                }
+
+                if (contentImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await contentImg.CopyToAsync(stream);
+                        blogDto.ContentImg = stream.ToArray();
+                    }
+                }
+
                 var responseDto = await _blogApiService.SaveAsync(blogDto);
                 ErrorHelper.ResponseHandler(responseDto, this.ControllerContext);
-
-                //foreach (var item in files)
-                //{
-                //    using (var stream = new MemoryStream())
-                //    {
-                //        await item.CopyToAsync(stream);
-                //        userDto.Image = stream.ToArray();
-                //    }
-                //}
-                //using (var stream = new MemoryStream())
-                //{
-                //    await avatarImage.CopyToAsync(stream);
-                //    userDto.Image = stream.ToArray();
-                //}
 
                 return RedirectToAction(nameof(BlogGrid));
             }
             catch
             {
-                //TODO:
                 var categoryList = await _categoryApiService.GetAllAsync();
                 var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
                 ViewBag.CategoriesSelectList = categoriesSelectList;
@@ -102,23 +115,59 @@ namespace BlogSite.Web.Controllers
 
         public async Task<IActionResult> BlogEdit(int id)
         {
+            var categoryList = await _categoryApiService.GetAllAsync();
+            var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
+            ViewBag.CategoriesSelectList = categoriesSelectList;
+
             return View(await _blogApiService.GetByIdAsync(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> BlogEdit(TBlogDto blogDto)
+        public async Task<IActionResult> BlogEdit(TBlogDto blogDto, IFormFile coverImg, IFormFile headerImg, IFormFile contentImg)
         {
             try
             {
+                if (coverImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await coverImg.CopyToAsync(stream);
+                        blogDto.CoverImg = stream.ToArray();
+                    }
+                }
+
+                if (headerImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await headerImg.CopyToAsync(stream);
+                        blogDto.HeaderImg = stream.ToArray();
+                    }
+                }
+
+                if (contentImg != null)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await contentImg.CopyToAsync(stream);
+                        blogDto.ContentImg = stream.ToArray();
+                    }
+                }
+
                 var result = await _blogApiService.UpdateAsync(blogDto);
 
                 if (!result)
                     return View();
                 else
-                    return RedirectToAction(nameof(blogDto));
+                    return RedirectToAction(nameof(BlogGrid));
             }
             catch
             {
+                var categoryList = await _categoryApiService.GetAllAsync();
+                var categoriesSelectList = new SelectList(categoryList, "Id", "Name");
+                ViewBag.CategoriesSelectList = categoriesSelectList;
+
+
                 return View();
             }
         }
