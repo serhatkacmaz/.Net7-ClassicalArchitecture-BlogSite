@@ -11,9 +11,18 @@
             height: 500px;
         }
 
-        .sub-img{
+        .sub-img {
             width: 320px;
             height: 200px;
+        }
+
+        .movement-ico {
+            font-size: 11pt;
+        }
+
+        .smoothScroll {
+            padding: 10px;
+            margin: 12px;
         }
     </style>
 }
@@ -26,7 +35,10 @@
         <div class="row">
 
             <div class="col-md-12 col-sm-12">
-                <h1>BLOG SITE</h1>
+                <h1>BLOG SITE </h1>
+                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=0" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-up movement-ico" aria-hidden="true" style="color: green;"></i></a>
+                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=1" class="smoothScroll btn btn-default"><i class="fa fa-bookmark-o movement-ico" style="color:dodgerblue"></i></a>
+                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=2" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-down movement-ico" aria-hidden="true" style="color:red;"></i></a>
             </div>
 
         </div>
