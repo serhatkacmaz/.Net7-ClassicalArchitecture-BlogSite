@@ -45,5 +45,13 @@ namespace BlogSite.Service.Services
 
             return BlogSiteResponseDto<List<TBlogDto>>.Success(StatusCodes.Status200OK, dtoList);
         }
+
+        public async Task<BlogSiteResponseDto<TBlogDto>> GetByIdWithUser(int id)
+        {
+            var model = await _blogRepository.GetByIdWithUser(id);
+            var dto = _mapper.Map<TBlogDto>(model);
+
+            return BlogSiteResponseDto<TBlogDto>.Success(StatusCodes.Status200OK, dto);
+        }
     }
 }

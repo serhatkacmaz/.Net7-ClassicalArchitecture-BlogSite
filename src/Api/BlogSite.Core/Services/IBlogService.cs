@@ -11,5 +11,6 @@ namespace BlogSite.Core.Services
         Task<BlogSiteResponseDto<List<TBlogDto>>> GetByUserIdAsync(int userId);
 
         Task<BlogSiteResponseDto<List<TBlogDto>>> GetAllWithUser(int page, int pageSize);
+        Task<BlogSiteResponseDto<TBlogDto>> GetByIdWithUser(int id);
     }
 }

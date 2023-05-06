@@ -1,4 +1,5 @@
-﻿using BlogSite.Core.Entities.Transaction;
+﻿using BlogSite.Common.DTOs.Transaction;
+using BlogSite.Core.Entities.Transaction;
 
 namespace BlogSite.Core.Repositories
 {
@@ -10,5 +11,7 @@ namespace BlogSite.Core.Repositories
         IQueryable<TBlog> GetByUserIdAsync(int userId);
 
         IQueryable<TBlog> GetAllWithUser(int page, int pageSize);
+
+        Task<TBlog> GetByIdWithUser(int id);
     }
 }

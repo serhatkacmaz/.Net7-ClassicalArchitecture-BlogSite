@@ -30,6 +30,12 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<TBlogDto> GetByIdWithUserAsync(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<TBlogDto>>($"blog/GetByIdWithUser/{id}");
+            return response.Data;
+        }
+
         public async Task<List<TBlogDto>> GetByUserIdAsync(int userId)
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TBlogDto>>>($"blog/GetByUserId/{userId}");

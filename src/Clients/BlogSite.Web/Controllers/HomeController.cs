@@ -34,5 +34,11 @@ namespace BlogSite.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> BlogReading(int id)
+        {
+            var model = await _blogApiService.GetByIdWithUserAsync(id);
+            return View(model);
+        }
+
     }
 }

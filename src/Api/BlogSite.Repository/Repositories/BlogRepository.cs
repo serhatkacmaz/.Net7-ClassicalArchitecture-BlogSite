@@ -1,4 +1,5 @@
-﻿using BlogSite.Core.Entities.Transaction;
+﻿using BlogSite.Common.DTOs.Transaction;
+using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,11 @@ namespace BlogSite.Repository.Repositories
                  .OrderBy(s => s.CreatedDate)
                  .Skip((page - 1) * pageSize)
                  .Take(pageSize);
+        }
+
+        public async Task<TBlog> GetByIdWithUser(int id)
+        {
+            return await _context.TBlogs.Include(s => s.User).Where(s => s.Id == id).FirstOrDefaultAsync();
         }
     }
 }
