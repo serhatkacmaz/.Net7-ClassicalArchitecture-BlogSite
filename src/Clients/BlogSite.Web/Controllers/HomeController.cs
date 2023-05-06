@@ -1,6 +1,7 @@
 ﻿using BlogSite.Common.DTOs.Transaction;
 using BlogSite.Common.Enums;
 using BlogSite.Web.ApiServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -48,6 +49,7 @@ namespace BlogSite.Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> MovementAdd(int blogId, byte type)
         {
             if (type == 0)
@@ -67,6 +69,7 @@ namespace BlogSite.Web.Controllers
             return RedirectToAction("BlogReading", "Home", new { id = blogId });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateComment(int Id, string message)
         {

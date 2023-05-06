@@ -56,9 +56,9 @@ namespace BlogSite.Web.Middleware
                 }
                 else
                 {
-                    context.User = null;
-                    context.Response.Redirect("/Home/Index");
-                    return; //INFO returnURl cancel
+                    //context.User = null;
+                    //context.Response.Redirect("/Home/Index");
+                    //return; //INFO returnURl cancel
                 }
             }
 

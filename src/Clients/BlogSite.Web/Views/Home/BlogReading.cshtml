@@ -6,14 +6,14 @@
 
 @section Styles{
     <style>
-        .img-content {
-            width: 1000px;
-            height: 500px;
-        }
+        /*      .img-content {
+                            width: 1000px;
+                            height: 500px;
+                        }*/
 
         .sub-img {
-            width: 320px;
-            height: 200px;
+            width: 350px;
+            height: 190px;
         }
 
         .movement-ico {
@@ -45,14 +45,13 @@
     </div>
 </section>
 
-<!-- Blog Single Post Section -->
-
 <section id="blog-single-post">
     <div class="container">
         <div class="row">
 
             <div class="col-md-offset-1 col-md-10 col-sm-12">
                 <div class="blog-single-post-thumb">
+
 
                     <div class="blog-post-title">
                         <h2>@Model.Name</h2>
@@ -73,7 +72,7 @@
                         <p>@Model.Description</p>
                     </div>
 
-                    <div class="blog-single-post-image">
+                    <div class="row" style="margin-top:3%;">
                         <div class="col-md-4 col-sm-4">
                             <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.CoverImg)}")" class="img-responsive sub-img" alt="Blog Image 1">
                         </div>
@@ -88,7 +87,7 @@
                     <div class="blog-author">
                         <div class="media">
                             <div class="media-object pull-left">
-                                <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.UserImg)}")" class="img-circle img-responsive" alt="user">
+                                <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.UserImg)}")" class="img-circle img-responsive" alt="blog">
                             </div>
                             <div class="media-body">
                                 <h3 class="media-heading"><a href="#">@Model.UserName ( @Model.UserTitle )</a></h3>
