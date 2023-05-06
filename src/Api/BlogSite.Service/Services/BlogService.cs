@@ -37,5 +37,13 @@ namespace BlogSite.Service.Services
             var count = _blogRepository.GetTotalViewCount();
             return BlogSiteResponseDto<int>.Success(StatusCodes.Status200OK, count);
         }
+
+        public async Task<BlogSiteResponseDto<List<TBlogDto>>> GetAllWithUser(int page, int pageSize)
+        {
+            var list = await _blogRepository.GetAllWithUser(page, pageSize).ToListAsync();
+            var dtoList = _mapper.Map<List<TBlogDto>>(list);
+
+            return BlogSiteResponseDto<List<TBlogDto>>.Success(StatusCodes.Status200OK, dtoList);
+        }
     }
 }

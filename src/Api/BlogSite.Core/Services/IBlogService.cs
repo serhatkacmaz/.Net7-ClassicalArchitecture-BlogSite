@@ -9,5 +9,7 @@ namespace BlogSite.Core.Services
         BlogSiteResponseDto<int> GetTotalViewCount();
         BlogSiteResponseDto<int> GetTotalViewCountByUserId(int userId);
         Task<BlogSiteResponseDto<List<TBlogDto>>> GetByUserIdAsync(int userId);
+
+        Task<BlogSiteResponseDto<List<TBlogDto>>> GetAllWithUser(int page, int pageSize);
     }
 }

@@ -1,10 +1,21 @@
 ﻿@using System.Security.Claims;
+@using BlogSite.Common.DTOs.Transaction;
+@model List<TBlogDto>
+
 @{
     var userRole = User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).ToList();
 }
 
-<!-- Home Section -->
+@section Styles{
+    <style>
+        .blog-img {
+            width: 1200px;
+            height: 500px;
+        }
+    </style>
+}
 
+<!-- Home Section -->
 <section id="home" class="main-home parallax-section">
     <div class="overlay"></div>
     <div id="particles-js"></div>
@@ -19,7 +30,8 @@
                     @if (userRole.Contains("Admin"))
                     {
                         <a href="/AdminDashboard/Index" class="smoothScroll btn btn-default">@Context.User.Identity.Name</a>
-                    }else
+                    }
+                    else
                     {
                         <a href="/UserDashboard/Index" class="smoothScroll btn btn-default">@Context.User.Identity.Name</a>
                     }
@@ -35,33 +47,40 @@
 </section>
 
 <!-- Blog Section -->
-
 <section id="blog">
     <div class="container">
-        <div class="row">
-
-            <div class="col-md-offset-1 col-md-10 col-sm-12">
-                <div class="blog-post-thumb">
-                    <div class="blog-post-image">
-                        <a href="single-post.html">
-                            <img src="~/neuron/images/blog-image1.jpg" class="img-responsive" alt="Blog Image">
-                        </a>
-                    </div>
-                    <div class="blog-post-title">
-                        <h3><a href="single-post.html">We Help You Create Perfect Modern Design</a></h3>
-                    </div>
-                    <div class="blog-post-format">
-                        <span><a href="#"><img src="~/neuron/images/author-image1.jpg" class="img-responsive img-circle"> Jen Lopez</a></span>
-                        <span><i class="fa fa-date"></i> July 22, 2017</span>
-                        <span><a href="#"><i class="fa fa-comment-o"></i> 35 Comments</a></span>
-                    </div>
-                    <div class="blog-post-des">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <a href="single-post.html" class="btn btn-default">Continue Reading</a>
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <div class="blog-post-thumb">
+                        <div class="blog-post-image">
+                            <img class="img-responsive blog-img" src="@($"data:image/png;base64,{Convert.ToBase64String(item.CoverImg)}")" alt="blog resmi">
+                        </div>
+                        <div class="blog-post-title">
+                            <h3><a href="single-post.html">@item.Name</a></h3>
+                        </div>
+                        <div class="blog-post-format">
+                            <span><a href="#"><img src="@($"data:image/png;base64,{Convert.ToBase64String(item.UserImg)}")" class="img-responsive img-circle">@item.UserName</a></span>
+                            <span><i class="fa fa-date"></i> @item.CreatedDate.ToShortDateString()</span>
+                        </div>
+                        <div class="blog-post-des">
+                            <p>@item.Content</p>
+                            <a href="single-post.html" class="btn btn-default">Okumaya Devam Et</a>
+                        </div>
                     </div>
                 </div>
             </div>
-
+        }
+        <!-- Pagination -->
+        <div style="float:right;">
+            <nav aria-label="...">
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item"><a class="page-link" href="/Home/Index?page=@ViewBag.PagePrevNum">@ViewBag.PagePrevNum</a></li>
+                    <li class="page-item"><a class="page-link" href="/Home/Index?page=@ViewBag.PageNum">@ViewBag.PageNum</a></li>
+                    <li class="page-item"><a class="page-link" href="/Home/Index?page=@ViewBag.PageNextNum">@ViewBag.PageNextNum</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
 </section>

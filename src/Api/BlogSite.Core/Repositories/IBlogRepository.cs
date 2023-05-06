@@ -8,5 +8,7 @@ namespace BlogSite.Core.Repositories
         int GetTotalViewCountByUserId(int userId);
 
         IQueryable<TBlog> GetByUserIdAsync(int userId);
+
+        IQueryable<TBlog> GetAllWithUser(int page, int pageSize);
     }
 }

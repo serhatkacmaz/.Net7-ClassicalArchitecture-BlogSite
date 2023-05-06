@@ -45,7 +45,7 @@ namespace BlogSite.Repository
             {
                 if (item.Entity is BaseEntity entityReference)
                 {
-                    switch (item.Entity)
+                    switch (item.State)
                     {
                         case EntityState.Added:
                             {

@@ -79,5 +79,11 @@ namespace BlogSite.API.Controllers
         {
             return CreateActionResult(_blogService.Count(x => x.User_ID == userId));
         }
+
+        [HttpGet("[action]/{page}/{pageSize}")]
+        public async Task<IActionResult> GetAllWithUser(int page, int pageSize)
+        {
+            return CreateActionResult(await _blogService.GetAllWithUser(page, pageSize));
+        }
     }
 }

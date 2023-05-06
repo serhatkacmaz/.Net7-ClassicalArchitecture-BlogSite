@@ -12,5 +12,7 @@ namespace BlogSite.Common.DTOs.Transaction
         public byte[] ContentImg { get; set; }
         public int Category_ID { get; set; }
         public int User_ID { get; set; }
+        public string UserName { get; set; }
+        public byte[] UserImg { get; set; }
     }
 }
