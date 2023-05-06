@@ -10,11 +10,14 @@ namespace BlogSite.Web.Controllers
     {
         private readonly AuthApiService _authApiService;
         private readonly UserApiService _userApiService;
-
-        public LoginController(AuthApiService authApiService, UserApiService userApiService)
+        private readonly UserRoleApiService _userRoleApiService;
+        private readonly IWebHostEnvironment _environment;
+        public LoginController(AuthApiService authApiService, UserApiService userApiService, UserRoleApiService userRoleApiService, IWebHostEnvironment environment)
         {
             _authApiService = authApiService;
             _userApiService = userApiService;
+            _userRoleApiService = userRoleApiService;
+            _environment = environment;
         }
 
         [HttpGet]
@@ -58,8 +61,13 @@ namespace BlogSite.Web.Controllers
 
             userDto.IsActive = true;
             userDto.Name = name;
+
+            var imagePath = _environment.WebRootPath + "\\img\\avatar.png";
+            userDto.Image = System.IO.File.ReadAllBytes(imagePath);
+
             var result = await _userApiService.SaveAsync(userDto);
 
+            await _userRoleApiService.SaveAsync(new UserRoleDto { IsActive = true, Role_ID = 2, User_ID = result.Data.Id });
             return RedirectToAction("Index", "Home");
         }
     }

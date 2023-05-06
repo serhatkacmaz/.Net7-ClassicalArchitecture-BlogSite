@@ -296,7 +296,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(2863),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(84),
                             Description = "Admin kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "Admin"
@@ -304,7 +304,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(2874),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(96),
                             Description = "Blog Site kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "BlogSiteUser"
@@ -376,7 +376,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(3223),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(515),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -387,7 +387,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(3225),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(518),
                             IsActive = true,
                             Mail = "skacmaz@gmail.com",
                             Name = "skacmaz",
@@ -466,7 +466,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(3108),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(360),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
@@ -474,7 +474,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 2, 11, 27, 21, 24, DateTimeKind.Local).AddTicks(3111),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(362),
                             IsActive = true,
                             Role_ID = 2,
                             User_ID = 2

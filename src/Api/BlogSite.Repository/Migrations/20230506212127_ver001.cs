@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -149,6 +150,24 @@ namespace BlogSite.Repository.Migrations
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)
                         .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
                         .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    CoverImg = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    HeaderImg = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    ContentImg = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
                     PeriodEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
                         .Annotation("SqlServer:IsTemporal", true)
                         .Annotation("SqlServer:TemporalHistoryTableName", "TBlogsHistory")
@@ -257,31 +276,6 @@ namespace BlogSite.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TImages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Blog_ID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    CoverArt = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TImages_TBlogs_Blog_ID",
-                        column: x => x.Blog_ID,
-                        principalTable: "TBlogs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TMovement",
                 columns: table => new
                 {
@@ -322,8 +316,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "CreatedDate", "Description", "IsActive", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8483), "Admin kullanıcıları için tanımlanmıştır.", true, "Admin", null },
-                    { 2, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8495), "Blog Site kullanıcıları için tanımlanmıştır.", true, "BlogSiteUser", null }
+                    { 1, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(84), "Admin kullanıcıları için tanımlanmıştır.", true, "Admin", null },
+                    { 2, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(96), "Blog Site kullanıcıları için tanımlanmıştır.", true, "BlogSiteUser", null }
                 });
 
             migrationBuilder.InsertData(
@@ -331,8 +325,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "About", "CreatedDate", "Image", "IsActive", "Mail", "Name", "Password", "Title", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8835), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "Admin User" },
-                    { 2, null, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8837), null, true, "skacmaz@gmail.com", "skacmaz", "1234", "Software Developer", null, "Serhat Kaçmaz" }
+                    { 1, null, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(515), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "Admin User" },
+                    { 2, null, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(518), null, true, "skacmaz@gmail.com", "skacmaz", "1234", "Software Developer", null, "Serhat Kaçmaz" }
                 });
 
             migrationBuilder.InsertData(
@@ -340,8 +334,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "CreatedDate", "IsActive", "Role_ID", "UpdatedDate", "User_ID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8729), true, 1, null, 1 },
-                    { 2, new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8731), true, 2, null, 2 }
+                    { 1, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(360), true, 1, null, 1 },
+                    { 2, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(362), true, 2, null, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -368,11 +362,6 @@ namespace BlogSite.Repository.Migrations
                 name: "IX_TComments_User_ID",
                 table: "TComments",
                 column: "User_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TImages_Blog_ID",
-                table: "TImages",
-                column: "Blog_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TMovement_Blog_ID",
@@ -405,9 +394,6 @@ namespace BlogSite.Repository.Migrations
         {
             migrationBuilder.DropTable(
                 name: "TComments");
-
-            migrationBuilder.DropTable(
-                name: "TImages");
 
             migrationBuilder.DropTable(
                 name: "TMovement");

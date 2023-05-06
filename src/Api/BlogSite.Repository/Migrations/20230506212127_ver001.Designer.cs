@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Repository.Migrations
 {
     [DbContext(typeof(BlogSiteContext))]
-    [Migration("20230420114400_ver001")]
+    [Migration("20230506212127_ver001")]
     partial class ver001
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace BlogSite.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -84,6 +84,12 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("nvarchar(150)")
                         .HasColumnOrder(3);
 
+                    b.Property<byte[]>("ContentImg")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("CoverImg")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnOrder(7);
@@ -91,6 +97,9 @@ namespace BlogSite.Repository.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(4);
+
+                    b.Property<byte[]>("HeaderImg")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
@@ -203,52 +212,6 @@ namespace BlogSite.Repository.Migrations
                     b.ToTable("TComments");
                 });
 
-            modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(0);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Blog_ID")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("CoverArt")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(4);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnOrder(6);
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)")
-                        .HasColumnOrder(3);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(5);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnOrder(2);
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnOrder(7);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Blog_ID");
-
-                    b.ToTable("TImages");
-                });
-
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
                 {
                     b.Property<int>("Id")
@@ -336,7 +299,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8483),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(84),
                             Description = "Admin kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "Admin"
@@ -344,7 +307,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8495),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(96),
                             Description = "Blog Site kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "BlogSiteUser"
@@ -416,7 +379,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8835),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(515),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -427,7 +390,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8837),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(518),
                             IsActive = true,
                             Mail = "skacmaz@gmail.com",
                             Name = "skacmaz",
@@ -506,7 +469,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8729),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(360),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
@@ -514,7 +477,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 20, 14, 43, 59, 969, DateTimeKind.Local).AddTicks(8731),
+                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(362),
                             IsActive = true,
                             Role_ID = 2,
                             User_ID = 2
@@ -561,17 +524,6 @@ namespace BlogSite.Repository.Migrations
                     b.Navigation("Blog");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TImage", b =>
-                {
-                    b.HasOne("BlogSite.Core.Entities.Transaction.TBlog", "Blog")
-                        .WithMany("Images")
-                        .HasForeignKey("Blog_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TMovement", b =>
@@ -624,8 +576,6 @@ namespace BlogSite.Repository.Migrations
             modelBuilder.Entity("BlogSite.Core.Entities.Transaction.TBlog", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Images");
 
                     b.Navigation("Movements");
                 });
