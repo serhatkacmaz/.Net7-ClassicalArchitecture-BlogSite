@@ -1,4 +1,6 @@
 ﻿using BlogSite.Common.DTOs;
+using BlogSite.Common.DTOs.Transaction;
+using BlogSite.Common.DTOs.UserBase;
 
 namespace BlogSite.Web.ApiServices
 {
@@ -40,6 +42,12 @@ namespace BlogSite.Web.ApiServices
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>("movement/GetTotalFavoriteCount");
             return response.Data;
+        }
+
+        public async Task<BlogSiteResponseDto<TMovementDto>> SaveAsync(TMovementDto movementDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("movement", movementDto);
+            return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TMovementDto>>();
         }
     }
 }

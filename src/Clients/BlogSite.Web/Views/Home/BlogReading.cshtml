@@ -36,9 +36,9 @@
 
             <div class="col-md-12 col-sm-12">
                 <h1>BLOG SITE </h1>
-                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=0" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-up movement-ico" aria-hidden="true" style="color: green;"></i></a>
-                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=1" class="smoothScroll btn btn-default"><i class="fa fa-bookmark-o movement-ico" style="color:dodgerblue"></i></a>
-                <a href="/Home/MovementAdd?BlogId=@(Model.Id)&Type=2" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-down movement-ico" aria-hidden="true" style="color:red;"></i></a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=1" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-up movement-ico" aria-hidden="true" style="color: green;"></i></a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=3" class="smoothScroll btn btn-default"><i class="fa fa-bookmark-o movement-ico" style="color:dodgerblue"></i></a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=2" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-down movement-ico" aria-hidden="true" style="color:red;"></i></a>
             </div>
 
         </div>
@@ -99,23 +99,25 @@
 
                     <div class="blog-comment">
                         <h3>Yorumlar</h3>
-                        <div class="media">
-                            <div class="media-object pull-left">
-                                <img src="images/comment-image1.jpg" class="img-responsive img-circle" alt="Blog Image 11">
+                        @foreach (var comment in Model.CommentModels)
+                        {
+                            <div class="media">
+                                <div class="media-object pull-left">
+                                    <img src="@($"data:image/png;base64,{Convert.ToBase64String(comment.UserImg)}")" class="img-responsive img-circle" alt="Blog Image 11">
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="media-heading">@comment.UserFullName</h3>
+                                    <span>@comment.Date.ToShortDateString()</span>
+                                    <p>@comment.Comment</p>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <h3 class="media-heading">David Jones</h3>
-                                <span>3 days ago</span>
-                                <p>Aliquam gravida arcu at risus blandit, in interdum metus varius. Cras efficitur, ex sit amet tincidunt rhoncus, dui ex hendrerit risus, ac dapibus ligula mi id leo. In auctor dui justo, ac consequat dui posuere ac.</p>
-                            </div>
-                        </div>
+                        }
                     </div>
 
                     <div class="blog-comment-form">
                         <h3>Yorum Yap</h3>
-                        <form action="#" method="post">
-                            <input type="text" class="form-control" placeholder="Name" name="name" required>
-                            <input type="email" class="form-control" placeholder="Email" name="email" required>
+                        <form asp-action="CreateComment" asp-controller="Home" method="post">
+                            @Html.HiddenFor(x=>x.Id)
                             <textarea name="message" rows="5" class="form-control" id="message" placeholder="Message" message="message" required="required"></textarea>
                             <div class="col-md-3 col-sm-4">
                                 <input name="submit" type="submit" class="form-control" id="submit" value="Yorumunuzu Gönderin">

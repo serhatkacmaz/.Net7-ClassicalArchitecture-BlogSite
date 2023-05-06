@@ -53,6 +53,7 @@ namespace BlogSite.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UserDto userDto)
         {
+            userDto.IsActive = true;
             var result = await _userApiService.SaveAsync(userDto);
 
             return RedirectToAction("Index", "Home");

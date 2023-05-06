@@ -38,7 +38,7 @@ namespace BlogSite.Repository.Repositories
 
         public async Task<TBlog> GetByIdWithUser(int id)
         {
-            return await _context.TBlogs.Include(s => s.User).Where(s => s.Id == id).FirstOrDefaultAsync();
+            return await _context.TBlogs.Include(s => s.User).Include(s => s.Comments).Where(s => s.Id == id).FirstOrDefaultAsync();
         }
     }
 }

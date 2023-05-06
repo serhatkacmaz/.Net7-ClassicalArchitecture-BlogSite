@@ -13,10 +13,17 @@ namespace BlogSite.Service.Mapping
             CreateMap<TComment, TCommentDto>().ReverseMap();
             CreateMap<TMovement, TMovementDto>().ReverseMap();
             CreateMap<TBlog, TBlogDto>()
-                  .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
-                  .ForMember(dest => dest.UserTitle, opt => opt.MapFrom(src => src.User.Title))
-                  .ForMember(dest => dest.UserAbout, opt => opt.MapFrom(src => src.User.About))
-                  .ForMember(dest => dest.UserImg, opt => opt.MapFrom(src => src.User.Image));
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+                .ForMember(dest => dest.UserTitle, opt => opt.MapFrom(src => src.User.Title))
+                .ForMember(dest => dest.UserAbout, opt => opt.MapFrom(src => src.User.About))
+                .ForMember(dest => dest.UserImg, opt => opt.MapFrom(src => src.User.Image))
+                .ForMember(dest => dest.CommentModels, opt => opt.MapFrom(src => src.Comments.Select(comment => new CommentModel
+                {
+                    UserImg = comment.User.Image,
+                    UserFullName = comment.User.UserName,
+                    Comment = comment.Comment,
+                    Date = comment.CreatedDate
+                })));
 
             CreateMap<TBlogDto, TBlog>();
         }

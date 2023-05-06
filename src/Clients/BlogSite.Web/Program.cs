@@ -26,6 +26,11 @@ builder.Services.AddHttpClient<MovementApiService>(opt =>
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 });
 
+builder.Services.AddHttpClient<CommentApiService>(opt =>
+{
+    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
+});
+
 builder.Services.AddHttpClient<CategoryApiService>(opt =>
 {
     opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);

@@ -16,5 +16,14 @@ namespace BlogSite.Common.DTOs.Transaction
         public byte[] UserImg { get; set; }
         public string UserAbout { get; set; }
         public string UserTitle { get; set; }
+        public List<CommentModel> CommentModels { get; set; }
+    }
+
+    public class CommentModel
+    {
+        public byte[] UserImg { get; set; }
+        public string UserFullName { get; set; }
+        public string Comment { get; set; }
+        public DateTime Date { get; set; }
     }
 }
