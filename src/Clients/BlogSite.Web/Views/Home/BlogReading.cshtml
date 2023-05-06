@@ -1,5 +1,117 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using BlogSite.Common.DTOs.Transaction;
+@model TBlogDto
+
 @{
 }
+
+@section Styles{
+    <style>
+        .img-content {
+            width: 1000px;
+            height: 500px;
+        }
+
+        .sub-img{
+            width: 320px;
+            height: 200px;
+        }
+    </style>
+}
+
+<!-- Home Section -->
+
+<section id="home" class="main-single-post parallax-section">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <h1>BLOG SITE</h1>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Blog Single Post Section -->
+
+<section id="blog-single-post">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-offset-1 col-md-10 col-sm-12">
+                <div class="blog-single-post-thumb">
+
+                    <div class="blog-post-title">
+                        <h2>@Model.Name</h2>
+                    </div>
+
+                    <div class="blog-post-format">
+                        <span><a href="#"><img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.UserImg)}")" class="img-responsive img-circle">@Model.UserName</a></span>
+                        <span><i class="fa fa-date"></i> @Model.CreatedDate</span>
+                    </div>
+
+                    <div class="blog-post-des">
+                        <blockquote>@Model.Content</blockquote>
+                        <div class="blog-post-image">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.ContentImg)}")" class="img-responsive img-content" alt="Blog Image 3">
+                        </div>
+
+                        <h3>@Model.Name</h3>
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <div class="blog-single-post-image">
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.CoverImg)}")" class="img-responsive sub-img" alt="Blog Image 1">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.ContentImg)}")" class="img-responsive sub-img" alt="Blog Image 2">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.HeaderImg)}")" class="img-responsive sub-img" alt="Blog Image 3">
+                        </div>
+                    </div>
+
+                    <div class="blog-author">
+                        <div class="media">
+                            <div class="media-object pull-left">
+                                <img src="@($"data:image/png;base64,{Convert.ToBase64String(Model.UserImg)}")" class="img-circle img-responsive" alt="user">
+                            </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a href="#">@Model.UserName ( @Model.UserTitle )</a></h3>
+                                <p>@Model.UserAbout</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-comment">
+                        <h3>Yorumlar</h3>
+                        <div class="media">
+                            <div class="media-object pull-left">
+                                <img src="images/comment-image1.jpg" class="img-responsive img-circle" alt="Blog Image 11">
+                            </div>
+                            <div class="media-body">
+                                <h3 class="media-heading">David Jones</h3>
+                                <span>3 days ago</span>
+                                <p>Aliquam gravida arcu at risus blandit, in interdum metus varius. Cras efficitur, ex sit amet tincidunt rhoncus, dui ex hendrerit risus, ac dapibus ligula mi id leo. In auctor dui justo, ac consequat dui posuere ac.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-comment-form">
+                        <h3>Yorum Yap</h3>
+                        <form action="#" method="post">
+                            <input type="text" class="form-control" placeholder="Name" name="name" required>
+                            <input type="email" class="form-control" placeholder="Email" name="email" required>
+                            <textarea name="message" rows="5" class="form-control" id="message" placeholder="Message" message="message" required="required"></textarea>
+                            <div class="col-md-3 col-sm-4">
+                                <input name="submit" type="submit" class="form-control" id="submit" value="Yorumunuzu Gönderin">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

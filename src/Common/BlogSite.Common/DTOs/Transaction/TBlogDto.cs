@@ -14,5 +14,7 @@ namespace BlogSite.Common.DTOs.Transaction
         public int User_ID { get; set; }
         public string UserName { get; set; }
         public byte[] UserImg { get; set; }
+        public string UserAbout { get; set; }
+        public string UserTitle { get; set; }
     }
 }
