@@ -3,6 +3,7 @@ using BlogSite.Common.DTOs.Transaction;
 using BlogSite.Common.Enums;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
+using BlogSite.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
@@ -80,6 +81,12 @@ namespace BlogSite.API.Controllers
         public IActionResult GetTotalFavoriteCount()
         {
             return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.Favorite && x.IsActive));
+        }
+
+        [HttpGet("GetAllByBlogIdAndUserId/{blogId}/{userId}")]
+        public async Task<IActionResult> GetAllByBlogIdAndUserId(int blogId, int userId)
+        {
+            return CreateActionResult(await _movementService.GetAllByBlogIdAndUserId(blogId, userId));
         }
     }
 }

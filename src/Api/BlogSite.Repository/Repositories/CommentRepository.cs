@@ -14,5 +14,10 @@ namespace BlogSite.Repository.Repositories
         {
             return _context.TComments.AsNoTracking().Include(s => s.User).Where(s => s.Blog_ID == blogId);
         }
+
+        public IQueryable<TComment> GetAllByBlogIdAndUserId(int blogId, int userId)
+        {
+            return _context.TComments.AsNoTracking().Where(s => s.Blog_ID == blogId && s.User_ID == userId);
+        }
     }
 }

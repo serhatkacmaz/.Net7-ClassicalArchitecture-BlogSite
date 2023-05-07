@@ -49,5 +49,11 @@ namespace BlogSite.Web.ApiServices
             var response = await _httpClient.PostAsJsonAsync("movement", movementDto);
             return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TMovementDto>>();
         }
+
+        public async Task<List<TMovementDto>> GetAllByBlogIdAndUserId(int blogId, int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TMovementDto>>>($"movement/GetAllByBlogIdAndUserId/{blogId}/{userId}");
+            return response.Data;
+        }
     }
 }

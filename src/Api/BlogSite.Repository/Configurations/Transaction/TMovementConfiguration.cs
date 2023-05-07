@@ -12,7 +12,7 @@ namespace BlogSite.Repository.Configurations.Transaction
             builder.Property(x => x.Id).UseIdentityColumn();
 
             builder.HasOne(x => x.User)
-                .WithMany()
+                .WithMany(x => x.TMovements)
                 .HasForeignKey(x => x.User_ID)
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers
 {
+    [Route("api/[controller]/[action]")]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : BaseController
@@ -47,6 +48,12 @@ namespace BlogSite.API.Controllers
         public async Task<IActionResult> Remove(int id)
         {
             return CreateActionResult(await _CommentService.RemoveAsync(id));
+        }
+
+        [HttpGet("[action]/{blogId}/{userId}")]
+        public async Task<IActionResult> GetAllByBlogIdAndUserId(int blogId, int userId)
+        {
+            return CreateActionResult(await _CommentService.GetAllByBlogIdAndUserId(blogId, userId));
         }
     }
 }

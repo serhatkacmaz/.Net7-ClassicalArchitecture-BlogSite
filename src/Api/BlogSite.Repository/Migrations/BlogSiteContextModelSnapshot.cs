@@ -237,9 +237,6 @@ namespace BlogSite.Repository.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(4);
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("User_ID")
                         .HasColumnType("int")
                         .HasColumnOrder(5);
@@ -248,11 +245,9 @@ namespace BlogSite.Repository.Migrations
 
                     b.HasIndex("Blog_ID");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("User_ID");
 
-                    b.ToTable("TMovement");
+                    b.ToTable("TMovements");
                 });
 
             modelBuilder.Entity("BlogSite.Core.Entities.UserBase.Role", b =>
@@ -296,7 +291,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(84),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8079),
                             Description = "Admin kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "Admin"
@@ -304,7 +299,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(96),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8096),
                             Description = "Blog Site kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "BlogSiteUser"
@@ -376,7 +371,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(515),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8490),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -387,7 +382,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(518),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8492),
                             IsActive = true,
                             Mail = "skacmaz@gmail.com",
                             Name = "skacmaz",
@@ -466,7 +461,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(360),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8361),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
@@ -474,7 +469,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(362),
+                            CreatedDate = new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8363),
                             IsActive = true,
                             Role_ID = 2,
                             User_ID = 2
@@ -531,12 +526,8 @@ namespace BlogSite.Repository.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BlogSite.Core.Entities.UserBase.User", null)
-                        .WithMany("TMovements")
-                        .HasForeignKey("UserId");
-
                     b.HasOne("BlogSite.Core.Entities.UserBase.User", "User")
-                        .WithMany()
+                        .WithMany("TMovements")
                         .HasForeignKey("User_ID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

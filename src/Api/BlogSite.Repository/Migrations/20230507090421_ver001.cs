@@ -276,7 +276,7 @@ namespace BlogSite.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TMovement",
+                name: "TMovements",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -286,25 +286,19 @@ namespace BlogSite.Repository.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     User_ID = table.Column<int>(type: "int", nullable: false),
-                    EUserReaction = table.Column<byte>(type: "tinyint", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    EUserReaction = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TMovement", x => x.Id);
+                    table.PrimaryKey("PK_TMovements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TMovement_TBlogs_Blog_ID",
+                        name: "FK_TMovements_TBlogs_Blog_ID",
                         column: x => x.Blog_ID,
                         principalTable: "TBlogs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TMovement_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TMovement_Users_User_ID",
+                        name: "FK_TMovements_Users_User_ID",
                         column: x => x.User_ID,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -316,8 +310,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "CreatedDate", "Description", "IsActive", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(84), "Admin kullanıcıları için tanımlanmıştır.", true, "Admin", null },
-                    { 2, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(96), "Blog Site kullanıcıları için tanımlanmıştır.", true, "BlogSiteUser", null }
+                    { 1, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8079), "Admin kullanıcıları için tanımlanmıştır.", true, "Admin", null },
+                    { 2, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8096), "Blog Site kullanıcıları için tanımlanmıştır.", true, "BlogSiteUser", null }
                 });
 
             migrationBuilder.InsertData(
@@ -325,8 +319,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "About", "CreatedDate", "Image", "IsActive", "Mail", "Name", "Password", "Title", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(515), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "Admin User" },
-                    { 2, null, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(518), null, true, "skacmaz@gmail.com", "skacmaz", "1234", "Software Developer", null, "Serhat Kaçmaz" }
+                    { 1, null, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8490), null, true, "admin@gmail.com", "admin", "1234", "Manager", null, "Admin User" },
+                    { 2, null, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8492), null, true, "skacmaz@gmail.com", "skacmaz", "1234", "Software Developer", null, "Serhat Kaçmaz" }
                 });
 
             migrationBuilder.InsertData(
@@ -334,8 +328,8 @@ namespace BlogSite.Repository.Migrations
                 columns: new[] { "Id", "CreatedDate", "IsActive", "Role_ID", "UpdatedDate", "User_ID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(360), true, 1, null, 1 },
-                    { 2, new DateTime(2023, 5, 7, 0, 21, 26, 847, DateTimeKind.Local).AddTicks(362), true, 2, null, 2 }
+                    { 1, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8361), true, 1, null, 1 },
+                    { 2, new DateTime(2023, 5, 7, 12, 4, 21, 149, DateTimeKind.Local).AddTicks(8363), true, 2, null, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -364,19 +358,14 @@ namespace BlogSite.Repository.Migrations
                 column: "User_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TMovement_Blog_ID",
-                table: "TMovement",
+                name: "IX_TMovements_Blog_ID",
+                table: "TMovements",
                 column: "Blog_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TMovement_User_ID",
-                table: "TMovement",
+                name: "IX_TMovements_User_ID",
+                table: "TMovements",
                 column: "User_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TMovement_UserId",
-                table: "TMovement",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_Role_ID",
@@ -396,7 +385,7 @@ namespace BlogSite.Repository.Migrations
                 name: "TComments");
 
             migrationBuilder.DropTable(
-                name: "TMovement");
+                name: "TMovements");
 
             migrationBuilder.DropTable(
                 name: "UserRefreshTokens");

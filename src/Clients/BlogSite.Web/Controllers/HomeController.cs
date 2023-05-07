@@ -46,6 +46,7 @@ namespace BlogSite.Web.Controllers
         public async Task<IActionResult> BlogReading(int id)
         {
             var model = await _blogApiService.GetByIdWithUserAsync(id);
+            var movementList = await _movementApiService.GetAllByBlogIdAndUserId(id, _userId);
             return View(model);
         }
 

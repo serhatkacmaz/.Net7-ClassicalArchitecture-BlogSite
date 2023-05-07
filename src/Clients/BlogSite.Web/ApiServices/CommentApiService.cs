@@ -17,5 +17,11 @@ namespace BlogSite.Web.ApiServices
             var response = await _httpClient.PostAsJsonAsync("comment", commentDto);
             return await response.Content.ReadFromJsonAsync<BlogSiteResponseDto<TCommentDto>>();
         }
+
+        public async Task<List<TBlogDto>> GetAllByBlogIdAndUserId(int blogId, int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TBlogDto>>>($"comment/GetAllByBlogIdAndUserId/{blogId}/{userId}");
+            return response.Data;
+        }
     }
 }
