@@ -7,9 +7,9 @@
 @section Styles{
     <style>
         /*      .img-content {
-                            width: 1000px;
-                            height: 500px;
-                        }*/
+                                                                            width: 1000px;
+                                                                            height: 500px;
+                                                                        }*/
 
         .sub-img {
             width: 350px;
@@ -36,9 +36,15 @@
 
             <div class="col-md-12 col-sm-12">
                 <h1>BLOG SITE </h1>
-                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=1" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-up movement-ico" aria-hidden="true" style="color: green;"></i></a>
-                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=3" class="smoothScroll btn btn-default"><i class="fa fa-bookmark-o movement-ico" style="color:dodgerblue"></i></a>
-                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=2" class="smoothScroll btn btn-default"><i class="fa fa-thumbs-down movement-ico" aria-hidden="true" style="color:red;"></i></a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=1" class="smoothScroll btn btn-default" style="background-color:@((int)ViewBag.Like  == 1 ? "yellowgreen":"white")">
+                    <i class="fa fa-thumbs-up movement-ico" aria-hidden="true" style="color: green;"></i>
+                </a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=3" class="smoothScroll btn btn-default" style="background-color:@((int)ViewBag.Favorite == 1 ? "#60bcd3":"white")">
+                    <i class="fa fa-bookmark-o movement-ico" style="color:dodgerblue"></i>
+                </a>
+                <a href="/Home/MovementAdd?blogId=@(Model.Id)&type=2" class="smoothScroll btn btn-default" style="background-color:@((int)ViewBag.DisLike == 1 ? "orangered":"white")">
+                    <i class="fa fa-thumbs-down movement-ico" aria-hidden="true" style="color:red;"></i>
+                </a>
             </div>
 
         </div>

@@ -19,6 +19,12 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<bool> Remove(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"movement/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<int> GetTotalBlogLikeCountByUserIdAsync(int userId)
         {
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<int>>($"movement/GetTotalBlogLikeCountByUserId/{userId}");
