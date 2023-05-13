@@ -17,7 +17,19 @@ namespace BlogSite.Web.Controllers
         private readonly UserApiService _userApiService;
         private readonly CategoryApiService _categoryApiService;
         private readonly MovementApiService _movementApiService;
-        public int _userId { get => int.Parse(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault()); }
+        public int _userId
+        {
+            get
+            {
+                var nameIdentifierClaim = User.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                if (nameIdentifierClaim != null)
+                {
+                    return int.Parse(nameIdentifierClaim.Value);
+                }
+
+                return default(int);
+            }
+        }
 
         public UserDashboardController(BlogApiService blogApiService, UserApiService userApiService, CategoryApiService categoryApiService, MovementApiService movementApiService)
         {

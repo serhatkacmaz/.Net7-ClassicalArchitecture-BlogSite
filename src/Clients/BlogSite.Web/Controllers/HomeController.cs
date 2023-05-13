@@ -13,7 +13,19 @@ namespace BlogSite.Web.Controllers
         UserApiService _userApiService;
         MovementApiService _movementApiService;
         CommentApiService _commentApiService;
-        public int _userId { get => int.Parse(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).Select(x => x.Value).FirstOrDefault()); }
+        public int _userId
+        {
+            get
+            {
+                var nameIdentifierClaim = User.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                if (nameIdentifierClaim != null)
+                {
+                    return int.Parse(nameIdentifierClaim.Value);
+                }
+
+                return default(int);
+            }
+        }
 
         public HomeController(BlogApiService blogApiService, UserApiService userApiService, MovementApiService movementApiService, CommentApiService commentApiService)
         {
