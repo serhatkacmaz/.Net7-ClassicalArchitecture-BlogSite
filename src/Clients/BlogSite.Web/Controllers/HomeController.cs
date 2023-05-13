@@ -58,10 +58,6 @@ namespace BlogSite.Web.Controllers
         public async Task<IActionResult> BlogReading(int id)
         {
             var model = await _blogApiService.GetByIdWithUserAsync(id);
-            HttpContext.Session.SetInt32("Like", 0);
-            HttpContext.Session.SetInt32("DisLike", 0);
-            HttpContext.Session.SetInt32("Favorite", 0);
-
             ViewData["Like"] = 0;
             ViewData["DisLike"] = 0;
             ViewData["Favorite"] = 0;
@@ -73,23 +69,18 @@ namespace BlogSite.Web.Controllers
                 switch (item.EUserReaction)
                 {
                     case EUserReaction.Like:
-                        HttpContext.Session.SetInt32("Like", 1);
+                        ViewData["Like"] = 1;
                         break;
                     case EUserReaction.DisLike:
-                        HttpContext.Session.SetInt32("DisLike", 1);
+                        ViewData["DisLike"] = 1;
                         break;
                     case EUserReaction.Favorite:
-                        HttpContext.Session.SetInt32("Favorite", 1);
+                        ViewData["Favorite"] = 1;
                         break;
                     default:
                         break;
                 }
             }
-
-            ViewBag.Like = HttpContext.Session.GetInt32("Like");
-            ViewBag.DisLike = HttpContext.Session.GetInt32("DisLike");
-            ViewBag.Favorite = HttpContext.Session.GetInt32("Favorite");
-
             //viewCount
             model.ViewNumber = model.ViewNumber + 1;
             await _blogApiService.UpdateAsync(model);

@@ -80,6 +80,7 @@ namespace BlogSite.Web.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
+                    IsApprove = item.IsApprove,
                     IsActive = item.IsActive,
                     CreatedDate = item.CreatedDate
                 });
@@ -218,7 +219,7 @@ namespace BlogSite.Web.Controllers
 
                 return View();
             }
-        }  
+        }
         #endregion
 
         #region Profile

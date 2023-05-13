@@ -92,5 +92,11 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(await _blogService.GetByIdWithUser(id));
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GeNotApprove()
+        {
+            return CreateActionResult(await _blogService.Where(s => s.IsActive));
+        }
+
     }
 }

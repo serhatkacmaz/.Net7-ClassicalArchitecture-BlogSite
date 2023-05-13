@@ -30,7 +30,7 @@ namespace BlogSite.Repository.Repositories
         {
             return _context.TBlogs
                  .Include(s => s.User)
-                 .Where(s => s.IsActive)
+                 .Where(s => s.IsActive && s.IsApprove)
                  .OrderBy(s => s.CreatedDate)
                  .Skip((page - 1) * pageSize)
                  .Take(pageSize);

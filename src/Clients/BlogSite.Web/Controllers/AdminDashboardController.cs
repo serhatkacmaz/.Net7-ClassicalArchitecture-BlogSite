@@ -3,6 +3,7 @@ using BlogSite.Common.DTOs.UserBase;
 using BlogSite.Web.ApiServices;
 using BlogSite.Web.Helpers;
 using BlogSite.Web.Models.AdminDashboard;
+using BlogSite.Web.Models.UserDashboard;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -52,6 +53,34 @@ namespace BlogSite.Web.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> BlogGrid()
+        {
+            var blogList = await _blogApiService.GeNotApprove();
+            return View(blogList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BlogApprove(int blogId, int status)
+        {
+            var model = await _blogApiService.GetByIdAsync(blogId);
+
+            if (model != null)
+            {
+                if (status == 0)
+                {
+                    model.IsApprove = true;
+                }
+                else
+                {
+                    model.IsApprove = false;
+                }
+
+                await _blogApiService.UpdateAsync(model);
+            }
+
+            return RedirectToAction(nameof(BlogGrid));
         }
 
         #region Category

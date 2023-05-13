@@ -42,6 +42,11 @@ namespace BlogSite.Web.ApiServices
             return response.Data;
         }
 
+        public async Task<List<TBlogDto>> GeNotApprove()
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TBlogDto>>>($"blog/GeNotApprove");
+            return response.Data;
+        }
 
         public async Task<List<TBlogDto>> GetAllWithUser(int page = 1, int pageSize = 5)
         {
