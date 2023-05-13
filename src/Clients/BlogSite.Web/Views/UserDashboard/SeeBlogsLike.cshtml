@@ -1,0 +1,58 @@
+﻿@using BlogSite.Common.DTOs.Transaction;
+@model List<TMovementDto>
+
+@{
+    Layout = "_UserDashboardLayout";
+}
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Bloglar</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">
+                            #
+                        </th>
+                        <th style="width: 80%">
+                            Beğenilme Tarihi
+                        </th>
+                        <th style="width: 10%" class="text-center">
+                            link
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                <a>@item.CreatedDate</a>
+                            </td>
+                            <td>
+                                <a href="/Home/BlogReading?id=@item.Blog_ID">Sayfaya git</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

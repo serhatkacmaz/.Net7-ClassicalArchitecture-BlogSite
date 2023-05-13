@@ -77,6 +77,19 @@ namespace BlogSite.API.Controllers
             return CreateActionResult(_movementService.Count(x => x.EUserReaction == EUserReaction.DisLike && x.User_ID == userId));
         }
 
+        [HttpGet("[action]/{userId}/")]
+        public async Task<IActionResult> GetLikeBlogId(int userId)
+        {
+            return CreateActionResult(await _movementService.Where(x => x.EUserReaction == EUserReaction.Like && x.User_ID == userId));
+        }
+
+
+        [HttpGet("[action]/{userId}/")]
+        public async Task<IActionResult> GetDisLikeBlogId(int userId)
+        {
+            return CreateActionResult(await _movementService.Where(x => x.EUserReaction == EUserReaction.DisLike && x.User_ID == userId));
+        }
+
         [HttpGet("GetTotalFavoriteCount")]
         public IActionResult GetTotalFavoriteCount()
         {

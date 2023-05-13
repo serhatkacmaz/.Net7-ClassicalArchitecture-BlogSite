@@ -156,6 +156,20 @@ namespace BlogSite.Web.Controllers
             return View(await _blogApiService.GetByIdAsync(id));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SeeBlogsLike()
+        {
+            var model = await _movementApiService.GetLikeBlogId(_userId);
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SeeBlogsDislike()
+        {
+            var model = await _movementApiService.GetDislikeBlogId(_userId);
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> BlogEdit(TBlogDto blogDto, IFormFile coverImg, IFormFile headerImg, IFormFile contentImg)
         {
@@ -204,7 +218,7 @@ namespace BlogSite.Web.Controllers
 
                 return View();
             }
-        }
+        }  
         #endregion
 
         #region Profile

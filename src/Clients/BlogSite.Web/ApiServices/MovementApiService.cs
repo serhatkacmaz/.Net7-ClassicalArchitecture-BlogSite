@@ -61,5 +61,17 @@ namespace BlogSite.Web.ApiServices
             var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TMovementDto>>>($"movement/GetAllByBlogIdAndUserId/{blogId}/{userId}");
             return response.Data;
         }
+
+        public async Task<List<TMovementDto>> GetLikeBlogId(int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TMovementDto>>>($"movement/GetLikeBlogId/{userId}");
+            return response.Data;
+        }
+
+        public async Task<List<TMovementDto>> GetDislikeBlogId(int userId)
+        {
+            var response = await _httpClient.GetFromJsonAsync<BlogSiteResponseDto<List<TMovementDto>>>($"movement/GetDislikeBlogId/{userId}");
+            return response.Data;
+        }
     }
 }

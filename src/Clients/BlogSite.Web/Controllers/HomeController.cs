@@ -89,6 +89,11 @@ namespace BlogSite.Web.Controllers
             ViewBag.Like = HttpContext.Session.GetInt32("Like");
             ViewBag.DisLike = HttpContext.Session.GetInt32("DisLike");
             ViewBag.Favorite = HttpContext.Session.GetInt32("Favorite");
+
+            //viewCount
+            model.ViewNumber = model.ViewNumber + 1;
+            await _blogApiService.UpdateAsync(model);
+
             return View(model);
         }
 
