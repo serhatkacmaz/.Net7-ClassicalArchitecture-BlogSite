@@ -4,6 +4,7 @@ using BlogSite.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Repository.Migrations
 {
     [DbContext(typeof(BlogSiteContext))]
-    partial class BlogSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230513131619_ver002")]
+    partial class ver002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +44,9 @@ namespace BlogSite.Repository.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasColumnOrder(2);
+
+                    b.Property<bool>("IsApprove")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -101,9 +107,6 @@ namespace BlogSite.Repository.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasColumnOrder(6);
-
-                    b.Property<bool>("IsApprove")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -294,7 +297,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3594),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8462),
                             Description = "Admin kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "Admin"
@@ -302,7 +305,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3605),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8475),
                             Description = "Blog Site kullanıcıları için tanımlanmıştır.",
                             IsActive = true,
                             Name = "BlogSiteUser"
@@ -374,7 +377,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3947),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8825),
                             IsActive = true,
                             Mail = "admin@gmail.com",
                             Name = "admin",
@@ -385,7 +388,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3949),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8827),
                             IsActive = true,
                             Mail = "skacmaz@gmail.com",
                             Name = "skacmaz",
@@ -464,7 +467,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3840),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8723),
                             IsActive = true,
                             Role_ID = 1,
                             User_ID = 1
@@ -472,7 +475,7 @@ namespace BlogSite.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 5, 13, 16, 17, 50, 101, DateTimeKind.Local).AddTicks(3842),
+                            CreatedDate = new DateTime(2023, 5, 13, 16, 16, 19, 39, DateTimeKind.Local).AddTicks(8725),
                             IsActive = true,
                             Role_ID = 2,
                             User_ID = 2

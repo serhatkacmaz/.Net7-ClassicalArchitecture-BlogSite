@@ -14,6 +14,7 @@ namespace BlogSite.Common.DTOs.Transaction
         public int User_ID { get; set; }
         public string UserName { get; set; }
         public byte[] UserImg { get; set; }
+        public bool IsApprove { get; set; }
         public string UserAbout { get; set; }
         public string UserTitle { get; set; }
         public List<CommentModel> CommentModels { get; set; }

@@ -16,6 +16,7 @@ namespace BlogSite.Core.Entities.Transaction
 
         public int Category_ID { get; set; }
         public MCategory Category { get; set; }
+        public bool IsApprove { get; set; }
 
         public int User_ID { get; set; }
         public User User { get; set; }
