@@ -2,51 +2,51 @@
 
 **Code First**
 ---
-Projenin veritabanını kod tabanlı olarak oluşturmak için Entity Framework Code First'i kullanır.
+The Entity Framework uses Code First to create the project's database on a code-based basis.
 
 **N-Layer**
 ---
-Projeyi N-Katmanlı mimari prensibine göre düzenler. Katmanlar arasında net bir sorumluluk ayrımı yaparak kodun bakımını ve ölçeklenebilirliğini kolaylaştırır.
+Organizes the project according to the principle of N-Layer architecture. It facilitates the maintenance and scalability of the code by making a clear Decoupling of responsibilities between layers.
 
 **ASP.NET Core Web API**
 ---
-RESTful API'leri oluşturmak için ASP.NET Core Web API framework'ünü kullanır.
+To create RESTful APIs ASP.NET It uses the Core Web API framework.
 
 **ASP.NET Core Web MVC**
 ---
-Web tabanlı kullanıcı arayüzü sağlamak için ASP.NET Core Web MVC framework'ünü kullanır.
+To provide a web-based user interface ASP.NET It uses the Core Web MVC framework.
 
 **Repository Pattern**
 ---
-Veritabanı işlemleri için Repository tasarım desenini uygular. Veritabanı işlemlerini soyutlamak ve kodun test edilebilirliğini artırmak için kullanılır.
+Implements the Repository design pattern for database operations. It is used to abstract database operations and increase the testability of code.
 
 **Static Factory Pattern**
 ---
-Nesne oluşturma işlemlerini gerçekleştiren static bir fabrika sınıfı kullanır. Bu, nesne oluşturma sürecini merkezi hale getirir ve kodun daha okunabilir ve bakımı daha kolay olmasını sağlar.
+It uses a static factory class that performs object creation operations. This makes the object creation process centralized and makes the code more readable and easier to maintain.
 
 **Unit Of Work Pattern**
 ---
-İşlemleri bir grup olarak yönetmek için Unit of Work tasarım desenini kullanır. Bir işlem başlatma, kaydetme ve geri alma gibi veritabanı işlemlerini gruplayarak tutarlılık sağlar.
+It uses the Unit of Work design pattern to manage operations as a group. It provides consistency by grouping database operations, such as initializing, saving, and retrieving a transaction.
 
 **Options Pattern**
 ---
-Yapılandırma değerlerini düzenlemek için Options Pattern'i kullanır. Bu, uygulama yapılandırmasını ayrı bir sınıf içinde toplar ve yapılandırma değerlerine erişimi kolaylaştırır.
+It uses the Options Pattern to edit the configuration values. This collects the application configuration in a separate class and facilitates access to the configuration values.
 
 **FluentValidation**
 ---
-Giriş doğrulama (input validation) için FluentValidation kütüphanesini kullanır. Girişleri doğrulamak ve hataları ele almak için kullanışlı bir yöntem sağlar.
+It uses the FluentValidation library for input validation. It provides a useful method for validating entries and handling errors.
 
 **AutoMapper**
 ---
-Nesneler arasında veri eşleştirme (mapping) işlemlerini kolaylaştırmak için AutoMapper kütüphanesini kullanır. DTO'lar (Data Transfer Objects) ile model nesneleri arasında veri alışverişini basitleştirir.
+It uses the AutoMapper library to facilitate data mapping operations between objects Decently. Simplifies the exchange of data between D Dec (Data Transfer Objects) and model objects.
 
 **AutoFac**
 ---
-Bağımlılık enjeksiyonu (Dependency Injection) için AutoFac kütüphanesini kullanır. Nesne oluşturma ve bağımlılıkları çözme sürecini yönetir ve kodun test edilebilirliğini artırır.
+It uses the AutoFac library for Dependency Injection. It manages the process of object creation and solving dependencies and improves the testability of the code.
 
 **JWT Token**
 ---
-Kimlik doğrulama ve yetkilendirme için JSON Web Token (JWT) kullanır. Web API'lerde kullanıcı kimlik doğrulamasını sağlar ve güvenliği sağlar.
+It uses JSON Web Token (JWT) for authentication and authorization. It provides user authentication in Web APIs and provides security.
 
 **RDBMS**
 ---
