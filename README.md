@@ -48,7 +48,7 @@ It uses the AutoFac library for Dependency Injection. It manages the process of 
 ---
 It uses JSON Web Token (JWT) for authentication and authorization. It provides user authentication in Web APIs and provides security.
 
-**RDBMS**
+**Database Diagram**
 ---
 ![BlogSiteDB drawio](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/503c68bf-29d0-4bec-8069-95e826ac9a17)
 
