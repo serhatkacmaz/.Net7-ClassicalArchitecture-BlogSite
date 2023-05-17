@@ -47,3 +47,8 @@ Bağımlılık enjeksiyonu (Dependency Injection) için AutoFac kütüphanesini 
 **JWT Token**
 ---
 Kimlik doğrulama ve yetkilendirme için JSON Web Token (JWT) kullanır. Web API'lerde kullanıcı kimlik doğrulamasını sağlar ve güvenliği sağlar.
+
+**RDBMS**
+---
+![BlogSiteDB drawio](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/503c68bf-29d0-4bec-8069-95e826ac9a17)
+
