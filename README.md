@@ -16,21 +16,10 @@ The Entity Framework uses Code First to create the project's database on a code-
 ---
 Organizes the project according to the principle of N-Layer architecture. It facilitates the maintenance and scalability of the code by making a clear Decoupling of responsibilities between layers.
 
-**ASP.NET Core Web API**
+**JWT Token**
 ---
-To create RESTful APIs ASP.NET It uses the Core Web API framework.
+It uses JSON Web Token (JWT) for authentication and authorization. It provides user authentication in Web APIs and provides security.
 
-**ASP.NET Core Web MVC**
----
-To provide a web-based user interface ASP.NET It uses the Core Web MVC framework.
-
-**Repository Pattern**
----
-Implements the Repository design pattern for database operations. It is used to abstract database operations and increase the testability of code.
-
-**Static Factory Pattern**
----
-It uses a static factory class that performs object creation operations. This makes the object creation process centralized and makes the code more readable and easier to maintain.
 
 **Unit Of Work Pattern**
 ---
@@ -52,9 +41,24 @@ It uses the AutoMapper library to facilitate data mapping operations between obj
 ---
 It uses the AutoFac library for Dependency Injection. It manages the process of object creation and solving dependencies and improves the testability of the code.
 
-**JWT Token**
+**ASP.NET Core Web API**
 ---
-It uses JSON Web Token (JWT) for authentication and authorization. It provides user authentication in Web APIs and provides security.
+To create RESTful APIs ASP.NET It uses the Core Web API framework.
+
+**ASP.NET Core Web MVC**
+---
+To provide a web-based user interface ASP.NET It uses the Core Web MVC framework.
+
+**Repository Pattern**
+---
+Implements the Repository design pattern for database operations. It is used to abstract database operations and increase the testability of code.
+
+**Static Factory Pattern**
+---
+It uses a static factory class that performs object creation operations. This makes the object creation process centralized and makes the code more readable and easier to maintain.
+
+
+
 
 
 
