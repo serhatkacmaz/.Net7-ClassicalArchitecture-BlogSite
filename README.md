@@ -1,12 +1,12 @@
 # BlogSite
 
-**Database Diagram**
----
-![BlogSiteDB drawio (1)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/de63870c-6617-45b3-a92e-c8c17b907121)
-
 **Solution Structure**
 ---
 ![Screenshot 2023-05-18 182806](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/43c669b9-0699-4b82-9c2d-209fde339e82)
+
+**Database Diagram**
+---
+![BlogSiteDB drawio (2)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/15b9b4be-4a52-4bab-8139-fdfacc4376b9)
 
 **Code First**
 ---
