@@ -1,5 +1,9 @@
 # BlogSite
 
+**Software Architecture**
+---
+![BlogSiteArchitecture drawio (9)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/c73786c3-cd7f-4e69-9b14-ffd6bbc6dfb8)
+
 **Solution Structure**
 ---
 ![Screenshot 2023-05-18 182806](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/43c669b9-0699-4b82-9c2d-209fde339e82)
