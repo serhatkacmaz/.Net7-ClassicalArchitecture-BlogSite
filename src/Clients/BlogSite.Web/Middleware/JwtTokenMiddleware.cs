@@ -16,11 +16,11 @@ namespace BlogSite.Web.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Path.Value.Contains("Login/") || context.Request.Path.Value.Contains("Home/Index"))
-            {
-                await _next(context);
-                return;
-            }
+            //if (context.Request.Path.Value.Contains("Login/") || context.Request.Path.Value.Contains("Home/Index"))
+            //{
+            //    await _next(context);
+            //    return;
+            //}
 
             var accessToken = context.Request.Cookies["X-Access-Token"];
             var refreshToken = context.Request.Cookies["Refresh-Token"];
