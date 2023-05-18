@@ -6,7 +6,7 @@
 
 **Database Diagram**
 ---
-![BlogSiteDB drawio (2)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/15b9b4be-4a52-4bab-8139-fdfacc4376b9)
+![BlogSiteDB drawio (4)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/bcb92859-7bfe-46f6-8bb3-5a4553ef4883)
 
 **Code First**
 ---
