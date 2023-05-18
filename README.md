@@ -1,5 +1,13 @@
 # BlogSite
 
+**Database Diagram**
+---
+![BlogSiteDB drawio](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/503c68bf-29d0-4bec-8069-95e826ac9a17)
+
+**Solution Structure**
+---
+![Screenshot 2023-05-18 182806](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/43c669b9-0699-4b82-9c2d-209fde339e82)
+
 **Code First**
 ---
 The Entity Framework uses Code First to create the project's database on a code-based basis.
@@ -48,7 +56,5 @@ It uses the AutoFac library for Dependency Injection. It manages the process of 
 ---
 It uses JSON Web Token (JWT) for authentication and authorization. It provides user authentication in Web APIs and provides security.
 
-**Database Diagram**
----
-![BlogSiteDB drawio](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/503c68bf-29d0-4bec-8069-95e826ac9a17)
+
 
