@@ -2,7 +2,7 @@
 
 **Database Diagram**
 ---
-![BlogSiteDB drawio](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/503c68bf-29d0-4bec-8069-95e826ac9a17)
+![BlogSiteDB drawio (1)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/de63870c-6617-45b3-a92e-c8c17b907121)
 
 **Solution Structure**
 ---
