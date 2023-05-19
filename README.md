@@ -60,9 +60,3 @@ Implements the Repository design pattern for database operations. It is used to 
 **Static Factory Pattern**
 ---
 It uses a static factory class that performs object creation operations. This makes the object creation process centralized and makes the code more readable and easier to maintain.
-
-
-
-
-
-
