@@ -4,6 +4,26 @@
 ---
 ![BlogSiteArchitecture drawio (9)](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/c73786c3-cd7f-4e69-9b14-ffd6bbc6dfb8)
 
+**Web Application Images**
+---
+Login and register
+![login](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/4cbfdb1c-d779-442d-92f0-7298a4ee16a0)
+
+Home
+![Home](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/ab790750-d107-4238-85f3-fd3162bf9c15)
+
+User Reaction
+![blogOyla](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/0185644b-0fdb-4811-8d84-0bf125be3524)
+
+Blog Reading Page
+![blogIcerek](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/0a95e8df-b46c-42b3-bd65-d0ea939dfdae)
+
+User Dashboard
+![userHome](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/89c21423-1e40-4522-9a0c-689668966e1d)
+
+Admin Dashboard
+![adminIndex](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/bc125645-a64c-4b89-8110-42be840ce472)
+
 **Solution Structure**
 ---
 ![Screenshot 2023-05-18 182806](https://github.com/Serhatkacmaz/.Net7-ClassicalArchitecture-BlogSite/assets/56757412/43c669b9-0699-4b82-9c2d-209fde339e82)
