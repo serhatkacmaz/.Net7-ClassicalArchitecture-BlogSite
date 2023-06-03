@@ -57,6 +57,11 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Exit" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -71,7 +76,7 @@
                         <span><i class="fas fa-user-alt" style='font-size:25px; color:white'></i></span>
                     </div>
                     <div class="info">
-                        <center style="color:white;">@User.Identity.Name.ToUpper()</center>
+                        <span class="brand-text font-weight-light"> <a href="/Home/Index">@User.Identity.Name.ToUpper()</a></span>
                     </div>
                 </div>
 

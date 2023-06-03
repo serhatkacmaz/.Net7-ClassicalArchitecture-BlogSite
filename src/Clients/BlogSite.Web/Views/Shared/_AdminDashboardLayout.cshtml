@@ -52,19 +52,28 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Exit" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <span><i class="fas fa-user-alt" style='font-size:25px; color:white'></i></span>
-                <span class="brand-text font-weight-light">@User.Identity.Name.ToUpper()</span>
-            </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <span><i class="fas fa-user-alt" style='font-size:25px; color:white'></i></span>
+                    </div>
+                    <div class="info">
+                        <span class="brand-text font-weight-light"> <a href="/Home/Index">@User.Identity.Name.ToUpper()</a></span>
+                    </div>
+                </div>
 
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">

@@ -152,5 +152,24 @@ namespace BlogSite.Web.Controllers
             return RedirectToAction("BlogReading", "Home", new { id = Id });
         }
 
+        [HttpGet]
+        public IActionResult Exit()
+        {
+            var accessTokenCookie = new CookieOptions
+            {
+                Expires = DateTime.Now.AddYears(-1)
+            };
+
+            var refreshTokenCookie = new CookieOptions
+            {
+                Expires = DateTime.Now.AddYears(-1)
+            };
+            
+            HttpContext.Response.Cookies.Append("X-Access-Token", "", accessTokenCookie);
+            HttpContext.Response.Cookies.Append("Refresh-Token", "", refreshTokenCookie);
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
