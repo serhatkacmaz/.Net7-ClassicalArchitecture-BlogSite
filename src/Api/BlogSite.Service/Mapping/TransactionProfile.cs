@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using BlogSite.Common.DTOs.Transaction;
-using BlogSite.Common.DTOs.UserBase;
 using BlogSite.Core.Entities.Transaction;
-using BlogSite.Core.Entities.UserBase;
 
 namespace BlogSite.Service.Mapping
 {
@@ -16,7 +14,7 @@ namespace BlogSite.Service.Mapping
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
                 .ForMember(dest => dest.UserTitle, opt => opt.MapFrom(src => src.User.Title))
                 .ForMember(dest => dest.UserAbout, opt => opt.MapFrom(src => src.User.About))
-                .ForMember(dest => dest.UserImg, opt => opt.MapFrom(src => src.User.Image));              
+                .ForMember(dest => dest.UserImg, opt => opt.MapFrom(src => src.User.Image));
 
             CreateMap<TBlogDto, TBlog>();
         }

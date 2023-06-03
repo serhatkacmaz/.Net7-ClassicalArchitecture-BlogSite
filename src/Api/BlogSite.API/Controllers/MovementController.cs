@@ -3,7 +3,6 @@ using BlogSite.Common.DTOs.Transaction;
 using BlogSite.Common.Enums;
 using BlogSite.Core.Entities.Transaction;
 using BlogSite.Core.Services;
-using BlogSite.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.API.Controllers

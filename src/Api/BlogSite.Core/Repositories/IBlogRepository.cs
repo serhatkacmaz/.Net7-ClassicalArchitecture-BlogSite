@@ -1,5 +1,4 @@
-﻿using BlogSite.Common.DTOs.Transaction;
-using BlogSite.Core.Entities.Transaction;
+﻿using BlogSite.Core.Entities.Transaction;
 
 namespace BlogSite.Core.Repositories
 {

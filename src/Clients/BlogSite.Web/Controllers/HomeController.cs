@@ -164,7 +164,7 @@ namespace BlogSite.Web.Controllers
             {
                 Expires = DateTime.Now.AddYears(-1)
             };
-            
+
             HttpContext.Response.Cookies.Append("X-Access-Token", "", accessTokenCookie);
             HttpContext.Response.Cookies.Append("Refresh-Token", "", refreshTokenCookie);
 

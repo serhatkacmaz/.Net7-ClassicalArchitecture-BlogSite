@@ -1,5 +1,5 @@
-﻿using BlogSite.Common.DTOs.Transaction;
-using BlogSite.Common.DTOs;
+﻿using BlogSite.Common.DTOs;
+using BlogSite.Common.DTOs.Transaction;
 
 namespace BlogSite.Web.ApiServices
 {
