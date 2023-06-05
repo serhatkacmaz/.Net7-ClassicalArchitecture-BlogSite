@@ -10,8 +10,8 @@ namespace BlogSite.Repository.Configurations.Transaction
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(x => x.Name).IsUnicode().IsRequired().HasMaxLength(50);
-            builder.Property(x => x.Content).IsRequired().HasMaxLength(150);
+            builder.Property(x => x.Name).IsUnicode().IsRequired().HasMaxLength(250);
+            builder.Property(x => x.Content).IsRequired();
 
             builder.ToTable(options =>
             {
