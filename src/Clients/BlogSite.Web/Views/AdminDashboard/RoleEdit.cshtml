@@ -9,6 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.CreatedDate)
 
     <!-- Main content -->
     <section class="content">
